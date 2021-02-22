@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{lmodern}
+\usepackage[left=0.25in, right=0.25in, top=0.75in, bottom=0.75in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{subfigure}
+\usepackage{enumerate}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{cancel}
+\usepackage{placeins}
+\usepackage{multirow}
+\usepackage{algorithm2e}
+\pagecolor{black}
+\color{white}
+
+\pagestyle{fancy}
+
+
+\hypersetup{%
+  colorlinks=true,% hyperlinks will be black
+  linkbordercolor=red,% hyperlink borders will be red
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
+
+\newcommand{\soln}{\\ \textbf{Solution}: }
+\newcommand{\bkt}[1]{\left(#1\right)}
+\lhead{MA5892: Numerical Methods and Scientific Computing}
+
+\chead{Assignment: 1}
+
+\rhead{Rollnumber: MA14M099}
+
+\begin{document}
+	\begin{enumerate}
+		\item
+		Does there exist irrational numbers $u$ and $v$ such that $u^v$ is rational?
+		\soln
+		Yes. Consider the number $x=\sqrt2^{\sqrt2}$.
+		\begin{itemize}
+			\item
+			If $x$ is rational, we are done by picking $u=v = \sqrt2$.
+			\item
+			Else, let $u=x=\sqrt2^{\sqrt2}$ and $v=\sqrt2$. We now have $u^v = \bkt{\sqrt2^{\sqrt2}}^{\sqrt2} = \bkt{\sqrt2}^2 = 2$ and now we are done.
+		\end{itemize}
+	\end{enumerate}
+\end{document}
