@@ -225,14 +225,20 @@ Integration by parts:
 
 \item Evaluate $I_{0}$ by hand
 
-        $$I_{n} = - \frac{1}{\pi} 1^{2n} cos(\pi) + \frac{2n}{\pi^{2}} 1^{2n-1} \sin(\pi) - \frac{2n(2n-1)}{\pi^{2}} I_{n-1}$$
-        $$I_{0} = - \frac{1}{\pi} 1^{0} cos(\pi) + \frac{2(0)}{\pi^{2}} 1^{2(0)-1} \sin(\pi) - \frac{2(0)(2(0)-1)}{\pi^{2}} I_{0-1}$$
-        $$I_{0} = - \frac{1}{\pi} cos(\pi) = \frac{1}{\pi} = 0.31831$$
+    \textbf{Solution:}
 
-        \vspace{2cm}
+        $$I_{n} = \int_{0}^{1} x^{2n} \sin(\pi x) \, dx$$
+        $$I_{0} = \int_{0}^{1} x^{0} \sin(\pi x) \, dx$$
+        $$I_{0} = \int_{0}^{1} \sin(\pi x) \, dx$$
+        $$= \bigg[ \frac{1}{\pi} (-\cos \pi x) \bigg]_{0}^{1}$$
+        $$ = \frac{1}{\pi} (-\cos \pi) - \frac{1}{\pi} (-\cos \pi)$$
+        $$ = \frac{1}{\pi} (1 + 1) = \frac{2}{\pi} \approx 0.63662$$
+
+\vspace{2cm}
 
 \item Use the recurrence to obtain $I_{n}$ for $n$ $\epsilon$ ${1,2,...,15}$ in Octave
 \lstinputlisting[language=Octave]{/home/saran/NMSC/Assignment/Assignment1/recurrence.m}
+Output:
 \lstinputlisting{/home/saran/NMSC/Assignment/Assignment1/output.txt}
 
 \vspace{2cm}
@@ -263,7 +269,7 @@ $$I_{n} = \int_{0}^{1} x^{2n} \sin(\pi x) \, dx$$
 \vspace{2cm}
 
 \item Explain your observation \\ \\
- The values obtained from the octave script recurrence relation are different from the integral calculated.
+ The values obtained from the octave script recurrence relation and the integral calculated are same from $n = 0$ to $n = 4$ and differs for other values of $n$.
 \end{enumerate}
 
 \end{enumerate}
