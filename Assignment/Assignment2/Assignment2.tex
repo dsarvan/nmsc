@@ -1,0 +1,122 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{lmodern}
+\usepackage[left=0.25in, right=0.25in, top=0.75in, bottom=0.75in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{subfigure}
+\usepackage{enumerate}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{cancel}
+\usepackage{placeins}
+\usepackage{multirow}
+\usepackage{algorithm2e}
+\usepackage{booktabs}
+\usepackage{bbding}
+%\pagecolor{black}
+%\color{white}
+\pagecolor{white}
+\color{black}
+\pagestyle{fancy}
+
+\hypersetup{%
+  colorlinks=true,% hyperlinks will be black
+  linkbordercolor=red,% hyperlink borders will be red
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
+
+\newcommand{\soln}{\\ \textbf{Solution}: }
+\newcommand{\bkt}[1]{\left(#1\right)}
+
+\lhead{MA5892: Numerical Methods and Scientific Computing}
+\chead{Assignment: 2}
+\rhead{Rollnumber: PH15M015}
+
+\begin{document}
+\begin{enumerate}
+\item Consider the Vandermonde matrix $V$, i.e.,
+
+    $$ V = 
+    \begin{bmatrix}
+        1 & x_{0} & x_{0}^{2} & . & . & . & x_{0}^{n}\\
+        1 & x_{1} & x_{1}^{2} & . & . & . & x_{1}^{n}\\
+        1 & x_{2} & x_{2}^{2} & . & . & . & x_{2}^{n}\\
+        . & .     & .         & . & . & . & . \\
+        . & .     & .         & . & . & . & . \\
+        . & .     & .         & . & . & . & . \\
+        1 & x_{n} & x_{n}^{2} & . & . & . & x_{n}^{n} 
+    \end{bmatrix}
+    $$
+
+
+
+\begin{itemize}  
+\item Show that $det(V)$ is a polynomial in the variables $x_{0}, x_{1}, ..., x_{n}$ with degree $\frac{n(n+1)}{2}$
+\item Show that if $x_{i} = x_{j}$ for $i \neq j$, then $det(V) = 0$
+\item Conclude that $(x_{i} - x_{j})$ is a factor of $det(V)$
+\item Conclude that $det(V) = C \left(\displaystyle \prod_{0 \leq j < i \leq n} (x_{i} - x_{j}) \right)$, where $C$ is a constant
+\item Compare the coefficient of $x_{1} \hspace{1mm} x_{2}^{2} \hspace{1mm} x_{3}^{3} \hspace{1mm} ... \hspace{1mm} x_{n}^{n}$ to obtain the value of $C$
+\end{itemize}
+
+\item Monic Legendre polynomials on $[-1, 1]$ are defined as follows:
+    $$ q_{0}(x) = 1 $$
+    $$ q_{1}(x) = x $$
+
+and $q_{n}(x)$ is a monic polynomial of degree $n$ such that $\displaystyle \int_{-1}^{1} q_{n}(x) q_{m}(x) dx = 0 $ for all $m \neq n$.
+
+\begin{itemize}
+\item Show that these orthogonal polynomials satisfy
+    $$ q_{n+1}(x) = x q_{n}(x) - \left(\frac{n^{2}}{4n^{2} - 1} \right) q_{n-1}(x)
+
+\item Prove that if $p(x)$ is a monic polynomial of degree $n$ minimizing $||p(x)||_{2}$, then $p(x) = q_{n}(x)$
+\item Conclude that the Legendre nodes (i.e., the roots of the Legendre polynomial) minimize $\displaystyle \int_{-1}^{1} \left( \prod_{k=0}^{n} (x-x{k}) \right)^{2} dx$
+\end{itemize}
+
+\item The Chebyshev polynomials of the first kind are defined as
+    $$T_{n}(x) = cos(n arccos(x))$$
+
+\begin{itemize}
+\item Show that the Chebyshev polynomials satisfy the orthogonality condition
+    $$\displaystyle \int_{-1}^{1} \frac{T_{n}(x) T_{m}(x)}{\sqrt{1 - x^{2}}} dx = 0$$
+
+\item Show that the Chebyshev polynomials of the first kind satisfy the recurrence:
+    $$T_{n+1} = 2xT_{n} - T_{n-1}$$
+with $T_{n}(x) = 1$ and $T_{1}(x) = 1$.
+
+\item Show that $T_{n}(x)$ is a polynomial of degree $n$ with leading coefficient as $2^{n-1}$ for $n \geq 1$
+
+\item All zeros of $T_{n+1}(x)$ are in the interval $[-1, 1]$ and given by $x_{k} = cos \left( \displaystyle \frac{2k+1}{2n+2} \pi \right)$, where $k \epsilon {0, 1, 2, ..., n}$
+
+\item Conclude that $T_{n}(x)$ alternates between $+1$ and $-1$ exactly $n+1$ times
+\item Show that
+    $$\displaystyle \left| \prod_{k=0}^{n} (x - x_{k}) \right| \leq \frac{1}{2^{n}}$$
+for all $x \epsilon [-1, 1]$
+
+
+\item For any choice of nodes ${y_{k}}_{k=0}^{n}$, consider the polynomial $P_{n+1}(x) = \dispalystyle \prod_{k=0}^{n} (x - y_{k})$ and look at $F(x) = P_{n+1}(x) - \frac{T_{n+1}(x)}{2^{n}}$ \\
+
+    If $|P_{n+1}(x) \leq \displaystyle \frac{1}{2^{n}}|$, show that $F(x)$ alternates in sign $n+2$ times on the interval $[-1, 1]$. Hence, conclude that $F(x)$ has to be identically zero and therfore conclude that Chebyshev nodes of the first kind minimizes $max x \epsilon [-1, 1] \left| \displaystyle \prod_{k=0}^{n} (x - x_{k}) \right|$
+\end{itemize}
+
+\item Consider the uniformly spaced nodes, the Legendre nodes, Chebyshev nodes of the first kind for $n+1$ points. For all these sets of points, perform the following:
+
+\begin{itemize}
+\item Plot the condition number of the Vandermonde matrix as a function of $n$ (Use semilogy for plot). Comment on how the condition number scales with $n$ for all these three sets of nodes. You will get three curves (one corresponding to uniform nodes, one corresponding to Legendre nodes and another one corresponding to Chebyshev nodes).
+\item For the Range function obtain the and plot the interpolant by the three set of nodes for $n \epsilon {5, 7, 9, ..., 33, 35}$ by
+
+\begin{itemize}
+\item Solving the linear system
+\item Using Lagrange polynomials
+\end{itemize}
+
+
+\end{itemize}
+
+
+\end{enumerate}
+\end{document}
