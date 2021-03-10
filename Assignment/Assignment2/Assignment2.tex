@@ -55,13 +55,13 @@
 
 
 
-\begin{itemize}  
-\item Show that $det(V)$ is a polynomial in the variables $x_{0}, x_{1}, ..., x_{n}$ with degree $\frac{n(n+1)}{2}$
+\begin{enumerate}[(a)]  
+\item Show that $det(V)$ is a polynomial in the variables $x_{0}, x_{1}, ..., x_{n}$ with degree $\displaystyle \frac{n(n+1)}{2}$
 \item Show that if $x_{i} = x_{j}$ for $i \neq j$, then $det(V) = 0$
 \item Conclude that $(x_{i} - x_{j})$ is a factor of $det(V)$
 \item Conclude that $det(V) = C \left(\displaystyle \prod_{0 \leq j < i \leq n} (x_{i} - x_{j}) \right)$, where $C$ is a constant
 \item Compare the coefficient of $x_{1} \hspace{1mm} x_{2}^{2} \hspace{1mm} x_{3}^{3} \hspace{1mm} ... \hspace{1mm} x_{n}^{n}$ to obtain the value of $C$
-\end{itemize}
+\end{enumerate}
 
 \item Monic Legendre polynomials on $[-1, 1]$ are defined as follows:
     $$ q_{0}(x) = 1 $$
@@ -69,18 +69,18 @@
 
 and $q_{n}(x)$ is a monic polynomial of degree $n$ such that $\displaystyle \int_{-1}^{1} q_{n}(x) q_{m}(x) dx = 0 $ for all $m \neq n$.
 
-\begin{itemize}
+\begin{enumerate}[(a)]
 \item Show that these orthogonal polynomials satisfy
-    $$ q_{n+1}(x) = x q_{n}(x) - \left(\frac{n^{2}}{4n^{2} - 1} \right) q_{n-1}(x)
+    $$q_{n+1}(x) = x q_{n}(x) - \left(\frac{n^{2}}{4n^{2} - 1} \right) q_{n-1}(x)$$
 
 \item Prove that if $p(x)$ is a monic polynomial of degree $n$ minimizing $||p(x)||_{2}$, then $p(x) = q_{n}(x)$
 \item Conclude that the Legendre nodes (i.e., the roots of the Legendre polynomial) minimize $\displaystyle \int_{-1}^{1} \left( \prod_{k=0}^{n} (x-x{k}) \right)^{2} dx$
-\end{itemize}
+\end{enumerate}
 
 \item The Chebyshev polynomials of the first kind are defined as
     $$T_{n}(x) = cos(n arccos(x))$$
 
-\begin{itemize}
+\begin{enumerate}[(a)]
 \item Show that the Chebyshev polynomials satisfy the orthogonality condition
     $$\displaystyle \int_{-1}^{1} \frac{T_{n}(x) T_{m}(x)}{\sqrt{1 - x^{2}}} dx = 0$$
 
@@ -98,14 +98,14 @@ with $T_{n}(x) = 1$ and $T_{1}(x) = 1$.
 for all $x \epsilon [-1, 1]$
 
 
-\item For any choice of nodes ${y_{k}}_{k=0}^{n}$, consider the polynomial $P_{n+1}(x) = \dispalystyle \prod_{k=0}^{n} (x - y_{k})$ and look at $F(x) = P_{n+1}(x) - \frac{T_{n+1}(x)}{2^{n}}$ \\
+\item For any choice of nodes ${y_{k}}_{k=0}^{n}$, consider the polynomial $P_{n+1}(x) = \displaystyle \prod_{k=0}^{n} (x - y_{k})$ and look at $F(x) = P_{n+1}(x) - \frac{T_{n+1}(x)}{2^{n}}$ \\
 
-    If $|P_{n+1}(x) \leq \displaystyle \frac{1}{2^{n}}|$, show that $F(x)$ alternates in sign $n+2$ times on the interval $[-1, 1]$. Hence, conclude that $F(x)$ has to be identically zero and therfore conclude that Chebyshev nodes of the first kind minimizes $max x \epsilon [-1, 1] \left| \displaystyle \prod_{k=0}^{n} (x - x_{k}) \right|$
-\end{itemize}
+If $\displaystyle |P_{n+1}(x)| \leq  \frac{1}{2^{n}}$, show that $F(x)$ alternates in sign $n+2$ times on the interval $[-1, 1]$. Hence, conclude that $F(x)$ has to be identically zero and therfore conclude that Chebyshev nodes of the first kind minimizes $max x \epsilon [-1, 1] \left| \displaystyle \prod_{k=0}^{n} (x - x_{k}) \right|$
+\end{enumerate}
 
 \item Consider the uniformly spaced nodes, the Legendre nodes, Chebyshev nodes of the first kind for $n+1$ points. For all these sets of points, perform the following:
 
-\begin{itemize}
+\begin{enumerate}[(a)]
 \item Plot the condition number of the Vandermonde matrix as a function of $n$ (Use semilogy for plot). Comment on how the condition number scales with $n$ for all these three sets of nodes. You will get three curves (one corresponding to uniform nodes, one corresponding to Legendre nodes and another one corresponding to Chebyshev nodes).
 \item For the Range function obtain the and plot the interpolant by the three set of nodes for $n \epsilon {5, 7, 9, ..., 33, 35}$ by
 
@@ -114,9 +114,16 @@ for all $x \epsilon [-1, 1]$
 \item Using Lagrange polynomials
 \end{itemize}
 
+Comment on the above.
 
-\end{itemize}
+\item Plot the decay in maximum relative error as a function of $n$ (on a semilogy) plot for the three different interpolants (vary $n$ from $5$ to $35$ in steps of $2$). To get the maximum relative error, evaluate the interpolant and the Runge function at $1001$ equally spaced points and compute the maximum relative error at these $1001$ points.
 
+\end{enumerate}
 
+\item Show that for any set of interpolant nodes, we have
+
+    $$\displaystyle \sum_{j=0}^{n} x_{j}^{m} l_{j}(x) = x^{m} $$
+
+for all $m \epsilon {0, 1, ..., n}$, where $l_{j}(x)$ is the $j_{th}$ Lagrange polynomial.
 \end{enumerate}
 \end{document}
