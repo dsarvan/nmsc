@@ -56,12 +56,176 @@
 
 
 \begin{enumerate}[(a)]  
-\item Show that $det(V)$ is a polynomial in the variables $x_{0}, x_{1}, ..., x_{n}$ with degree $\displaystyle \frac{n(n+1)}{2}$
-\item Show that if $x_{i} = x_{j}$ for $i \neq j$, then $det(V) = 0$
-\item Conclude that $(x_{i} - x_{j})$ is a factor of $det(V)$
-\item Conclude that $det(V) = C \left(\displaystyle \prod_{0 \leq j < i \leq n} (x_{i} - x_{j}) \right)$, where $C$ is a constant
-\item Compare the coefficient of $x_{1} \hspace{1mm} x_{2}^{2} \hspace{1mm} x_{3}^{3} \hspace{1mm} ... \hspace{1mm} x_{n}^{n}$ to obtain the value of $C$
+\item Show that $det(V)$ is a polynomial in the variables $x_{0}, x_{1}, ..., x_{n}$ with degree $\displaystyle \frac{n(n+1)}{2}$ \\
+
+\textbf{Solution:}
+
+        The Vandermonde determinant $det(V) \neq 0$ if and only if the variables $x_{0}, x_{1}, ..., x_{n}$ are distinct.
+
+        Let $n = 2$, then,
+
+        \begin{align*}
+        V &= \begin{bmatrix}
+            1 & x_{0} & x_{0}^{2}\\
+            1 & x_{1} & x_{1}^{2}\\
+            1 & x_{2} & x_{2}^{2}
+        \end{bmatrix} \\ \\
+        det(V) &= \begin{vmatrix}
+            1 & x_{0} & x_{0}^{2}\\
+            1 & x_{1} & x_{1}^{2}\\
+            1 & x_{2} & x_{2}^{2}
+        \end{vmatrix} \\ \\
+        &= 1(x_{1} x_{2}^{2} - x_{1}^{2} x_{2}) - x_{0}(x_{2}^{2} - x_{1}^{2}) + x_{0}^{2}(x_{2} - x_{1}) \\
+        &= x_{1} x_{2}^{2} - x_{1}^{2} x_{2} - x_{0} x_{2}^{2} + x_{0} x_{1}^{2} + x_{0}^{2} x_{2} - x_{1} x_{0}^{2} \\
+        &= x_{1} x_{2}^{2} - x_{1}^{2} x_{2} - x_{0} x_{2}^{2} + x_{0} x_{1} x_{2} - x_{1} x_{2} x_{0} + x_{1}^{2} x_{0} + x_{0}^{2} x_{2} - x_{0}^{2} x_{1} \\
+        &= (x_{1} x_{2} - x_{1}^{2} - x_{0} x_{2} + x_{0} x_{1}) (x_{2} - x_{0}) \\
+        &= (x_{1} - x_{0}) (x_{2} - x_{1}) (x_{2} - x_{0}) \\
+        &= \displaystyle \prod_{0 \leq j < i \leq 2} (x_{i} - x_{j}) 
+        \end{align*}
+
+
+\item Show that if $x_{i} = x_{j}$ for $i \neq j$, then $det(V) = 0$ \\
+
+\textbf{Solution:}
+
+        The Vandermonde determinant $det(V) \neq 0$ if and only if the variables $x_{0}, x_{1}, ..., x_{n}$ are distinct.
+
+        Let $n = 1$, then,
+
+        \begin{align*}
+        det(V) &= \begin{vmatrix}
+            1 & x_{0} \\
+            1 & x_{1} \\
+        \end{vmatrix} \\ \\
+            &= (x_{1} - x_{0}) \\
+            &= 0 \hspace{1cm} if \hspace{0.2cm} x_{1} = x_{0}
+        \end{align*}
+
+        In general, for degree n,
+
+        \begin{align*}
+            det(V) &= \displaystyle \prod_{0 \leq j < i \leq n} (x_{i} - x_{j}) \\
+            &= 0 \hspace{1cm} if \hspace{0.2cm} x_{i} = x_{j}
+        \end{align*}
+
+
+
+\item Conclude that $(x_{i} - x_{j})$ is a factor of $det(V)$ \\
+
+\textbf{Solution:}
+Since $det(V)$ is a polynomial, this implies that $(x_{i} - x_{j})$ is a factor of $det(V)$.
+
+
+\item Conclude that $det(V) = C \left(\displaystyle \prod_{0 \leq j < i \leq n} (x_{i} - x_{j}) \right)$, where $C$ is a constant \\
+
+\textbf{Solution:}
+
+    \begin{align*}
+    V &= \begin{bmatrix}
+        1 & x_{0} & x_{0}^{2} & . & . & . & x_{0}^{n}\\
+        1 & x_{1} & x_{1}^{2} & . & . & . & x_{1}^{n}\\
+        1 & x_{2} & x_{2}^{2} & . & . & . & x_{2}^{n}\\
+        . & .     & .         & . & . & . & . \\
+        . & .     & .         & . & . & . & . \\
+        . & .     & .         & . & . & . & . \\
+        1 & x_{n} & x_{n}^{2} & . & . & . & x_{n}^{n} 
+    \end{bmatrix} \\ \\
+    det(V) &= det \begin{bmatrix}
+        1 & x_{0} & x_{0}^{2} & . & . & . & x_{0}^{n}\\
+        1 & x_{1} & x_{1}^{2} & . & . & . & x_{1}^{n}\\
+        1 & x_{2} & x_{2}^{2} & . & . & . & x_{2}^{n}\\
+        . & .     & .         & . & . & . & . \\
+        . & .     & .         & . & . & . & . \\
+        . & .     & .         & . & . & . & . \\
+        1 & x_{n} & x_{n}^{2} & . & . & . & x_{n}^{n} 
+    \end{bmatrix}
+    \end{align*}
+
+    \begin{align*}
+    \text{then, by row operations we get} \\ \\
+        &= det \begin{bmatrix}
+            1 & x_{0} & x_{0}^{1} & . & . & . & x_{0}^{n-1} & x_{0}^{n}\\
+            0 & x_{1} - x_{0} & x_{1}^{2} - x_{0}^{2} & . & . & . & x_{1}^{n-1} - x_{0}^{n-1} & x_{1}^{n} - x_{0}^{n}\\
+            . & . & . & . & . & . & . & . \\
+            . & . & . & . & . & . & . & . \\
+            . & . & . & . & . & . & . & . \\
+            0 & x_{n} - x_{0} & x_{n}^{2} - x_{0}^{2} & . & . & . & x_{n}^{n-1} - x_{0}^{n-1} & x_{n}^{n} - x_{0}^{n}
+        \end{bmatrix}_{n+1 \times n+1} \\ \\
+        &= det \begin{bmatrix}
+            x_{1} - x_{0} & x_{1}^{2} - x_{0}^{2} & . & . & . & x_{1}^{n-1} - x_{0}^{n-1} & x_{1}^{n} - x_{0}^{n}\\
+            x_{2} - x_{1} & x_{2}^{2} - x_{1}^{2} & . & . & . & x_{2}^{n-1} - x_{1}^{n-1} & x_{2}^{n} - x_{1}^{n}\\
+            . & . & . & . & . & . & . \\
+            . & . & . & . & . & . & . \\
+            x_{n} - x_{0} & x_{n}^{2} - x_{0}^{2} & . & . & . & x_{n}^{n-1} - x_{0}^{n-1} & x_{n}^{n} - x_{0}^{n}
+        \end{bmatrix}_{n \times n} \\ \\
+        &= det \begin{bmatrix}
+            x_{1} - x_{0} & 0 & . & . & . & 0\\
+            0 & x_{2} - x_{0} & . & . & . & 0\\
+            . & . & . & . & . & .\\
+            . & . & . & . & . & .\\
+            . & . & . & . & . & .\\
+            0 & 0 & . & . & . & x_{n} - x_{0}
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & x_{1} + x_{0} & . & . & . & \sum_{i=0}^{n-1} x_{1}^{n-1-i} x_{0}^{i}\\
+            1 & x_{2} + x_{0} & . & . & . & \sum_{i=0}^{n-1} x_{2}^{n-1-i} x_{0}^{i}\\
+            . & . & . & . & . & .\\
+            . & . & . & . & . & .\\
+            . & . & . & . & . & .\\
+            1 & x_{n} + x_{0} & . & . & . & \sum_{i=0}^{n-1} x_{n}^{n-1-i} x_{0}^{i}
+        \end{bmatrix}
+    \end{align*}
+    \begin{align*}
+        \text{and, by Cauchy's Theorem, we get that} \\ \\
+        &= \displaystyle \prod_{j=1}^{n} (x_{j} - x_{0}) \ \ det \begin{bmatrix}
+            1 & x_{1} + x_{0} & . & . & . & \sum_{i=0}^{n-1} x_{1}^{n-1-i} x_{0}^{i}\\
+            1 & x_{2} + x_{0} & . & . & . & \sum_{i=0}^{n-1} x_{2}^{n-1-i} x_{0}^{i}\\
+            . & . & . & . & . & .\\
+            . & . & . & . & . & .\\
+            . & . & . & . & . & .\\
+            1 & x_{n} + x_{0} & . & . & . & \sum_{i=0}^{n-1} x_{n}^{n-1-i} x_{0}^{i}
+        \end{bmatrix} \\ \\
+        &= \displaystyle \prod_{j=1}^{n} (x_{j} - x_{0}) \  \ det \begin{bmatrix}
+            1 & x_{1} & x_{1}^{2} & . & . & . & x_{1}^{n-1}\\
+            1 & x_{2} & x_{2}^{2} & . & . & . & x_{2}^{n-1}\\
+            . & . & . & . & . & . & .\\
+            . & . & . & . & . & . & .\\
+            . & . & . & . & . & . & .\\
+            1 & x_{1} & x_{n}^{2} & . & . & . & x_{n}^{n-1}
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & x_{0} & x_{0}^{2} & . & . & . & x_{0}^{n-1}\\
+            0 & 1 & x_{0} & . & . & . & x_{0}^{n-2}\\
+            . & . & . & . & . & . & .\\
+            . & . & . & . & . & . & .\\
+            . & . & . & . & . & . & .\\
+            0 & 0 & 0 & . & . & . & 1
+        \end{bmatrix} \\ \\
+        \text{again, by Cauchy, we have that} \\ \\
+        &= \displaystyle \prod_{j=1}^{n} (x_{j} - x_{0}) \  \ det \begin{bmatrix}
+            1 & x_{1} & x_{1}^{2} & . & . & . & x_{1}^{n-1}\\
+            1 & x_{2} & x_{2}^{2} & . & . & . & x_{2}^{n-1}\\
+            . & . & . & . & . & . & .\\
+            . & . & . & . & . & . & .\\
+            . & . & . & . & . & . & .\\
+            1 & x_{n} & x_{n}^{2} & . & . & . & x_{n}^{n-1}
+        \end{bmatrix} \\ \\
+        &= \displaystyle \prod_{j=1}^{n} (x_{j} - x_{0}) \  \ \prod_{1 \leq i < j \leq n} (x_{j} - x_{i}) \\ \\
+        &= \displaystyle \prod_{0 \leq i < j \leq n} (x_{j} - x_{i})
+    \end{align*}
+
+
+
+\item Compare the coefficient of $x_{1} \hspace{1mm} x_{2}^{2} \hspace{1mm} x_{3}^{3} \hspace{1mm} ... \hspace{1mm} x_{n}^{n}$ to obtain the value of $C$ \\
+
+\textbf{Solution:}
+The coefficient of the leading diagonal, $\displaystyle \prod_{n} x_{n}^{n}$ is equals to $1$ in both the determinant and the product, the value of $C = 1$.
 \end{enumerate}
+
+
+
+
+
 
 \item Monic Legendre polynomials on $[-1, 1]$ are defined as follows:
     $$ q_{0}(x) = 1 $$
@@ -71,11 +235,34 @@ and $q_{n}(x)$ is a monic polynomial of degree $n$ such that $\displaystyle \int
 
 \begin{enumerate}[(a)]
 \item Show that these orthogonal polynomials satisfy
-    $$q_{n+1}(x) = x q_{n}(x) - \left(\frac{n^{2}}{4n^{2} - 1} \right) q_{n-1}(x)$$
+    $$q_{n+1}(x) = x q_{n}(x) - \left(\frac{n^{2}}{4n^{2} - 1} \right) q_{n-1}(x)$$ \\
 
-\item Prove that if $p(x)$ is a monic polynomial of degree $n$ minimizing $||p(x)||_{2}$, then $p(x) = q_{n}(x)$
-\item Conclude that the Legendre nodes (i.e., the roots of the Legendre polynomial) minimize $\displaystyle \int_{-1}^{1} \left( \prod_{k=0}^{n} (x-x_{k}) \right)^{2} dx$
+\textbf{Solution:}
+
+let $n = 1$, 
+
+        \begin{align*}
+            q_{2}(x) &= x q_{1}(x) - \left(\frac{1}{4 - 1}\right) q_{0}(x) \\
+            &= x(x) - \left(\frac{1}{3}\right) (1) \\
+            &= x^{2} - \left(\frac{1}{3}\right) \\
+            &= 3x^{2} - 1
+        \end{align*}
+
+\item Prove that if $p(x)$ is a monic polynomial of degree $n$ minimizing $||p(x)||_{2}$, then $p(x) = q_{n}(x)$ \\
+
+\textbf{Solution:}
+
+
+
+\item Conclude that the Legendre nodes (i.e., the roots of the Legendre polynomial) minimize $\displaystyle \int_{-1}^{1} \left( \prod_{k=0}^{n} (x-x_{k}) \right)^{2} dx$ \\
+
+\textbf{Solution:}
+
+
+
+
 \end{enumerate}
+
 
 \item The Chebyshev polynomials of the first kind are defined as
     $$T_{n}(x) = cos(n \ arccos(x))$$
