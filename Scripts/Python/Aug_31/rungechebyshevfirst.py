@@ -55,7 +55,7 @@ error = max(abs(f - fintp)/abs(f))
 print(error)
 
 fig, ax = plt.subplots()
-ax.plot(x, f, c="olive", ls="dotted", label=r'$\displaystyle\frac{1}{1+25 x^{2}}$')
+ax.plot(x, f, c='olive', ls='dotted', label=r'$\displaystyle\frac{1}{1+25 x^{2}}$')
 ax.plot(x, fintp, c='teal', label=r'$Interpolation$')
 ax.plot(xnodes, fnodes, 'm.', label=r'$N = 21$')
 ax.set(xlim=(-1, 1), ylim=(0, 1.1))
