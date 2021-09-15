@@ -24,7 +24,7 @@ for n in range(5):
     x = np.arange(-1, 1, 0.0001)
     y = Pn(x)
 
-    ax.plot(x, y, label=r'$P_{}$'.format(n))
+    ax.plot(x, y, label=r'$P_{}(x)$'.format(n))
 
 ax.set(xlabel=r'$x$', ylabel=r'$P_{n}(x)$')
 ax.set_title(r'Legendre polynomials')
