@@ -31,7 +31,8 @@ N = 35
 Bern = np.zeros(M)
 
 for k in range(0,N+1):
-    Bern = Bern + factorial(N)/(factorial(N-k)*factorial(k)) * ((x+1)/2)**k * ((1-x)/2)**(N-k) * f(2*k/N-1)
+    Bern = Bern + factorial(N)/(factorial(N-k)*factorial(k)) \
+            * ((x+1)/2)**k * ((1-x)/2)**(N-k) * f(2*k/N-1)
 
 fig, ax = plt.subplots()
 ax.plot(x, y, c='red', ls='dotted', label=r'$\displaystyle\frac{1}{1+25 x^{2}}$')
