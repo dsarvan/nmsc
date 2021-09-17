@@ -16,15 +16,12 @@ matplotlib.rcParams['text.usetex'] = True
 import matplotlib.pyplot as plt
 matplotlib.use('Agg')
 
-def f(x):
-    return 1/(1 + 25 * x**2)
-
 def factorial(n):
     return 1 if n < 2 else n*factorial(n-1)
 
 M = 1001
 x = np.linspace(-1,1,M)
-y = lambda x: 1/(1 + 25 * x**2)
+f = lambda x: 1/(1 + 25 * x**2)
 
 N = 35
 
@@ -32,7 +29,7 @@ Bern = sum(map(lambda k: factorial(N)/(factorial(N-k)*factorial(k)) \
         * ((x + 1)/2)**k * ((1 - x)/2)**(N-k) * f(2*k/N-1), range(N+1)))
 
 fig, ax = plt.subplots()
-ax.plot(x, y(x), c='red', ls='dotted', label=r'$\displaystyle\frac{1}{1+25 x^{2}}$')
+ax.plot(x, f(x), c='red', ls='dotted', label=r'$\displaystyle\frac{1}{1+25 x^{2}}$')
 ax.plot(x, Bern, c='teal', label=r'$Bernstein$')
 ax.set(xlim=(-1, 1), ylim=(0, 1.1))
 ax.set(xlabel=r'$x$', ylabel=r'$\displaystyle\frac{1}{1+25 x^{2}}$')
