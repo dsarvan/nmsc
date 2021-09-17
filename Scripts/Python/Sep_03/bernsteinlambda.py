@@ -6,8 +6,6 @@
 """ Script to compute Bernstein polynomial using lambda function """
 
 import numpy as np
-import numpy.polynomial.polynomial as poly
-from scipy.special import legendre
 import matplotlib
 matplotlib.rcParams['pgf.texsystem'] = 'pdflatex'
 matplotlib.rcParams.update({'font.family': 'serif', 'font.size': 8,
