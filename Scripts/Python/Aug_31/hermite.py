@@ -29,4 +29,4 @@ for n in range(4):
 ax.set(xlabel=r'$x$', ylabel=r'$H_{n}(x)$', ylim=(-10,10))
 ax.set_title(r'Hermite polynomials')
 ax.grid(); ax.legend()
-plt.savefig('hermite.png')
+plt.savefig('hermite.pdf')
