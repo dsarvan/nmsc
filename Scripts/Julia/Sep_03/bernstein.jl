@@ -3,7 +3,7 @@
 # Name: D.Saravanan
 # Date: 03/09/2021
 
-""" Script to compute Bernstein polynomial """
+""" Program to compute Bernstein polynomial """
 
 import PyPlot
 const plt = PyPlot
@@ -27,22 +27,25 @@ function bernstein(x, M, N)
     bern = zeros(M)
 
     for k in 0:N
-        bern = bern + fact(N)/(fact(N - k)*fact(k)) .* 
-                ((x .+ ones(M))./2).^k * ((ones(M) .- x)./2).^(N-k) .* f(2*k/N-1)
+        bern = bern .+ fact(N)/(fact(N - k)*fact(k)) .* 
+                ((x .+ 1)./2).^k .* ((1 .- x)./2).^(N-k) .* f(2*k/N-1)
     end
 
     return bern
 end
 
-M = 1001
+const M = 1001
 x = LinRange(-1,1,M)
 y1 = f(x)
 
-N = 5
+const N = 5
 y2 = bernstein(x, M, N)
   
 fig, ax = plt.subplots()
 ax.plot(x, y1, c="olive", ls="dotted", label=L"$\displaystyle\frac{1}{1+25 x^{2}}$")
-ax.plot(x, y2, c="teal", label=L"$N = 5$")
+ax.plot(x, y2, c="teal", label=L"$Bernstein$")
+ax.set(xlim=(-1, 1), ylim=(0, 1.1))
+ax.set(xlabel=L"$x$", ylabel=L"$\displaystyle\frac{1}{1+25 x^{2}}$")
+ax.set_title(raw"Bernstein polynomial")
 ax.grid(true); ax.legend()
-plt.savefig("bernstein.png")
+plt.savefig("bernstein.pdf")
