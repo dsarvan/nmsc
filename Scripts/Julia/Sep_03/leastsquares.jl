@@ -39,21 +39,21 @@ const cond_X = cond(X)
 const cond_XX = cond(X'*X)
 
 # QR decomposition of the matrix X
-Q, R = qrfact(X)
+Q, R = qr(X)
 
 # condition number of the matrix R (same as the condition number of the matrix X)
 cond_R = cond(R)
 
-#println(cond_X, ' ', cond_XX, ' ', cond_R) 
+println(cond_X, ' ', cond_XX, ' ', cond_R) 
 
 # solution to the equation: R a = Q' f
-b = transpose(Q)*f
+#b = transpose(Q)*f
 
-println(size(R))
-println(size(Q))
-println(size(f))
-println(size(Q'*f))
+#println(size(R))
+#println(size(Q))
+#println(size(f))
+#println(size(Q'*f))
 
-a = R\b
+#a = R\b
 
-println(a)
+#println(a)
