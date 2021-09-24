@@ -40,20 +40,24 @@ const cond_XX = cond(X'*X)
 
 # QR decomposition of the matrix X
 Q, R = qr(X)
+Q = Base.ReshapedArray(Q,(N+1,M+1),())
 
 # condition number of the matrix R (same as the condition number of the matrix X)
-cond_R = cond(R)
+const cond_R = cond(R)
 
-println(cond_X, ' ', cond_XX, ' ', cond_R) 
+#println(cond_X, ' ', cond_XX, ' ', cond_R) 
 
 # solution to the equation: R a = Q' f
-#b = transpose(Q)*f
+a = R\Q'*f
 
-#println(size(R))
-#println(size(Q))
-#println(size(f))
-#println(size(Q'*f))
+# computing the least-squares
+ls = X*a
 
-#a = R\b
-
-#println(a)
+fig, ax = plt.subplots()
+ax.plot(x, f, c="olive", ls="dotted", label=L"$\displaystyle\frac{1}{1+25 x^{2}}$")
+ax.plot(x, ls, c="teal", label=L"$Least-Squares$")
+ax.set(xlim=(-1, 1), ylim=(0, 1.1))
+ax.set(xlabel=L"$x$", ylabel=L"$\displaystyle\frac{1}{1+25 x^{2}}$")
+ax.set_title(raw"Least-Squares approximation")
+ax.grid(true); ax.legend()
+plt.savefig("leastsquares.pdf")
