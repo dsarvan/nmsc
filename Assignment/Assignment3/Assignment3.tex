@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{lmodern}
+\usepackage[left=0.25in, right=0.25in, top=0.75in, bottom=0.75in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{subfigure}
+\usepackage{enumerate}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{cancel}
+\usepackage{placeins}
+\usepackage{multirow}
+\usepackage{algorithm2e}
+\usepackage{booktabs}
+\usepackage{bbding}
+\pagecolor{white}
+\color{black}
+
+\pagestyle{fancy}
+
+\hypersetup{%
+  colorlinks=true,% hyperlinks will be black
+  linkbordercolor=red,% hyperlink borders will be red
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
+
+\newcommand{\soln}{\\ \textbf{Solution}: }
+\newcommand{\bkt}[1]{\left(#1\right)}
+
+\lhead{MA5892: Numerical Methods and Scientific Computing}
+\chead{Assignment: 3}
+\rhead{Rollnumber: PH15M015}
+
+\begin{document}
+\begin{enumerate}
+\item In numerical solution of boundary value problems in differential equations, we can
+sometimes use the physics of the problem not only to enforce boundary conditions but also
+to maintain high-order accuracy near the boundary. For example, we may know the heat flux
+through a surface or displacement of a beam specified at one end. We can use this
+information to produce better estimates of the derivatives near the boundary.
+
+Suppose we want to numerically solve the following boundary value problem with Neumann
+boundary conditions:
+
+\begin{equation*}
+    \frac{d^{2} y}{dx^{2}} + y = x^{3}, \ 0 \leq x \leq 1
+\end{equation*}
+
+with $y^{'}(0) = y^{'}(1) = 0$. We discretize the domain using grid points $x_{i} = 
+(i - 0.5)h, \ i \in \{1,2,...,N\}$. In this problem, $y_{i}$ is the numerical estimate of 
+$y$ at $x_{i}$. By using a finite difference scheme, we can estimate $y_{i}^{''}$ in terms 
+of linear combinations of $y_{i}$'s and transform the ODE into a linear system of equations.
+
+\begin{itemize}
+
+    \item Derive a fourth order Pade approximation for the second derivative at the
+        $i^{th}$ node involving only its neighbors $i \pm 1$, i.e., obtain $y_{i}^{''}$
+        involving $y_{i \pm 1}$, $y_{i}$ and $y_{i \pm 1}^{''}$. Note that this is
+        applicable only at $i \in \{2,3,...,N-1\}$
+
+    \item For the left boundary, derive a third order Pade scheme to approximate
+        $y_{1}^{''}$ in the following form:
+        \begin{equation*}
+            y_{1}^{''} + b_{2} y_{2}^{''} = a_{1}y_{1} + a_{2}y_{2} + a_{3}y_{3} +
+            a_{4}y^{'}(0) + O(h^{3})
+        \end{equation*}
+
+    \item Repeat the above for the left boundary.
+
+    \item Use the finite difference formulae derived above, to obtain a linear system for
+        $y_{i}^{''}$. Explicitly write down the entries in the matrix and the right hand
+        side.
+
+    \item Compare the numerical and exact solution by varying $n \in
+        \{10,20,50,100,200,500,1000\}$. Plot the rror (computed using the max-norm as a
+        function of n) on a log-log plot. Discuss your result.
+
+    \item How are the Neumann boundary conditions enforced into the discretized boundary
+        value problem?
+
+\end{itemize}
+
+
+
+
+
+		Does there exist irrational numbers $u$ and $v$ such that $u^v$ is rational?
+		\soln
+		Yes. Consider the number $x=\sqrt2^{\sqrt2}$.
+		\begin{itemize}
+			\item
+			If $x$ is rational, we are done by picking $u=v = \sqrt2$.
+			\item
+			Else, let $u=x=\sqrt2^{\sqrt2}$ and $v=\sqrt2$. We now have $u^v = \bkt{\sqrt2^{\sqrt2}}^{\sqrt2} = \bkt{\sqrt2}^2 = 2$ and now we are done.
+		\end{itemize}
+
+\end{enumerate}
+\end{document}
