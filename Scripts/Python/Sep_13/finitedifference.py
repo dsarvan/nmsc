@@ -39,12 +39,10 @@ for k in range(N):
 
 
 fig, ax = plt.subplots()
-ax.plot(h, np.abs(forward - g(x)), label=r'forward')
-ax.plot(h, np.abs(backwrd - g(x)), label=r'backwrd')
-ax.plot(h, np.abs(central - g(x)), label=r'central')
-ax.plot(h, np.abs(fourthd - g(x)), label=r'fourthd')
+ax.loglog(h, np.abs(forward - g(x)), label=r'forward')
+#ax.loglog(h, np.abs(backwrd - g(x)), label=r'backwrd')
+#ax.loglog(h, np.abs(central - g(x)), label=r'central')
+#ax.loglog(h, np.abs(fourthd - g(x)), label=r'fourthd')
 ax.grid(True); ax.legend()
 
 plt.savefig('finite.png')
-
-
