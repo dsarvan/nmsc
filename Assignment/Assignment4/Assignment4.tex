@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{lmodern}
+\usepackage[left=0.25in, right=0.25in, top=0.75in, bottom=0.75in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{subfigure}
+\usepackage{enumerate}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{cancel}
+\usepackage{placeins}
+\usepackage{multirow}
+\usepackage{algorithm2e}
+\usepackage{booktabs}
+\usepackage{bbding}
+\pagecolor{white}
+\color{black}
+
+\pagestyle{fancy}
+
+\hypersetup{%
+  colorlinks=true,% hyperlinks will be black
+  linkbordercolor=red,% hyperlink borders will be red
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
+
+\newcommand{\soln}{\\ \textbf{Solution}: }
+\newcommand{\bkt}[1]{\left(#1\right)}
+
+\lhead{MA5892: Numerical Methods and Scientific Computing}
+\chead{Assignment: 4}
+\rhead{Roll number: PH15M015}
+
+\begin{document}
+\begin{enumerate}
+\item Compute $\displaystyle \int_{0}^{1} e^{x^{2}} \ dx$ using the trapezoidal rule and 
+trapezoidal rule with end corrections using the first and third derivatives. Perform this
+by subdividing $[0, 1]$ into $N \in \{2, 5, 10, 20, 50, 100, 200, 500, 1000\}$ panels and 
+plot the decay of the absolute error using the \textbf{three methods}. The value of the 
+integral accurate upto $16$ digits is $1.4626517459071816$.
+
+\item Use the Euler-Macluarin to obtain
+\begin{equation*}
+\log (n!) = \log \displaystyle \left(C \left(\frac{n}{e} \right)^{n} \sqrt{n} \right) 
+    + \mathcal{O}(1/n)
+\end{equation*}
+where $C$ is some constant.
+
+\item We will now determine $C$ in the above question as follows.
+\begin{itemize}
+    \item Use integration by parts to obtain an expression for $I_{k} = \displaystyle
+        \int_{0}^{\pi/2} sin^{k}(x)\ dx$ (It might be easier to look at the even and odd
+        cases separately)
+
+    \item Prove that $I_{k}$ is a monotone decreasing sequence.
+
+    \item Show that
+        \begin{equation*}
+            \lim_{m \to \infty} \frac{I_{2m - 1}}{I_{2m + 1}} = 1
+        \end{equation*}
+
+    \item Conclude that
+        \begin{equation*}
+            \lim_{m \to \infty} \frac{I_{2m}}{I_{2m + 1}} = 1
+        \end{equation*}
+
+    \item Hence, infer that the central binomial coefficient is asymptotically given by
+        \begin{equation*}
+            \binom{2m}{m} \sim \frac{4^{m}}{\sqrt{m\pi}}
+        \end{equation*}
+        where $f(m) \sim g(m) \Longrightarrow \lim_{m \to \infty} \displaystyle
+        \frac{f(m)}{g(m)} = 1$
+
+    \item Conclude that $C$ in the above question is $\sqrt{2\pi}$
+
+    \item Hence, obtain the Stirling formula:
+        \begin{equation*}
+            n! \sim \left(\frac{n}{e}\right)^{n} \sqrt{2\pi n}
+        \end{equation*}
+
+    \item Obtain the relative error in $n!$ using the Stirling formula for $n \in \{20,50\}$
+
+    \item Obtain a better estimate for $n!$, which is accurate upto $\mathcal{O}(1/n^{3})$
+\end{itemize}
+
+\end{enumerate}
+\end{document}
