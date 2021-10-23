@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{lmodern}
+\usepackage[left=0.25in, right=0.25in, top=0.75in, bottom=0.75in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{subfigure}
+\usepackage{enumerate}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{cancel}
+\usepackage{placeins}
+\usepackage{multirow}
+\usepackage{algorithm2e}
+\pagecolor{white}
+\color{black}
+
+\pagestyle{fancy}
+
+\hypersetup{%
+  colorlinks=true,% hyperlinks will be black
+  linkbordercolor=red,% hyperlink borders will be red
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
+
+\newcommand{\soln}{\\ \textbf{Solution}: }
+\newcommand{\bkt}[1]{\left(#1\right)}
+
+\lhead{MA5892: Numerical Methods and Scientific Computing}
+\chead{Assignment: 5}
+\rhead{Rollnumber: PH15M015}
+
+\begin{document}
+\begin{enumerate}
+\item Prove the Equioscillation theorem.
+
+\textbf{Equioscillation theorem:} Let $f \in C[-1,1]$ and $p(x)$ be a polynomial whose
+degree doesn't exceed $n$. $p$ minimizes $\lVert f-p \rVert_{\infty}$ iff $f-p$ equioscillates at $n+2$
+points.
+
+\item Consider the function $f(x) = |x|$ on the interval $[-1,1]$.
+\begin{itemize}
+\item Prove that of all polynomials whose degree doesn't exceed $3$, $p(x) = x^{2} +
+\displaystyle \frac{1}{8}$ is the best approximation in the $\lVert \cdot \rVert_{\infty}$ norm.
+\item Interpolate the function using $4$ Legendre nodes and Chebyshev nodes. Call the
+polynomials obtained as $p_{L}(x)$ and $p_{C}(x)$.
+\item Fill in the table below. You should be able to complete the table by hand.
+\end{itemize}
+
+\begin{table}[ht]
+\centering
+\begin{tabular*}{.3\linewidth}{@{\extracolsep{\fill}}|c|c|c|}
+\hline
+Approximation & $\lVert \cdot \rVert_{2}$ & $\lVert \cdot \rVert_{\infty}$ \\
+\hline
+$f(x) - p(x)$ & & \\
+\hline
+$f(x) - p_{L}(x)$ & & \\
+\hline
+$f(x) - p_{C}(x)$ & & \\
+\hline
+\end{tabular*}
+\end{table}
+
+Comment on the errors you obtain using the different norm. Which one is optimal under the
+$\lVert \cdot \rVert_{2}$ and $\lVert \cdot \rVert_{\infty}$? For each norm, order the different approximations in increasing order of accuracy.
+
+\item \textbf{Error estimate of Gaussian quadrature:} Prove that
+\begin{equation*}
+\int_{a}^{b} w(x) f(x) dx - \sum_{i=1}^{n} w_{i} f(x_{i}) = \frac{f^{(2n)} (\xi)}{(2n)!} \lVert p_{n} (x) \rVert_{w}^{2}
+\end{equation*}
+
+for some $\xi \in (a,b)$ and $p_{n}(x)$ is the monic orthogonal polynomial corresponding to the weight function $w(x)$.
+
+\item Let $f(x)$ be periodic function on $[0,1]$ of the form 
+\begin{equation*}
+f(x) = a_{0} + \sum_{k=1}^{n} (a_{k}\ cos(2k\pi x) + b_{k}\ sin(2k\pi x))
+\end{equation*}
+
+Take the case of $n = 20$ and $a_{k}, b{k}$ are uniformly distributed on $[-1,1]$.
+Approximate $\displaystyle \int_{-1}^{1} f(x) dx$ using trapezoidal rule with $k$ points where $k \in
+\{1,2,...,80\}$. Compare the error with the exact integral and comment on the result you
+obtain. Prove that the trapezoidal rule give you the exact integral for $k > n$.
+
+\item Evaluate $\displaystyle \int_{-1}^{1} e^{-x^{2}} dx$ using Gaussian quadrature with $n$ nodes,
+where $n \in \{3,4,5,...,51\}$. Plot the absolute error as a function of $N$ on a log-log
+plot.
+
+\end{enumerate}
+\end{document}
