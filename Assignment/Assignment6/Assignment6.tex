@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{lmodern}
+\usepackage[left=0.25in, right=0.25in, top=0.75in, bottom=0.75in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{subfigure}
+\usepackage{enumerate}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{cancel}
+\usepackage{placeins}
+\usepackage{multirow}
+\usepackage{algorithm2e}
+\pagecolor{white}
+\color{black}
+
+\pagestyle{fancy}
+
+\hypersetup{%
+  colorlinks=true,% hyperlinks will be black
+  linkbordercolor=red,% hyperlink borders will be red
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
+
+\newcommand{\soln}{\\ \textbf{Solution}: }
+\newcommand{\bkt}[1]{\left(#1\right)}
+
+\lhead{MA5892: Numerical Methods and Scientific Computing}
+\chead{Assignment: 6}
+\rhead{Rollnumber: PH15M015}
+
+\begin{document}
+\begin{enumerate}
+\item A common problem in mathematical physics is that of solving the Fredholm integral
+equation
+
+\begin{equation*}
+f(x) = \phi(x) + \displaystyle \int_{a}^{b} K(x,t) \phi(t) dt
+\end{equation*}
+
+where the function $f(x)$ and $K(x,t)$ are given and the problem is to obtain $\phi(x)$.
+
+\begin{itemize}
+\item Describe a numerical method for solving the above equation
+\item Solve the following equation
+
+\begin{equation*}
+\phi(x) = \pi x^{2} + \displaystyle \int_{0}^{\pi} 3 (0.5 sin(3x) - tx^{2}) \phi(t) dt
+\end{equation*}
+
+Obtain the exact solution of the above and compare your numerical solution with it.
+\end{itemize}
+
+\item Evaluate $I = \displaystyle \int_{0}^{1} \frac{e^{-x}}{\sqrt{x}} dx$ by subdividing
+the domain into $ n \in \{5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000 \}$ panels.
+
+\begin{itemize}
+    \item Using rectangular rule.
+    \item Make a change of variable $x = t^{2}$ and use rectangular rule.
+\end{itemize}
+
+Compare the two methods above in terms of accuracy and cost. Explain the difference, if
+any.
+
+\item The Householder's method is a generalization of the Newton method and the sequence
+of iterates is given by
+
+\begin{equation*}
+x_{n+1} = x_{n} + d \frac{(1/f)^{d-1} (x_{n})}{(1/f)^{d} (x_{n})}
+\end{equation*}
+
+where $(1/f)^{k} (x_{n})$ is the $k^{th}$ derivative of the function $1/f$ evaluated at 
+$x_{n}$. Note that taking $d = 1$, we obtain the Newton method. Prove that if $f(x)$ is 
+$d + 1$ times continuously differentiable function, i.e., $f^{(d+1)}$ exists and is
+continuous, and if the sequence of iterates converge to a root $a$, then we have
+
+\begin{equation*}
+|x_{n+1} - a| \leq K |x_{n} - a|^{d+1} for some K > 0 eventually
+\end{equation*}
+
+The above statement means that the order of convergence of the above method is $d+1$.
+
+\item Lef $f(x)$ be a twice differentiable strictly convex function with a single simple
+(i.e., multiplicity of the root is one) root at $x = a$. Prove that the Newton method 
+converges to the root irrespective of the initial guess.
+
+\item Prove that the function $w(x) = xe^{x} - a$ has only one real root for $a > 0$.
+\begin{itemize}
+\item Write a program to obtain the root of the above using (i) bisection (ii) Newton
+method (iii) Secant method.
+\item Explain in detail why, when and for what initial guess does each of the method
+converge.
+\item What happens when $a < 0$? Perform a complete analysis on the convergence for $a <
+0$ as well.
+\end{itemize}
+
+\end{enumerate}
+\end{document}
