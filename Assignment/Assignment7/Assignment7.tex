@@ -16,11 +16,10 @@
 \usepackage{placeins}
 \usepackage{multirow}
 \usepackage{algorithm2e}
-\pagecolor{black}
-\color{white}
+\pagecolor{white}
+\color{black}
 
 \pagestyle{fancy}
-
 
 \hypersetup{%
   colorlinks=true,% hyperlinks will be black
@@ -30,23 +29,42 @@
 
 \newcommand{\soln}{\\ \textbf{Solution}: }
 \newcommand{\bkt}[1]{\left(#1\right)}
+
 \lhead{MA5892: Numerical Methods and Scientific Computing}
-
-\chead{Assignment: 1}
-
-\rhead{Rollnumber: MA14M099}
+\chead{Assignment: 7}
+\rhead{Rollnumber: PH15M015}
 
 \begin{document}
-	\begin{enumerate}
-		\item
-		Does there exist irrational numbers $u$ and $v$ such that $u^v$ is rational?
-		\soln
-		Yes. Consider the number $x=\sqrt2^{\sqrt2}$.
-		\begin{itemize}
-			\item
-			If $x$ is rational, we are done by picking $u=v = \sqrt2$.
-			\item
-			Else, let $u=x=\sqrt2^{\sqrt2}$ and $v=\sqrt2$. We now have $u^v = \bkt{\sqrt2^{\sqrt2}}^{\sqrt2} = \bkt{\sqrt2}^2 = 2$ and now we are done.
-		\end{itemize}
-	\end{enumerate}
+\begin{enumerate}
+\item Consider the non-linear ordinary differential equation
+
+    \begin{equation*}
+        y' + y(1 - y) = 0
+    \end{equation*}
+
+        with $y(0) = 1/2$.
+
+        \begin{itemize}
+            \item Write a code to solve the above to obtain $y(1)$ using
+                \begin{enumerate}
+                    \item Euler Explicit
+                    \item Euler Implicit
+                    \item Trapezoidal Rule
+                    \item RK2
+                    \item RK4
+                \end{enumerate}
+        \end{itemize}
+
+        For each of the above, identify for what time stepping the scheme is stable, and
+        the overall global accuracy.
+
+\item Write a code that guarantees global fourth order accuracy to solve
+
+    \begin{equation*}
+        y'' + 4y' + 3y = sin(t^{2})
+    \end{equation*}
+
+        with $y(0) = 0$ and $y(1) = 1$ using the shooting method.
+
+\end{enumerate}
 \end{document}
