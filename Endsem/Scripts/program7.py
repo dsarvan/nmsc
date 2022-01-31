@@ -23,11 +23,11 @@ matplotlib.rcParams["text.usetex"] = True
 matplotlib.use("Agg")
 
 # end points of interval
-a, b = -1, 1
+a, b = 0, 1
 
 # function to be integrated
 def f(x):
-    return np.exp(-(x ** 2))
+    return np.exp(-x)/np.sqrt(x)
 
 
 # derivative of the function
@@ -36,7 +36,7 @@ def g(x):
 
 
 # exact value of the integral
-exact = 0.746824132812427025399
+exact = 1.49364826562485405080
 
 # number of grid points
 N = [5, 10, 20, 50, 100, 200, 500, 1000]
@@ -47,8 +47,6 @@ Ngrids = len(N)
 h = np.zeros(Ngrids)
 
 rect = np.zeros(Ngrids)
-trap = np.zeros(Ngrids)
-tend = np.zeros(Ngrids)
 
 for k, N in enumerate(N):
     h[k] = (b - a) / (N - 1)
@@ -56,19 +54,13 @@ for k, N in enumerate(N):
     y = 0.5*(x[0:N-1] + x[1:N])
 
     rect[k] = h[k]*np.sum(f(y))
-    trap[k] = h[k] * (np.sum(f(x)) - (f(a) + f(b)) / 2)
-    tend[k] = trap[k] - h[k] ** 2 / 12 * (g(b) - g(a))
 
 
 # error calculations
 rect_err = abs(np.double(rect - exact))
-trap_err = abs(np.double(trap - exact))
-tend_err = abs(np.double(tend - exact))
 
 fig, ax = plt.subplots()
 ax.loglog(h, rect_err, 'm.--', label=r'rectangular')
-ax.loglog(h, trap_err, "b.--", label=r"trapezoidal")
-ax.loglog(h, tend_err, "r.--", label=r"trependpont")
 ax.set(xlabel=r"grid size", ylabel=r"error in quadrature")
 ax.set_title(r"Quadrature convergence")
 ax.grid(True)
