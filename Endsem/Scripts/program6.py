@@ -3,7 +3,7 @@
 # Name: D.Saravanan
 # Date: 02/12/2021
 
-""" Script to implement the different quadrature """
+""" Script to implement the different quadrature and see how the error behaves """
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -23,20 +23,20 @@ matplotlib.rcParams["text.usetex"] = True
 matplotlib.use("Agg")
 
 # end points of interval
-a, b = 0, 1
+a, b = -1, 1
 
 # function to be integrated
 def f(x):
-    return np.exp(-(x ** 2))
+    return np.exp(-(x**2))
 
 
 # derivative of the function
 def g(x):
-    return -2 * x * np.exp(-(x ** 2))
+    return -2 * x * np.exp(-(x**2))
 
 
 # exact value of the integral
-exact = 0.746824132812427025399
+exact = 1.49364826562485405080
 
 # number of grid points
 N = [2, 5, 10, 20, 50, 100]
