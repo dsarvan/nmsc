@@ -27,12 +27,17 @@ a, b = -1, 1
 
 # function to be integrated
 def f(x):
-    return np.exp(-(x**2))
+    return np.exp(-x**2)
 
 
-# derivative of the function
+# first derivative of the function
 def g(x):
-    return -2 * x * np.exp(-(x**2))
+    return -2*x*np.exp(-x**2)
+
+
+# third derivative of the function
+def s(x):
+    return 4*x*(3 - 2*x**2)*np.exp(-x**2)
 
 
 # exact value of the integral
@@ -46,24 +51,28 @@ Ngrids = len(N)
 
 h = np.zeros(Ngrids)
 
-trap = np.zeros(Ngrids)
-tend = np.zeros(Ngrids)
+trap = np.zeros(Ngrids)  # trapezoidal rule
+tend = np.zeros(Ngrids)  # trapezoidal rule with first derivative
+tent = np.zeros(Ngrids)  # trapezoidal rule with first and third derivative
 
 for k, N in enumerate(N):
     h[k] = (b - a) / (N - 1)
     x = np.linspace(a, b, N)
 
     trap[k] = h[k] * (np.sum(f(x)) - (f(a) + f(b)) / 2)
-    tend[k] = trap[k] - h[k] ** 2 / 12 * (g(b) - g(a))
+    tend[k] = trap[k] - (h[k]**2 / 12) * (g(b) - g(a))
+    tent[k] = tend[k] + (h[k]**4 / 720) * (s(b) - s(a))
 
 
 # error calculations
 trap_err = abs(np.double(trap - exact))
 tend_err = abs(np.double(tend - exact))
+tent_err = abs(np.double(tent - exact))
 
 fig, ax = plt.subplots()
 ax.loglog(h, trap_err, "b.--", label=r"trapezoidal")
 ax.loglog(h, tend_err, "r.--", label=r"trependpont")
+ax.loglog(h, tent_err, "m.--", label=r"trapendpont")
 ax.set(xlabel=r"grid size", ylabel=r"error in quadrature")
 ax.set_title(r"Quadrature convergence")
 ax.grid(True)
