@@ -30,9 +30,9 @@ def f(x):
     return np.exp(-x)/np.sqrt(x)
 
 
-# derivative of the function
-def g(x):
-    return -2 * x * np.exp(-(x ** 2))
+# function with chnage of variable
+def g(t):
+    return 2 * np.exp(-t**2)
 
 
 # exact value of the integral
@@ -47,20 +47,24 @@ Ngrids = len(N)
 h = np.zeros(Ngrids)
 
 rect = np.zeros(Ngrids)
+recv = np.zeros(Ngrids)
 
 for k, N in enumerate(N):
-    h[k] = (b - a) / (N - 1)
-    x = np.linspace(a, b, N)
+    h[k] = (b - a) / (N - 1)        # grid spacing
+    x = np.linspace(a, b, N)        # grid points
     y = 0.5*(x[0:N-1] + x[1:N])
 
     rect[k] = h[k]*np.sum(f(y))
+    recv[k] = h[k]*np.sum(g(y))
 
 
 # error calculations
 rect_err = abs(np.double(rect - exact))
+recv_err = abs(np.double(recv - exact))
 
 fig, ax = plt.subplots()
 ax.loglog(h, rect_err, 'm.--', label=r'rectangular')
+ax.loglog(h, recv_err, 'b.--', label=r'rectangular (change of variable)')
 ax.set(xlabel=r"grid size", ylabel=r"error in quadrature")
 ax.set_title(r"Quadrature convergence")
 ax.grid(True)
