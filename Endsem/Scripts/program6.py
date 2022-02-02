@@ -3,7 +3,7 @@
 # Name: D.Saravanan
 # Date: 02/12/2021
 
-""" Script to implement the different quadrature and see how the error behaves """
+""" Script to implement quadrature methods and see how the error behaves """
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -52,8 +52,8 @@ Ngrids = len(N)
 h = np.zeros(Ngrids)
 
 trap = np.zeros(Ngrids)  # trapezoidal rule
-tend = np.zeros(Ngrids)  # trapezoidal rule with first derivative
-tent = np.zeros(Ngrids)  # trapezoidal rule with first and third derivative
+tend = np.zeros(Ngrids)  # trapezoidal rule using first derivative
+tent = np.zeros(Ngrids)  # trapezoidal rule using first and third derivative
 
 for k, N in enumerate(N):
     h[k] = (b - a) / (N - 1)
@@ -70,9 +70,9 @@ tend_err = abs(np.double(tend - exact))
 tent_err = abs(np.double(tent - exact))
 
 fig, ax = plt.subplots()
-ax.loglog(h, trap_err, "b.--", label=r"trapezoidal")
-ax.loglog(h, tend_err, "r.--", label=r"trependpont")
-ax.loglog(h, tent_err, "m.--", label=r"trapendpont")
+ax.loglog(h, trap_err, "b.--", label=r"trapezoidal rule")
+ax.loglog(h, tend_err, "r.--", label=r"trapezoidal rule using 1st derivative")
+ax.loglog(h, tent_err, "m.--", label=r"trapezoidal rule using 1st and 3rd derivative")
 ax.set(xlabel=r"grid size", ylabel=r"error in quadrature")
 ax.set_title(r"Quadrature convergence")
 ax.grid(True)
