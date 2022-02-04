@@ -54,27 +54,33 @@ h = np.zeros(Ngrids)
 trap = np.zeros(Ngrids)  # trapezoidal rule
 tend = np.zeros(Ngrids)  # trapezoidal rule using first derivative
 tent = np.zeros(Ngrids)  # trapezoidal rule using first and third derivative
+gleg = np.zeros(Ngrids)  # gauss-legendre quadrature rule
 
 for k, N in enumerate(N):
     h[k] = (b - a) / (N - 1)
     x = np.linspace(a, b, N)
 
+    # nodes and weights calculation of gauss-legendre
+    xnode, wnode = np.polynomial.legendre.leggauss(N)
+
     trap[k] = h[k] * (np.sum(f(x)) - (f(a) + f(b)) / 2)
     tend[k] = trap[k] - (h[k]**2 / 12) * (g(b) - g(a))
     tent[k] = tend[k] + (h[k]**4 / 720) * (s(b) - s(a))
+    gleg[k] = np.inner(wnode, f(xnode))
 
 
 # error calculations
 trap_err = abs(np.double(trap - exact))
 tend_err = abs(np.double(tend - exact))
 tent_err = abs(np.double(tent - exact))
+gleg_err = abs(np.double(gleg - exact))
 
 fig, ax = plt.subplots()
 ax.loglog(h, trap_err, "b.--", label=r"trapezoidal rule")
 ax.loglog(h, tend_err, "r.--", label=r"trapezoidal rule using 1st derivative")
 ax.loglog(h, tent_err, "m.--", label=r"trapezoidal rule using 1st and 3rd derivative")
+ax.loglog(h, gleg_err, "g.--", label=r"gauss-legendre quadrature rule")
 ax.set(xlabel=r"grid size", ylabel=r"error in quadrature")
 ax.set_title(r"Quadrature convergence")
-ax.grid(True)
-ax.legend()
+ax.grid(True); ax.legend()
 plt.savefig("program6.png")
