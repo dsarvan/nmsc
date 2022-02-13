@@ -40,6 +40,7 @@ exact = 1.49364826562485405080
 
 # number of grid points
 N = [5, 10, 20, 50, 100, 200, 500, 1000]
+n = np.array(N)
 
 # number of different set of grids
 Ngrids = len(N)
@@ -63,9 +64,9 @@ rect_err = abs(np.double(rect - exact))
 recv_err = abs(np.double(recv - exact))
 
 fig, ax = plt.subplots()
-ax.loglog(h, rect_err, 'm.--', label=r'rectangular')
-ax.loglog(h, recv_err, 'b.--', label=r'rectangular (change of variable)')
-ax.set(xlabel=r"grid size", ylabel=r"error in quadrature")
+ax.loglog(n, rect_err, 'm.--', label=r'rectangular')
+ax.loglog(n, recv_err, 'b.--', label=r'rectangular (change of variable)')
+ax.set(xlabel=r"n", ylabel=r"error in quadrature")
 ax.set_title(r"Quadrature convergence")
 ax.grid(True)
 ax.legend()
