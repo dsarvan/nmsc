@@ -45,6 +45,7 @@ exact = 1.49364826562485405080
 
 # number of grid points
 N = [2, 5, 10, 20, 50, 100]
+n = np.array(N)
 
 # number of different set of grids
 Ngrids = len(N)
@@ -76,11 +77,11 @@ tent_err = abs(np.double(tent - exact))
 gleg_err = abs(np.double(gleg - exact))
 
 fig, ax = plt.subplots()
-ax.loglog(h, trap_err, "b.--", label=r"trapezoidal rule")
-ax.loglog(h, tend_err, "r.--", label=r"trapezoidal rule using 1st derivative")
-ax.loglog(h, tent_err, "m.--", label=r"trapezoidal rule using 1st and 3rd derivative")
-ax.loglog(h, gleg_err, "g.--", label=r"gauss-legendre quadrature rule")
-ax.set(xlabel=r"grid size", ylabel=r"error in quadrature")
+ax.loglog(n, trap_err, "b.--", label=r"trapezoidal rule")
+ax.loglog(n, tend_err, "r.--", label=r"trapezoidal rule using 1st derivative")
+ax.loglog(n, tent_err, "m.--", label=r"trapezoidal rule using 1st and 3rd derivative")
+ax.loglog(n, gleg_err, "g.--", label=r"gauss-legendre quadrature rule")
+ax.set(xlabel=r"n", ylabel=r"error in quadrature")
 ax.set_title(r"Quadrature convergence")
 ax.grid(True); ax.legend()
 plt.savefig("program6.png")
