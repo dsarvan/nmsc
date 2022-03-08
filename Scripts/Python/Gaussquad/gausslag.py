@@ -14,10 +14,10 @@ f = lambda x: np.exp(-x)*np.sin(x**2)
 exact = quad(f, 0, np.inf)[0]
 
 # nodes and weights calculations
-x, w = np.polynomial.laguerre.laggauss(10)
+x, w = np.polynomial.laguerre.laggauss(140)
 
 # integration
-integral = np.inner(w, np.exp(-x)*np.sin(x**2))
+integral = np.inner(w, np.sin(x**2))
 
 # error calculation
 error = abs(np.double(integral - exact))
