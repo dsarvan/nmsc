@@ -31,12 +31,12 @@ def f(x):
 
 
 # first derivative of the function
-def g(x):
+def df(x):
     return -2*x*np.exp(-x**2)
 
 
 # third derivative of the function
-def s(x):
+def ddf(x):
     return 4*x*(3 - 2*x**2)*np.exp(-x**2)
 
 
@@ -50,7 +50,7 @@ n = np.array(N)
 # number of different set of grids
 Ngrids = len(N)
 
-h = np.zeros(Ngrids)
+h = np.zeros(Ngrids)     # different grid spacings
 
 trap = np.zeros(Ngrids)  # trapezoidal rule
 tend = np.zeros(Ngrids)  # trapezoidal rule using first derivative
@@ -65,8 +65,8 @@ for k, N in enumerate(N):
     xnode, wnode = np.polynomial.legendre.leggauss(N)
 
     trap[k] = h[k] * (np.sum(f(x)) - (f(a) + f(b)) / 2)
-    tend[k] = trap[k] - (h[k]**2 / 12) * (g(b) - g(a))
-    tent[k] = tend[k] + (h[k]**4 / 720) * (s(b) - s(a))
+    tend[k] = trap[k] - (h[k]**2 / 12) * (df(b) - df(a))
+    tent[k] = tend[k] + (h[k]**4 / 720) * (ddf(b) - ddf(a))
     gleg[k] = np.inner(wnode, f(xnode))
 
 
@@ -81,7 +81,7 @@ ax.loglog(n, trap_err, "b.--", label=r"trapezoidal rule")
 ax.loglog(n, tend_err, "r.--", label=r"trapezoidal rule using 1st derivative")
 ax.loglog(n, tent_err, "m.--", label=r"trapezoidal rule using 1st and 3rd derivative")
 ax.loglog(n, gleg_err, "g.--", label=r"gauss-legendre quadrature rule")
-ax.set(xlabel=r"n", ylabel=r"error in quadrature")
+ax.set(xlabel=r"grid size", ylabel=r"error in quadrature")
 ax.set_title(r"Quadrature convergence")
 ax.grid(True); ax.legend()
 plt.savefig("program6.png")
