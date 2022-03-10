@@ -7,6 +7,8 @@
 
 import matplotlib
 import matplotlib.pyplot as plt
+plt.style.use('classic')
+from matplotlib.ticker import ScalarFormatter
 import numpy as np
 
 matplotlib.rcParams["pgf.texsystem"] = "pdflatex"
@@ -63,11 +65,16 @@ for k, N in enumerate(N):
 rect_err = abs(np.double(rect - exact))
 recv_err = abs(np.double(recv - exact))
 
+formatter = ScalarFormatter()
+formatter.set_scientific(False)
+
 fig, ax = plt.subplots()
-ax.loglog(n, rect_err, 'm.--', label=r'rectangular')
-ax.loglog(n, recv_err, 'b.--', label=r'rectangular (change of variable)')
-ax.set(xlabel=r"n", ylabel=r"error in quadrature")
+ax.plot(n, rect_err, 'm.--', label=r'rectangular')
+ax.plot(n, recv_err, 'b.--', label=r'rectangular (change of variable)')
+ax.set_xscale("log", base=2)
+ax.set_yscale("log", base=10)
+ax.xaxis.set_major_formatter(formatter)
+ax.set(xlabel=r"number of grid points", ylabel=r"error in quadrature")
 ax.set_title(r"Quadrature convergence")
-ax.grid(True)
-ax.legend()
+ax.grid(True); ax.legend(loc="lower left")
 plt.savefig("program7.png")
