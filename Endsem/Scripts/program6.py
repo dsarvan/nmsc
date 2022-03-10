@@ -7,6 +7,8 @@
 
 import matplotlib
 import matplotlib.pyplot as plt
+plt.style.use('classic')
+from matplotlib.ticker import ScalarFormatter
 import numpy as np
 
 matplotlib.rcParams["pgf.texsystem"] = "pdflatex"
@@ -76,12 +78,18 @@ tend_err = abs(np.double(tend - exact))
 tent_err = abs(np.double(tent - exact))
 gleg_err = abs(np.double(gleg - exact))
 
+formatter = ScalarFormatter()
+formatter.set_scientific(False)
+
 fig, ax = plt.subplots()
-ax.loglog(n, trap_err, "b.--", label=r"trapezoidal rule")
-ax.loglog(n, tend_err, "r.--", label=r"trapezoidal rule using 1st derivative")
-ax.loglog(n, tent_err, "m.--", label=r"trapezoidal rule using 1st and 3rd derivative")
-ax.loglog(n, gleg_err, "g.--", label=r"gauss-legendre quadrature rule")
-ax.set(xlabel=r"grid size", ylabel=r"error in quadrature")
+ax.plot(n, trap_err, "b.--", label=r"trapezoidal rule")
+ax.plot(n, tend_err, "r.--", label=r"trapezoidal rule 1st derivative")
+ax.plot(n, tent_err, "m.--", label=r"trapezoidal rule 1st and 3rd derivative")
+ax.plot(n, gleg_err, "g.--", label=r"gauss-legendre quadrature rule")
+ax.set_xscale("log", base=2)
+ax.set_yscale("log", base=10)
+ax.xaxis.set_major_formatter(formatter)
+ax.set(xlabel=r"number of grid points", ylabel=r"error in quadrature")
 ax.set_title(r"Quadrature convergence")
-ax.grid(True); ax.legend()
+ax.grid(True); ax.legend(loc="lower left")
 plt.savefig("program6.png")
