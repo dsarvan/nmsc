@@ -7,7 +7,6 @@
 
 import numpy as np
 from scipy.integrate import quad
-import matplotlib.pyplot as plt
 
 # exact value of the integral
 f = lambda x: np.exp(-x)*np.sin(x**2)
