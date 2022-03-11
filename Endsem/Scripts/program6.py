@@ -15,10 +15,10 @@ matplotlib.rcParams["pgf.texsystem"] = "pdflatex"
 matplotlib.rcParams.update(
     {
         "font.family": "serif",
-        "font.size": 8,
-        "axes.labelsize": 10,
-        "axes.titlesize": 10,
-        "figure.titlesize": 10,
+        "font.size": 10,
+        "axes.labelsize": 12,
+        "axes.titlesize": 12,
+        "figure.titlesize": 12,
     }
 )
 matplotlib.rcParams["text.usetex"] = True
@@ -60,8 +60,8 @@ tent = np.zeros(Ngrids)  # trapezoidal rule using first and third derivative
 gleg = np.zeros(Ngrids)  # gauss-legendre quadrature rule
 
 for k, N in enumerate(N):
-    h[k] = (b - a) / (N - 1)
-    x = np.linspace(a, b, N)
+    h[k] = (b - a) / (N - 1)        # grid spacing
+    x = np.linspace(a, b, N)        # grid points
 
     # nodes and weights calculation of gauss-legendre
     xnode, wnode = np.polynomial.legendre.leggauss(N)
@@ -84,7 +84,7 @@ formatter.set_scientific(False)
 fig, ax = plt.subplots()
 ax.plot(n, trap_err, "b.--", label=r"trapezoidal rule")
 ax.plot(n, tend_err, "r.--", label=r"trapezoidal rule 1st derivative")
-ax.plot(n, tent_err, "m.--", label=r"trapezoidal rule 1st and 3rd derivative")
+ax.plot(n, tent_err, "m.--", label=r"trapezoidal 1st \& 3rd derivative")
 ax.plot(n, gleg_err, "g.--", label=r"gauss-legendre quadrature rule")
 ax.set_xscale("log", base=2)
 ax.set_yscale("log", base=10)
@@ -92,4 +92,4 @@ ax.xaxis.set_major_formatter(formatter)
 ax.set(xlabel=r"number of grid points", ylabel=r"error in quadrature")
 ax.set_title(r"Quadrature convergence")
 ax.grid(True); ax.legend(loc="lower left")
-plt.savefig("program6.png")
+plt.savefig("program6.pgf")
