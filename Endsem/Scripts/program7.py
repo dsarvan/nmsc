@@ -3,7 +3,7 @@
 # Name: D.Saravanan
 # Date: 02/12/2021
 
-""" Script to implement the different quadrature """
+""" Script to evaluate an integral using rectangular rule """
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -15,10 +15,10 @@ matplotlib.rcParams["pgf.texsystem"] = "pdflatex"
 matplotlib.rcParams.update(
     {
         "font.family": "serif",
-        "font.size": 8,
-        "axes.labelsize": 10,
-        "axes.titlesize": 10,
-        "figure.titlesize": 10,
+        "font.size": 10,
+        "axes.labelsize": 12,
+        "axes.titlesize": 12,
+        "figure.titlesize": 12,
     }
 )
 matplotlib.rcParams["text.usetex"] = True
@@ -47,10 +47,10 @@ n = np.array(N)
 # number of different set of grids
 Ngrids = len(N)
 
-h = np.zeros(Ngrids)
+h = np.zeros(Ngrids)        # different grid spacings
 
-rect = np.zeros(Ngrids)
-recv = np.zeros(Ngrids)
+rect = np.zeros(Ngrids)     # rectangular rule
+recv = np.zeros(Ngrids)     # rectangular rule with change of variables
 
 for k, N in enumerate(N):
     h[k] = (b - a) / (N - 1)        # grid spacing
@@ -69,12 +69,12 @@ formatter = ScalarFormatter()
 formatter.set_scientific(False)
 
 fig, ax = plt.subplots()
-ax.plot(n, rect_err, 'm.--', label=r'rectangular')
-ax.plot(n, recv_err, 'b.--', label=r'rectangular (change of variable)')
+ax.plot(n, rect_err, 'm.--', label=r'rectangular rule')
+ax.plot(n, recv_err, 'b.--', label=r'rectangular rule (change of variable)')
 ax.set_xscale("log", base=2)
 ax.set_yscale("log", base=10)
 ax.xaxis.set_major_formatter(formatter)
 ax.set(xlabel=r"number of grid points", ylabel=r"error in quadrature")
 ax.set_title(r"Quadrature convergence")
 ax.grid(True); ax.legend(loc="lower left")
-plt.savefig("program7.png")
+plt.savefig("program7.pgf")
