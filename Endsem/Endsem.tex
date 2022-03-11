@@ -30,6 +30,22 @@
   pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
 }
 
+\lstset{
+  basicstyle=\footnotesize,
+  numbers=left,
+  numberstyle=\footnotesize,
+  stepnumber=1,
+  numbersep=5pt,
+  backgroundcolor=\color{white},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=4,
+  captionpos=b,
+  breaklines=true,
+  breakatwhitespace=false,
+}
+
 \newcommand{\soln}{\\ \textbf{Solution}: }
 \newcommand{\bkt}[1]{\left(#1\right)}
 
@@ -114,7 +130,8 @@
     \lstinputlisting[language=Python]{Scripts/program6.py}
 
     \begin{figure}[ht!]
-    \includegraphics[width=0.9\linewidth]{Scripts/program6.pdf}
+    \centering
+    \resizebox{0.9\linewidth}{!}{\input{Scripts/program6.pgf}}
     \end{figure}
 
     \item Evaluate $I = \displaystyle \int_{0}^{1} \frac{e^{-x}}{\sqrt{x}} dx$ by
@@ -139,7 +156,8 @@
     \lstinputlisting[language=Python]{Scripts/program7.py}
 
     \begin{figure}[ht!]
-    \includegraphics[width=0.9\linewidth]{Scripts/program7.pdf}
+    \centering
+    \resizebox{0.9\linewidth}{!}{\input{Scripts/program7.pgf}}
     \end{figure}
 
     \item Consider the motion of a simple pendulum. The restoring force is $mg \sin \theta$
