@@ -1,5 +1,5 @@
 #!/usr/bin/env octave
-# File: eulermethod.m
+# File: eulerexplicit.m
 # Name: D.Saravanan
 # Date: 02/12/2021
 
@@ -23,4 +23,4 @@ exact = exp(-10*t);     % exact solution
 plot(t, y, 'r+');
 hold on;
 plot(t, exact, 'k-');
-print('eulermethod.png', '-dpng')
+print('eulerexplicit.png', '-dpng')
