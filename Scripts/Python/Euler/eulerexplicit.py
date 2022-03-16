@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# File: eulermethod.py
+# File: eulerexplicit.py
 # Name: D.Saravanan
 # Date: 02/12/2021
 
@@ -39,4 +39,4 @@ exact = np.exp(-10*t)
 figure, ax = plt.subplots()
 ax.plot(t, y, 'r+')
 ax.plot(t, exact, 'k')
-plt.savefig('eulermethod.png')
+plt.savefig('eulerexplicit.png')
