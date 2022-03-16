@@ -39,9 +39,9 @@ for k in range(0, N):
 exact = np.exp(-0.5*t)
 
 figure, ax = plt.subplots()
-ax.plot(t, y1, "r*", label=r"euler explicit")
-ax.plot(t, y2, "b*", label=r"euler implicit")
-ax.plot(t, y3, "g*", label=r"trapezoidal rule")
+ax.plot(t, y1, "r.", label=r"euler explicit")
+ax.plot(t, y2, "b.", label=r"euler implicit")
+ax.plot(t, y3, "g.", label=r"trapezoidal rule")
 ax.plot(t, exact, "k-", label=r"exact solution")
 ax.set(xlabel=r"t", ylabel=r"y(t)")
 ax.set_title(r"Euler explicit, implicit \& Trapezoidal scheme")
