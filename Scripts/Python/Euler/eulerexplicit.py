@@ -23,10 +23,10 @@ matplotlib.rcParams["text.usetex"] = True
 matplotlib.use("Agg")
 
 t_ = 10                     # time period
-dt = 0.01                   # time step
+dt = 0.02                   # time step
 N = int(t_/dt)              # number of steps
 t = np.zeros(N+1)           # time step vector
-y = np.zeros(N+1)           # solution vector
+y = np.zeros(N+1)           # solution vector of euler explicit
 t[0] = 0
 y[0] = 1
 
@@ -34,9 +34,12 @@ for k in range(0, N):
     t[k+1] = t[k] + dt
     y[k+1] = y[k] + dt * (-10*y[k])
 
-exact = np.exp(-10*t)
+exact = np.exp(-10*t)       # exact solution
 
 figure, ax = plt.subplots()
-ax.plot(t, y, 'r+')
-ax.plot(t, exact, 'k')
+ax.plot(t, y, "r.", label=r"euler explicit")
+ax.plot(t, exact, "k-", label=r"exact solution")
+ax.set(xlabel=r"t", ylabel=r"y(t)")
+ax.set_title(r"Euler explicit scheme")
+ax.grid(True); ax.legend()
 plt.savefig('eulerexplicit.png')
