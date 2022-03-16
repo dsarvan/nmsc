@@ -22,19 +22,19 @@ matplotlib.rcParams.update(
 matplotlib.rcParams["text.usetex"] = True
 matplotlib.use("Agg")
 
-t_ = 25
-dt = 0.5
-N = int(t_/dt)
-t = np.zeros(N+1)
-y1 = np.ones(N+1)
-y2 = np.ones(N+1)
+t_ = 25                     # time period
+dt = 0.5                    # time step
+N = int(t_/dt)              # number of steps
+t = np.zeros(N+1)           # time vector
+y1 = np.ones(N+1)           # solution vector of euler explicit
+y2 = np.ones(N+1)           # solution vector of euler implicit
 
 for k in range(0, N):
     t[k+1] = t[k] + dt
     y1[k+1] = y1[k]*(1 - 0.5*dt)
     y2[k+1] = y2[k]/(1 + 0.5*dt)
 
-exact = np.exp(-0.5*t)
+exact = np.exp(-0.5*t)      # exact solution
 
 figure, ax = plt.subplots()
 ax.plot(t, y1, "r.", label=r"euler explicit")
