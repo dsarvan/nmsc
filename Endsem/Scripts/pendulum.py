@@ -3,6 +3,9 @@
 # Name: D.Saravanan
 # Date: 02/12/2021
 
+""" Script to compute the angular displacement and angular velocity for a simple
+pendulum using Euler's method """
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -19,27 +22,25 @@ plt.rcParams.update(
     }
 )
 
-t_ = 100
-dt = 0.01
-N = int(t_/dt)
-t = np.zeros(N+1)
-y1 = np.ones(N+1)
-y2 = np.ones(N+1)
+t_ = 40                 # time period
+dt = 0.05               # time step
+N = int(t_/dt)          # number of steps
+t = np.zeros(N+1)       # time vector
 
-th0 = 0.5
+theta = np.ones(N+1)    # angular displacement
+omega = np.ones(N+1)    # angular velocity
 
-
+theta[0] = 0.5          # initial value of angular displacement
+omega[0] = 0.0          # initial value of angular velocity
 
 for k in range(0, N):
     t[k+1] = t[k] + dt
-    y1[k+1] = y1[k]*(1 - 1*dt)
-    y2[k+1] = y2[k]*(1 + 1*dt)
-
-exact = np.sin(t) + np.cos(t)
+    theta[k+1] = theta[k] + omega[k] * dt
+    omega[k+1] = omega[k] - np.sin(theta[k]) * dt
 
 figure, ax = plt.subplots()
-#ax.plot(t, y1, "r.", label=r"euler explicit")
-ax.plot(t, y2, "b.", label=r"euler implicit")
-ax.plot(t, exact, "k-", label=r"exact solution")
+ax.plot(t, theta, "r--", label=r"$angular\ displacement$")
+ax.set(xlabel=r"$time\ (s)$", ylabel=r"$\theta\ (rad)$")
+ax.set_title(r"$Simple\ pendulum\ using\ Euler's\ method$")
 ax.grid(True); ax.legend()
 plt.savefig("pendulum.png")
