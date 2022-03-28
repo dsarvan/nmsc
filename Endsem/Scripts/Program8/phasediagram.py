@@ -72,6 +72,6 @@ for n, dt in enumerate([0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20]):  # t
     ax.plot(theta2, omega2, "b-", label=r"$euler\ implicit$")
     ax.plot(theta3, omega3, "k-", label=r"$trapezoidal\ scheme$")
     ax.set(xlabel=r"$\theta\ (rad)$", ylabel=r"$\omega\ (s^{-1})$")
-    ax.set_title(r"$Phase\ space\ diagram\ (time\ step = {}\ (s))$".format(dt))
+    ax.set_title(r"$Phase\ space\ diagram\ (time\ step = {}\ s)$".format(dt))
     ax.grid(True); ax.legend(loc="best")
     plt.savefig("phasediagram{}.pgf".format(n))
