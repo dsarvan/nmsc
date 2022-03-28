@@ -74,4 +74,4 @@ for n, dt in enumerate([0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20]):  # t
     ax.set(xlabel=r"$time\ (s)$", ylabel=r"$\theta\ (rad)$")
     ax.set_title(r"$Simple\ pendulum\ using\ Euler's\ methods\ (time\ step = {}\ (s))$".format(dt))
     ax.grid(True); ax.legend(loc="best")
-    plt.savefig("program8{}.png".format(n))
+    plt.savefig("program8{}.pgf".format(n))
