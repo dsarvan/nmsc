@@ -775,7 +775,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=4.100000in,y=0.351543in,,top]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont number of grid points}%
+\pgftext[x=4.100000in,y=0.351543in,,top]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle number\ of\ grid\ points\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfpathrectangle{\pgfqpoint{1.000000in}{0.600000in}}{\pgfqpoint{6.200000in}{4.800000in}}%
@@ -1294,13 +1294,13 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=0.531635in,y=3.000000in,,bottom,rotate=90.000000]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont error in quadrature}%
+\pgftext[x=0.531635in,y=3.000000in,,bottom,rotate=90.000000]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle error\ in\ quadrature\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=4.100000in,y=5.469444in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Quadrature convergence}%
+\pgftext[x=4.100000in,y=5.469444in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle Quadrature\ convergence\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1312,8 +1312,8 @@
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
 \pgfpathmoveto{\pgfqpoint{1.083333in}{0.683333in}}%
-\pgfpathlineto{\pgfqpoint{3.959872in}{0.683333in}}%
-\pgfpathlineto{\pgfqpoint{3.959872in}{1.662962in}}%
+\pgfpathlineto{\pgfqpoint{4.145656in}{0.683333in}}%
+\pgfpathlineto{\pgfqpoint{4.145656in}{1.662962in}}%
 \pgfpathlineto{\pgfqpoint{1.083333in}{1.662962in}}%
 \pgfpathlineto{\pgfqpoint{1.083333in}{0.683333in}}%
 \pgfpathclose%
@@ -1366,7 +1366,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.616667in,y=1.479628in,left,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont trapezoidal rule}%
+\pgftext[x=1.616667in,y=1.479628in,left,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle trapezoidal\ rule\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1415,7 +1415,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.616667in,y=1.247221in,left,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont trapezoidal rule 1st derivative}%
+\pgftext[x=1.616667in,y=1.247221in,left,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle trapezoidal\ rule\ 1st\ derivative\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1464,7 +1464,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.616667in,y=1.014814in,left,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont trapezoidal 1st \& 3rd derivative}%
+\pgftext[x=1.616667in,y=1.014814in,left,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle trapezoidal\ 1st\ \&\ 3rd\ derivative\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1513,7 +1513,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.616667in,y=0.782407in,left,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont gauss-legendre quadrature rule}%
+\pgftext[x=1.616667in,y=0.782407in,left,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle gauss-legendre\ quadrature\ rule\)}%
 \end{pgfscope}%
 \end{pgfpicture}%
 \makeatother%

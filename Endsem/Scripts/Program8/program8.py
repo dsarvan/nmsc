@@ -24,7 +24,8 @@ plt.rcParams.update(
 
 t_ = 100  # time period (s)
 
-for n, dt in enumerate([0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20]):  # time step
+# time step (s)
+for n, dt in enumerate([0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20]):
 
     N = int(t_ / dt)  # number of steps
     t = np.zeros(N + 1)  # time vector (s)
