@@ -201,6 +201,110 @@
     \item Submit the plots obtained, entire code and the write-up.
     \end{itemize}
 
+
+    \textbf{Solution:}
+
+    We first reduce the second order differential equation
+
+    \begin{equation*}
+    \frac{d^{2} \theta}{dt^{2}} = - \sin(\theta)
+    \end{equation*}
+
+    to a system of first order equations.
+
+    \begin{equation*}
+    \begin{aligned}
+    \frac{d \theta}{dt} &= \omega \\ \\
+    \frac{d \omega}{dt} &= -\sin(\theta)
+    \end{aligned}
+    \end{equation*}
+
+    Notice that $(\theta^\prime, \omega^\prime)$ is given as a function of $(\theta,
+    \omega)$. The entire motion of the pendulum is determined if we know $(\theta,
+    \omega)$ at some instant. So we call $(\theta, \omega)$ the phase of the system. We
+    are given the initial phase of the system, \textit{i.e.,}\ we know from which initial
+    angle we have released the pendulum, and with what angular velocity. Our aim is to 
+    know the phase at all time points during the swing.
+
+    Thus, at $t = t_0$, we know
+    
+    \begin{equation*}
+    \begin{aligned}
+    \theta &= \theta_0 = \frac{\pi}{6} \\
+    \omega &= \omega_0 = 0
+    \end{aligned}
+    \end{equation*}
+
+    We want to know the values $\theta(t)$ and $\omega(t)$ at any given $t > t_0$. We 
+    also know the rate at which they are increasing at $t = t_0$:
+
+    \begin{equation*}
+    \begin{aligned}
+    \theta^{\prime}(t_0) &= \omega_0 \\
+    \omega^{\prime}(t_0) &= - \sin(\theta_0)
+    \end{aligned}
+    \end{equation*}
+
+    Now advance time a little to $t_1 = t_0 + \delta t$, say. By this time $\theta$ and
+    $\omega$ will roughly change to
+
+    \begin{equation*}
+    \begin{aligned}
+    \theta_1 &= \theta_0 + \theta^{\prime}(t_0) \delta t = \theta_0 + \omega_0 \delta t \\
+    \omega_1 &= \omega_0 + \omega^{\prime}(t_0) \delta t = \omega_0 - \sin(\theta_0) \delta t
+    \end{aligned}
+    \end{equation*}
+
+    So we get the phase (approximately) at $t_1 = t_0 + \delta t$. Now we keep on
+    advancing time by $\delta t$ increments. The same logic may be used repeatedly to 
+    give, at $t_k = t_0 + k \cdot \delta t$,
+
+    \begin{equation*}
+    \begin{aligned}
+    \theta_k &= \theta_{k-1} + \omega_{k-1} \delta t \\
+    \omega_k &= \omega_{k-1} - \sin(\theta_{k-1}) \delta t
+    \end{aligned}
+    \end{equation*}
+
+    Admittedly, this is a rather crude approximation. However, if $\delta t$ is pretty
+    small, the accuracy increases.
+
+    \begin{enumerate}
+
+    \item Forward Euler:
+    
+    \begin{equation*}
+    \begin{aligned}
+    \theta_{k+1} &= \theta_{k} + \omega_{k} \delta t \\
+    \omega_{k+1} &= \omega_{k} - \sin(\theta_{k}) \delta t
+    \end{aligned}
+    \end{equation*}
+
+    \item Backward Euler:
+
+    \begin{equation*}
+    \begin{aligned}
+    \theta_{k+1} &= \theta_{k} + \omega_{k+1} \delta t \\
+                 &= \theta_{k} + \Big( \omega_{k} - \sin(\theta_{k}) \delta t \Big) \delta t \\
+    \omega_{k+1} &= \omega_{k} - \sin(\theta_{k+1}) \delta t \\
+                 &= \omega_{k} - \sin(\theta_{k} + \omega_{k} \delta t) \delta t
+    \end{aligned}
+    \end{equation*}
+
+    \item Trapezoidal rule:
+
+    \begin{equation*}
+    \begin{aligned}
+    \theta_{k+1} &= \theta_{k} + \frac{\delta t}{2} \Big( \omega_{k} + \omega_{k+1} \Big) \\
+                 &= \theta_{k} + \frac{\delta t}{2} \Big( \omega_{k} + \omega_{k} - \sin(\theta_{k}) \delta t \Big) \\ \\
+    \omega_{k+1} &= \omega_{k} - \frac{\delta t}{2} \Big( \sin(\theta_{k}) + \sin(\theta_{k+1}) \Big) \\
+                 &= \omega_{k} - \frac{\delta t}{2} \Big( \sin(\theta_{k}) + \sin(\theta_{k} + \omega_{k} \delta t) \Big)
+    \end{aligned}
+    \end{equation*}
+
+    \end{enumerate}
+
+
     \textbf{Program:}
     \lstinputlisting[language=Python]{Scripts/Program8/program8.py}
 
