@@ -269,6 +269,43 @@
     Admittedly, this is a rather crude approximation. However, if $\delta t$ is pretty
     small, the accuracy increases.
 
+    Physical stability for the simple pendulum:
+    
+    The stability analysis of the simple pendulum problem will be done by 
+    approximating $sin(\theta)$ to be $\theta$.
+
+    \begin{equation*}
+    \frac{d^2 \theta}{dt^2} = - \theta
+    \end{equation*}
+
+    converting into a system of first order ordinary differential equations,
+
+    \begin{equation*}
+    \begin{aligned}
+    \theta^{\prime} &= \frac{d \theta}{dt} = \omega \\
+    \theta^{\prime\prime} &= \frac{d \omega}{dt} = - \theta
+    \end{aligned}
+    \end{equation*}
+
+    rewriting in matrix form,
+        
+    \begin{equation*}
+    \frac{d}{dt} \begin{bmatrix} \theta \\ \omega \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} \begin{bmatrix} \theta \\ \omega \end{bmatrix}
+    \end{equation*}
+
+    then,
+
+    \begin{equation*}
+    det \Bigg( \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} - \lambda \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \Bigg) = 0
+    \end{equation*}
+
+    solving, we obtain $\lambda = \pm i$.
+
+    For the exact solution to be stable and bounded, the $Re(\lambda) \le 0$. 
+    Since, $Re(\lambda) = 0$, the exact solution for the simple pendulum problem
+    is stable and bounded.
+
+
     \begin{enumerate}
 
     \item Forward Euler:
