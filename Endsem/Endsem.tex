@@ -103,7 +103,7 @@
     \end{equation*}
 
     We create a sequence of polynomials $\phi_{k}(x)$ of degree $k$ for $k = 0, 1, 2, 3, ...$ such that
-    $\langle \phi_{i}, \phi{j} \rangle_{w} = 0$ for all $i \neq j$.
+    $\langle \phi_{i}, \phi_{j} \rangle_{w} = 0$ for all $i \neq j$.
 
     We know that the Chebyshev polynomials of the first kind $T_{n}(x)$ are orthogonal within the interval $x \in [-1, 1]$ with a weight function 
     $w(x) = \displaystyle \frac{1}{\sqrt{1 - x^{2}}}$,
@@ -165,13 +165,78 @@
     \end{aligned}
     \end{equation*}
     
+
+   \textbf{Solution:} 
+
+    Let $\langle f, g \rangle_{w} = \displaystyle \int_{a}^{b} w(x) f(x) g(x)\ dx$ (the weighted inner product). By the Gram-Schmidt process, there is a sequence
+    $\{\phi_{j}\}$ of orthogonal polynomials where $\phi_{j}$ has degree $n$. $\phi_{n+1}$ has $n+1$ distinct real zeros $x_{0}, ..., x_{n}$ in $[a, b]$. 
+
+    Let $l_{k} (x)$ be the $k$-th Lagrange basis polynomial for these zeros and let
     
+    \begin{equation*}
+    c_{k} = \int_{a}^{b} l_{k} (x)\ dx
+    \end{equation*}    
+
+    The claim is that with this set of $x_{k}$'s and $c_{k}$'s, $\displaystyle \int_{a}^{b} w(x) f(x)\ dx \approx \sum_{k=0}^{n} c_{k} f(x_{k})$ has degree $2n+1$. \\
+
+    Suppose $f \in \mathbb{P}_{2n+1}$. Since $p_{n+1}$ has degree $n+1$, polynomial division gives
+    \begin{equation*}
+    f = q(x)p_{n+1} (x) + r(x), \hspace{2cm} q, r \in \mathbb{P}_{n}.
+    \end{equation*}
+
+    Plugging this expression into the integral,
+
+    \begin{equation*}
+    \begin{aligned}
+    I &= \int_{a}^{b} (q(x)p_{n+1}(x) + r(x)) w(x) dx \\
+      &= \langle q, p_{n+1} \rangle_{w} + \int_{a}^{b} r(x) w(x)\ dx \\
+      &= \int_{a}^{b} r(x) w(x)\ dx
+    \end{aligned}
+    \end{equation*}
+
+    because $p_{n+1}$ is orthogonal to all polynomials of degree $\le n$, which includes $q$. Now plug the expression into the formula:
+
+    \begin{equation*}
+    \begin{aligned}
+    \text{formula} &= \sum_{k=0}^{n} c_{k} f(x_{k}) \\
+    &= \sum_{k=0}^{n} c_{k} q(x_{k}) p_{n+1}(x_{k}) + \sum_{k=0}^{n} c_{k} r(x_{k}) \\
+    &= \sum_{k=0}^{n} c_{k} r(x_{k})
+    \end{aligned}
+    \end{equation*}
+ 
+    Last, we need to establish that $I$ and the formula are equal. Because $r(x)$ has degree $\le n$, it is equal to its Lagrange interpolant through the nodes $x_{0},...,x_{n}$, so
+
+    \begin{equation*}
+    r(x) = \sum_{k=0}^{n} r(x_{k}) l_{k}(x)
+    \end{equation*}
+
+    Thus, working from the formula for $I$,
     
-
+    \begin{equation*}
+    I = \int_{a}^{b} r(x) w(x)\ dx = \sum_{k=0}^{n} \int_{a}^{b} l_{k}(x) w(x)\ dx = \sum_{k=0}^{n} c_{k} r(x_{k})
+    \end{equation*}
     
+    which establishes equality. To see that the degree of accuracy is exactly $2n+1$, consider
+    
+    \begin{equation*}
+    f(x) = \prod_{j=0}^{n} (x-x_{j})^2
+    \end{equation*}
 
+    Note that the nodes $x_{k}$ depend on the degree, so really they should be written $x_{n,k}\ (\text{for} k = 0,...,n)$ for $\phi_{n+1}$. One can show that, unlike with equally spaced interpolation,
+    
+    \begin{equation*}
+    \lim_{x\to\infty} |I - \sum_{k=0}^{n} c_{k} f(x_{n,k})| = 0
+    \end{equation*}
 
+    under reasonable assumptions on $f$. Thus, Gaussian quadrature does well when adding more points to reduce error when function values of $f$ at any point are available.
 
+    In summary, let $\{\phi_{j}\}$ be an orthogonal basis of polynomials in the inner product $\langle f, g \rangle_{w} = \displaystyle \int_{a}^{b} w(x) f(x) g(x)\ dx$ and let $x_{0},...,x_{n}$ be the zeros of the polynomial $\phi_{n+1}$ with Lagrange basis $\{l_{k}(x)\}$. Then
+
+    \begin{equation*}
+    I = \int_{a}^{b} w(x) f(x)\ dx \approx \sum_{k=0}^{n} c_{k} f(x_{k}), \hspace{2cm} c_{k} = \int_{a}^{b} l_{k}(x) w(x)\ dx,
+    \end{equation*}
+
+    called the Gaussian quadrature formula for $w(x)$, has degree of accuracy $2n+1$.
 
 
 
