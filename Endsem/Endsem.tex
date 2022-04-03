@@ -169,15 +169,15 @@
    \textbf{Solution:} 
 
     Let $\langle f, g \rangle_{w} = \displaystyle \int_{a}^{b} w(x) f(x) g(x)\ dx$ (the weighted inner product). By the Gram-Schmidt process, there is a sequence
-    $\{\phi_{j}\}$ of orthogonal polynomials where $\phi_{j}$ has degree $n$. $\phi_{n+1}$ has $n+1$ distinct real zeros $x_{0}, ..., x_{n}$ in $[a, b]$. 
+    $\{\phi_{j}\}$ of orthogonal polynomials where $\phi_{j}$ has degree $j$. $\phi_{j+1}$ has $j+1$ distinct real zeros $x_{0}, ..., x_{n}$ in $[a, b]$. 
 
-    Let $l_{k} (x)$ be the $k$-th Lagrange basis polynomial for these zeros and let
+    Let $l_{i} (x)$ be the $i$-th Lagrange basis polynomial for these zeros and let
     
     \begin{equation*}
-    c_{k} = \int_{a}^{b} l_{k} (x)\ dx
+    a_{i} = \int_{a}^{b} l_{i} (x)\ dx
     \end{equation*}    
 
-    The claim is that with this set of $x_{k}$'s and $c_{k}$'s, $\displaystyle \int_{a}^{b} w(x) f(x)\ dx \approx \sum_{k=0}^{n} c_{k} f(x_{k})$ has degree $2n+1$. \\
+    The claim is that with this set of $x_{i}$'s and $a_{i}$'s, $\displaystyle \int_{a}^{b} w(x) f(x)\ dx \approx \sum_{i=0}^{n} a_{i} f(x_{i})$ has degree $2n+1$. \\
 
     Suppose $f \in \mathbb{P}_{2n+1}$. Since $p_{n+1}$ has degree $n+1$, polynomial division gives
     \begin{equation*}
@@ -198,22 +198,22 @@
 
     \begin{equation*}
     \begin{aligned}
-    \text{formula} &= \sum_{k=0}^{n} c_{k} f(x_{k}) \\
-    &= \sum_{k=0}^{n} c_{k} q(x_{k}) p_{n+1}(x_{k}) + \sum_{k=0}^{n} c_{k} r(x_{k}) \\
-    &= \sum_{k=0}^{n} c_{k} r(x_{k})
+    \text{formula} &= \sum_{i=0}^{n} a_{i} f(x_{i}) \\
+    &= \sum_{i=0}^{n} a_{i} q(x_{i}) p_{n+1}(x_{i}) + \sum_{i=0}^{n} a_{i} r(x_{i}) \\
+    &= \sum_{i=0}^{n} a_{i} r(x_{i})
     \end{aligned}
     \end{equation*}
  
     Last, we need to establish that $I$ and the formula are equal. Because $r(x)$ has degree $\le n$, it is equal to its Lagrange interpolant through the nodes $x_{0},...,x_{n}$, so
 
     \begin{equation*}
-    r(x) = \sum_{k=0}^{n} r(x_{k}) l_{k}(x)
+    r(x) = \sum_{i=0}^{n} r(x_{i}) l_{i}(x)
     \end{equation*}
 
     Thus, working from the formula for $I$,
     
     \begin{equation*}
-    I = \int_{a}^{b} r(x) w(x)\ dx = \sum_{k=0}^{n} \int_{a}^{b} l_{k}(x) w(x)\ dx = \sum_{k=0}^{n} c_{k} r(x_{k})
+    I = \int_{a}^{b} r(x) w(x)\ dx = \sum_{i=0}^{n} \int_{a}^{b} l_{i}(x) w(x)\ dx = \sum_{i=0}^{n} a_{i} r(x_{i})
     \end{equation*}
     
     which establishes equality. To see that the degree of accuracy is exactly $2n+1$, consider
@@ -222,10 +222,10 @@
     f(x) = \prod_{j=0}^{n} (x-x_{j})^2
     \end{equation*}
 
-    Note that the nodes $x_{k}$ depend on the degree, so really they should be written $x_{n,k}\ (\text{for} k = 0,...,n)$ for $\phi_{n+1}$. One can show that, unlike with equally spaced interpolation,
+    Note that the nodes $x_{i}$ depend on the degree, so really they should be written $x_{n,i}\ (\text{for}\ i = 0,...,n)$ for $\phi_{n+1}$. One can show that, unlike with equally spaced interpolation,
     
     \begin{equation*}
-    \lim_{x\to\infty} |I - \sum_{k=0}^{n} c_{k} f(x_{n,k})| = 0
+    \lim_{x\to\infty} |I - \sum_{i=0}^{n} a_{i} f(x_{n,i})| = 0
     \end{equation*}
 
     under reasonable assumptions on $f$. Thus, Gaussian quadrature does well when adding more points to reduce error when function values of $f$ at any point are available.
@@ -233,16 +233,49 @@
     In summary, let $\{\phi_{j}\}$ be an orthogonal basis of polynomials in the inner product $\langle f, g \rangle_{w} = \displaystyle \int_{a}^{b} w(x) f(x) g(x)\ dx$ and let $x_{0},...,x_{n}$ be the zeros of the polynomial $\phi_{n+1}$ with Lagrange basis $\{l_{k}(x)\}$. Then
 
     \begin{equation*}
-    I = \int_{a}^{b} w(x) f(x)\ dx \approx \sum_{k=0}^{n} c_{k} f(x_{k}), \hspace{2cm} c_{k} = \int_{a}^{b} l_{k}(x) w(x)\ dx,
+    I = \int_{a}^{b} w(x) f(x)\ dx \approx \sum_{i=0}^{n} a_{i} f(x_{i}), \hspace{2cm} a_{i} = \int_{a}^{b} l_{i}(x) w(x)\ dx,
     \end{equation*}
 
     called the Gaussian quadrature formula for $w(x)$, has degree of accuracy $2n+1$.
 
+    
+    \textbf{Solution:}
 
+    \begin{equation*}
+    I = \int_{0}^{1} \frac{x sin(x)}{\sqrt{1-x^2}} dx \approx \sum_{i=0}^{n} a_{i} f(x_{i}) \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(x) w(x)\ dx
+    \end{equation*}
 
+    where $l_{i}(x) = \displaystyle \prod_{i \neq j}^{n} \frac{x - x_{j}}{x_{i} - x_{j}}$
 
+    The Chebyshev polynomials of the first kind $T_{n}(y)$ are orthogonal polynomials on $[0, 1]$ with respect to the weight function $w(y) = \displaystyle \frac{1}{\sqrt{4y-4y^2}}$
 
+    \begin{equation*}
+    T_{2}(2y-1) = y^{2} - y + \frac{1}{8}
+    \end{equation*}
+    
+    with nodes $y_{0} = 0.85355339$ and $y_{1} = 0.14644661$ and the corresponding weights $w = 0.78539816$
 
+    \begin{equation*}
+    I = \int_{0}^{1} \frac{(2y-1) sin(2y-1)}{\sqrt{4y-4y^2}} dy \approx \sum_{i=0}^{n} a_{i} f(2y_{i} - 1) \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(2y-1) w(2y-1)\ dy
+    \end{equation*} 
+
+    called the Gaussian quadrature formula for $w(y)$ and has degree of accuracy $2n + 1$.
+ 
+    For the quadrature formula to be exact for all $f(y)$ of degree $2n+1 = 3 \implies n = 1$,
+    \begin{equation*}
+    \begin{aligned}
+    I &= \int_{0}^{1} \frac{(2y-1) sin(2y-1)}{\sqrt{4y-4y^2}} dy = \sum_{i=0}^{1} a_{i} f(2y_{i} - 1) \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(2y-1) w(2y-1)\ dy \\
+    &= a_{0} f(2y_{0} - 1) + a_{1} f(2y_{1} - 1) \\
+    &= \int_{0}^{1} l_{0}(2y-1) w(2y-1) dy\ f(2y_{0} - 1) + \int_{0}^{1} l_{1}(2y-1) w(2y-1) dy\ f(2y_{1} - 1) \\
+    &= \int_{0}^{1} \frac{(2y-1)-(2y_{1}-1)}{(2y_{0}-1)-(2y_{1}-1)} \frac{1}{\sqrt{4y-4y^2}} dy\ f(2y_{0} - 1) \\ 
+    & \hspace{0.5cm} + \int_{0}^{1} \frac{(2y-1)-(2y_{0}-1)}{(2y_{1}-1)-(2y_{0}-1)} \frac{1}{\sqrt{4y-4y^2}} dy\ f(2y_{1} - 1) \\
+    &= \int_{0}^{1} \frac{(2y-1)-(2(0.14644661)-1)}{2(0.85355339)-1)-(2(0.14644661)-1)} \frac{1}{\sqrt{4y-4y^2}} dy\ f(2(0.85355339)-1) \\
+    & \hspace{0.5cm} + \int_{0}^{1} \frac{(2y-1)-(2(0.85355339)-1)}{(2(0.14644661)-1)-(2(0.85355339)-1)} \frac{1}{\sqrt{4y-4y^2}} dy\ f(2(0.14644661)-1) \\
+    &= (0.78539816)\ (2(0.85355339)-1)\ sin(2(0.85355339)-1) \\
+    & \hspace{0.5cm} + (0.78539816)\ (2(0.14644661)-1)\ sin(2(0.14644661)-1) \\
+    &= 0.72156522
+    \end{aligned}
+    \end{equation*}
 
 
 
