@@ -302,6 +302,33 @@
     = x^{1/3}$, i.e., if your initial guess is $x_{0} = 1$, what would be the value of
     $x_{n}$? Does the method converge to the root we want?
 
+    \textbf{Solution:}
+
+    Given, $f(x) = x^{1/3}$, then $f^{\prime}(x) = (1/3)x^{-2/3}$, and the 
+    Newton method iteration becomes
+    \begin{equation*}
+    \begin{aligned}
+    x_{n+1} &= x_{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})} \\
+    &= 1 - \frac{x^{1/3}}{(1/3)x^{-2/3}} \\
+    &= x_{n} - 3x_{n} \\
+    &= -2x_{n}
+    \end{aligned}
+    \end{equation*}
+    
+    The next $10$ estimates are $-2.0,\ 4.0,\ -8.0,\ 16.0,\ -32.0,\ 64.0,\
+    -128.0,\ 256.9,\ -512.0,\ 1024.0$. It is obvious that things are going bad.
+    In fact, if we start with any non-zero estimate, the estimates oscillate 
+    more and more wildly.
+
+    If the initial guess is $x_{0} = 1$, then the value of $x_{n} = -2x_{n-1}$.
+    The Newton's method diverges in this case. The tangent line at the root is
+    vertical as in $f(x) = x^{1/3}$.
+
+
+
+
+
+
     \item It is given that a sequence of Newton iterates converge to a root $r$ of the
     function $f(x)$. Further, it is given that the root $r$ is a root of multiplicity
     $2$, i.e., $f(x) = (x - r)^{2} g(x)$, where $g(r) \ne 0$. It is also given that the
