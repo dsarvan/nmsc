@@ -76,18 +76,6 @@
             \langle f, g \rangle = \int_{0}^{1} \frac{x}{\sqrt{1 - x^{2}}} f(x) g(x) dx
             \end{equation*}
 
-        \item Use the above to find a quadrature formula of the form
-
-            \begin{equation*}
-            \int_{0}^{1} \frac{x}{\sqrt{1 - x^{2}}} f(x) dx = \sum_{i=0}^{n} a_{i} f(x_{i})
-            \end{equation*}
-
-        that is exact for all $f(x)$ of degree $3$.
-
-        \item Use the above to evaluate $\displaystyle \int_{0}^{1} \frac{x \sin(x)}
-        {\sqrt{1 - x^{2}}} dx$
-    \end{itemize}
-
     \textbf{Solution:}
 
     Given two functions $f, g \in C[0, 1]$. we define an inner product of these two functions by
@@ -165,6 +153,13 @@
     \end{aligned}
     \end{equation*}
     
+        \item Use the above to find a quadrature formula of the form
+
+            \begin{equation*}
+            \int_{0}^{1} \frac{x}{\sqrt{1 - x^{2}}} f(x) dx = \sum_{i=0}^{n} a_{i} f(x_{i})
+            \end{equation*}
+
+        that is exact for all $f(x)$ of degree $3$.
 
    \textbf{Solution:} 
 
@@ -231,13 +226,22 @@
     under reasonable assumptions on $f$. Thus, Gaussian quadrature does well when adding more points to reduce error when function values of $f$ at any point are available.
 
     In summary, let $\{\phi_{j}\}$ be an orthogonal basis of polynomials in the inner product $\langle f, g \rangle_{w} = \displaystyle \int_{a}^{b} w(x) f(x) g(x)\ dx$ and let $x_{0},...,x_{n}$ be the zeros of the polynomial $\phi_{n+1}$ with Lagrange basis $\{l_{k}(x)\}$. Then
-
     \begin{equation*}
     I = \int_{a}^{b} w(x) f(x)\ dx \approx \sum_{i=0}^{n} a_{i} f(x_{i}), \hspace{2cm} a_{i} = \int_{a}^{b} l_{i}(x) w(x)\ dx,
     \end{equation*}
 
     called the Gaussian quadrature formula for $w(x)$, has degree of accuracy $2n+1$.
 
+    Thus,
+    \begin{equation*}
+    I = \int_{0}^{1} \frac{x}{\sqrt{1-x^2}} f(x)\ dx = \sum_{i=0}^{1} a_{i} f(x_{i}), \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(x) w(x)\ dx,
+    \end{equation*}
+    
+    is exact for all $f(x)$ of degree $3$.
+
+    
+        \item Use the above to evaluate $\displaystyle \int_{0}^{1} \frac{x \sin(x)}
+        {\sqrt{1 - x^{2}}} dx$
     
     \textbf{Solution:}
 
@@ -253,8 +257,7 @@
     T_{2}(2y-1) = y^{2} - y + \frac{1}{8}
     \end{equation*}
     
-    with nodes $y_{0} = 0.85355339$ and $y_{1} = 0.14644661$ and the corresponding weights $w = 0.78539816$
-
+    with nodes $y_{0} = 0.85355339$, $y_{1} = 0.14644661$ and the weights $w_{0} = w_{1} = 0.78539816$
     \begin{equation*}
     I = \int_{0}^{1} \frac{(2y-1) sin(2y-1)}{\sqrt{4y-4y^2}} dy \approx \sum_{i=0}^{n} a_{i} f(2y_{i} - 1) \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(2y-1) w(2y-1)\ dy
     \end{equation*} 
@@ -277,7 +280,7 @@
     \end{aligned}
     \end{equation*}
 
-
+    \end{itemize}
 
 
 
