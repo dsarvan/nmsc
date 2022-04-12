@@ -309,7 +309,7 @@
     \begin{equation*}
     \begin{aligned}
     x_{n+1} &= x_{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})} \\
-    &= 1 - \frac{x^{1/3}}{(1/3)x^{-2/3}} \\
+    &= x_{n} - \frac{x^{1/3}}{(1/3)x^{-2/3}} \\
     &= x_{n} - 3x_{n} \\
     &= -2x_{n}
     \end{aligned}
@@ -335,13 +335,146 @@
     function $f$, its derivatives till the second order are continuous in the
     neighbourhood of the root $r$. If $e_{n}$ is the error of the $n^{th}$ iterate,
     i.e., $e_{n} = x_{n} - r$, then obtain
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}}
+    \end{equation*}
 
-        \begin{equation*}
-        \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}}
-        \end{equation*}
+    \textbf{Solution:}
 
-    \item \textbf{Bonus question:} What happens to the above if the root $r$ has a
-    multiplicity $m$?
+    If $e_{n}$ is the error fo the $n^{th}$ iterative method. If
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} = S < 1,
+    \end{equation*}
+
+    the method is said to obey linear convergence with rate $S$.
+
+    Assuming that $g$ is continuously differentiable, that $g(r) = r$, and that 
+    $S = |g^{\prime}(r)| < 1$. Then Fixed-Point Iteration converges linearly 
+    with rate $S$ to the fixed point $r$ for initial guesses sufficiently close
+    to $r$.
+    
+    If $x{n}$ denote the iterate at step $n$. The next iterate is $x_{n+1} = g(x_{n})$. Since $g(r) = r$,
+    \begin{equation*}
+    \begin{aligned}
+    x_{n+1} - r &= g(x_{n}) - g(r) \\
+    &= g^{\prime}(c_{n})(x_{n} - r)
+    \end{aligned}
+    \end{equation*}
+
+    for some $c_{n}$ between $x_{n}$ and $r$, accroding to the Mean Value 
+    Theorem. 
+    
+    Since $e_{n} = |x_{n} - r|$, then $e_{n+1} = |g^{\prime}(c_{n})|e_{n}$.
+
+    If $S = |g^{\prime}(r)|$ is less than one, then by the continuity of 
+    $g^{\prime}$, there is a small neighborhood around $r$ for which 
+    $|g^{\prime}(x)| < (S+1)/2$, slightly larger than $S$, but still less than 
+    one. If $x_{n}$ happens to lie in this neighborhood, then $c_{n}$ does, too
+    (it is trapped between $x_{n}$ and $r$), and so
+    \begin{equation*}
+    e_{n+1} \leq \frac{S+1}{2}e_{n}
+    \end{equation*}
+      
+    Thus, the error decreases by a factor of $(S+1)/2$ or better on this and
+    every future step. That means $\lim_{n \rightarrow \infty} x_{n} = r$, and
+    taking the limit of the equation $e_{n+1} = |g^{\prime}(c_{n})e_{n}$, yields
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} = \lim_{n \rightarrow \infty} |g^{\prime}(c_{n})| = |g^{\prime}(r)| = S
+    \end{equation*}
+
+    The approximate error relationship $e_{n+1} \approx Se_{n}$ holds in the
+    limit as convergence is approached, where $S = |g^{\prime}(r)|$.
+
+    The root $r$ is a root of multiplicity $2$ and the convergence rate is
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} = \frac{1}{2}
+    \end{equation*}
+
+-------------------------------------------------------------------------------
+    If $e_{n}$ is the error of the $n^{th}$ iterate, then the iteration is
+    quadratically convergent if
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} < \infty
+    \end{equation*}
+
+    Let $f$ be twice continuously differentiable and $f(r) = 0$. If $f^{\prime}(r) = 0$, then Newton's Method is locally and quadratically convergent to $r$. The error $e_{n}$ at step $n$ satisfies
+
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} = \frac{f^{\prime\prime}(r)}{2f^{\prime}(r)}
+    \end{equation*}
+
+    To prove local convergence, note that Newton's Method is a particular form 
+    of Fixed-Point Iteration, where
+    \begin{equation*}
+    g(x) = x - \frac{f(x)}{f^{\prime}(x)}
+    \end{equation*}
+
+    with derivative
+    \begin{equation*}
+    g^{\prime}(x) = 1 - \frac{f^{\prime}(x)^{2} - f(x) f^{\prime\prime}(x)}{f^{\prime}(x)^{2}} = \frac{f(x) f^{\prime\prime}(x)}{f^{\prime}(x)^{2}}
+    \end{equation*}
+
+    Since $g^{\prime}(r) = 0$, Newton's Method is locally convergent.
+    
+    To prove quadratic convergence, we derive Newton's Method a second way.
+    Taylor's formula tells us the difference between the values of a function at
+    a given point and another nearby point. For the two points, we will use the
+    root $r$ and the current guess $x_{n}$ after $n$ steps, and we will stop and
+    take a remainder after two terms:
+    
+    \begin{equation*}
+    f(r) = f(x_{n}) + (r-x_{n})f^{\prime}(x_{n}) + \frac{(r-x_{n})^{2}}{2}f^{\prime\prime}(c_{n}) 
+    \end{equation*}
+ 
+    Here $c_{n}$ is between $x_{n}$ and $r$. Because $r$ is the root, we have
+    \begin{equation*}
+    \begin{aligned}
+    0 &= f(x_{n}) + (r-x_{n})f^{\prime}(x_{n}) + \frac{(r-x_{n})^{2}}{2}f^{\prime\prime}(c_{n}) \\
+    - \frac{f(x_{n})}{f^{\prime}(x_{n})} &= r - x_{n} + \frac{(r-x_{n})^{2}}{2} \frac{f^{\prime\prime}(c_{n})}{f^{\prime}(x_{n})}
+    \end{aligned}
+    \end{equation*}
+
+    assuming that $f^{\prime}(x_{n}) \neq 0$. With rearranging, we can compare
+    the next Newton iterate with the root:
+    \begin{equation*}
+    \begin{aligned}
+    x_{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})} - r &= \frac{(r-x_{n})^{2}}{2} \frac{f^{\prime\prime}(c_{n})}{f^{\prime}(x_{n})} \\
+    x_{n+1} - r &= e_{n}^{2} \frac{f^{\prime\prime}(c_{n})}{2f^{\prime}(x_{n})} \\
+    e_{n+1} &= e_{n}^{2} \Bigg| \frac{f^{\prime\prime}(c_{n})}{2f^{\prime}(x_{n})} \Bigg|
+    \end{aligned}
+    \end{equation*} 
+
+    In this equation, we have defined  the error at step $n$ to be $e_{n} = |x_{n} - r|$. Since $c_{n}$ lies between $r$ and $x_{n}$, it converges to $r$ just as $x_{n}$ does, and
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}^2} = \Bigg| \frac{f^{\prime\prime}(r)}{2f^{\prime}(r)} \Bigg|,
+    \end{equation*}
+    
+    the definition of quadratic convergence.    
+--------------------------------------------------------------------------------
+     
+
+
+
+
+
+    \item \textbf{Bonus question:} What happens to the above if the root $r$ has
+     a multiplicity $m$?
+    
+    \textbf{Solution:}
+    
+    Let assume that the $(m+1)$ - times continuously differentiable function
+    $f$ on $[a, b]$ has a multiplicity $m$ root at $r$. Then Newton's method is 
+    locally convergent to $r$, and the error $e_{n}$ at step $n$ satisfies
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} = \frac{(m-1)}{m}
+    \end{equation*}
+
+
+
+
+
+
+
 
     \item Compute $\displaystyle \int_{-1}^{1} e^{-x^{2}} dx$ using the
 
