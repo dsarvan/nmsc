@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{report}
+\documentclass[a4paper,11pt]{report}
 \usepackage{hyperref}
 \usepackage[table]{xcolor}
 \usepackage{listings}
@@ -31,9 +31,10 @@
 }
 
 \lstset{
-  basicstyle=\footnotesize,
+  basicstyle=\footnotesize\rmfamily,
+  commentstyle=\mdseries\rmfamily,
   numbers=left,
-  numberstyle=\footnotesize,
+  numberstyle=\footnotesize\rmfamily,
   stepnumber=1,
   numbersep=5pt,
   backgroundcolor=\color{white},
@@ -75,6 +76,83 @@
             \langle f, g \rangle = \int_{0}^{1} \frac{x}{\sqrt{1 - x^{2}}} f(x) g(x) dx
             \end{equation*}
 
+    \textbf{Solution:}
+
+    Given two functions $f, g \in C[0, 1]$. we define an inner product of these two functions by
+    \begin{equation*}
+    \langle f, g \rangle = \int_{0}^{1} w(x) f(x) g(x) dx, \hspace{2cm} w(x) > 0
+    \end{equation*}
+        
+    Thus the definition of the inner product depends on the integration interval $[0, 1]$ and a given weight function $w(x)$.
+
+    For the above inner product we also have
+    \begin{equation*}
+    \langle xf, g \rangle_{w} = \int_{0}^{1} w(x)\ x f(x) g(x)\ dx = \langle f, xg \rangle_{w}
+    \end{equation*}
+
+    We create a sequence of polynomials $\phi_{k}(x)$ of degree $k$ for $k = 0, 1, 2, 3, ...$ such that
+    $\langle \phi_{i}, \phi_{j} \rangle_{w} = 0$ for all $i \neq j$.
+
+    We know that the Chebyshev polynomials of the first kind $T_{n}(x)$ are orthogonal within the interval $x \in [-1, 1]$ with a weight function 
+    $w(x) = \displaystyle \frac{1}{\sqrt{1 - x^{2}}}$,
+
+    \begin{equation*}
+    \int_{-1}^{1} \frac{1}{\sqrt{1 - x^2}}\ T_{i}(x) T_{j}(x)\ dx = 
+    \begin{cases}
+        0 & i \neq j \\
+        \pi/2 & i = j \neq 0 \\
+        \pi & i = j = 0
+    \end{cases}
+    \end{equation*}
+
+    We also know that the Chebyshev polynomials of the first kind $T_{n}(y)$ are orthogonal polynomials on $[0,1]$ with respect to the weight function
+    $w(y) = \displaystyle \frac{1}{\sqrt{4y - 4y^2}}$,
+
+    \begin{equation*}
+    \int_{0}^{1} \frac{1}{\sqrt{4y - 4y^2}}\ T_{i}(y) T_{j}(y)\ dy = 
+    \begin{cases}
+        0 & i \neq j \\
+        \pi/4 & i = j \neq 0 \\
+        \pi/2 & i = j = 0
+    \end{cases}
+    \end{equation*}
+
+    We can transform any finite domain $a \le y \le b$ to the basic domain $-1 \le x \le 1$ with the change of variable
+    $y = \displaystyle \frac{1}{2} (b - a)x + \frac{1}{2} (b + a)$.
+
+    For the domain $0 \le y \le 1$, we can write $y = \displaystyle \frac{1}{2} (x + 1)$.
+    
+    Let us now find the sequence of orthogonal polynomials. This is done by a Gram-Schmidt process. 
+
+    let, $\phi_{0}(x) = 1$
+
+    then, $\phi_{1}(x) = x - B_{1} \phi_{0}(x)$, where $B_{1} = \displaystyle \frac{\langle x \phi_{0}, \phi_{0} \rangle_{w}}{\| \phi_{0} \|_{w}^{2}}$
+    
+    \begin{equation*}
+    \begin{aligned}
+    \phi_{1}(y) &= (2y-1) - \displaystyle \frac{\langle (2y-1) \phi_{0}, \phi{0} \rangle}{\langle \phi_{0}, \phi_{0} \rangle}\ \phi_{0}(2y-1) \\
+                &= (2y-1) - \displaystyle \frac{\langle (2y-1), 1 \rangle}{\langle 1, 1 \rangle} \\
+                &= (2y-1) - \displaystyle \frac{\displaystyle\int_{0}^{1} \frac{1}{\sqrt{4y-y^2}} (2y-1) dy}{\displaystyle\int_{0}^{1} \frac{1}{\sqrt{4y-y^2}} dy} \\
+                &= y - \frac{1}{2}
+    \end{aligned}
+    \end{equation*}
+
+    and $\phi_{k}(x) = (x - B_{k}) \phi_{k-1}(x) - C_{k} \phi_{k-2}(x), \hspace{1cm} k \ge 2$ \\
+    with, $B_{k} = \displaystyle \frac{\langle x \phi_{k-1}, \phi_{k-1} \rangle_{w}}{\| \phi_{k-1} \|_{w}^{2}}$ and
+    $C_{k} = \displaystyle \frac{\langle x \phi_{k-1}, \phi_{k-2} \rangle_{w}}{\| \phi_{k-2} \|_{w}^{2}} = \frac{\| \phi_{k-1} \|_{w}^{2}}{\| \phi_{k-2} \|_{w}^{2}}$
+
+    \begin{equation*}
+    \begin{aligned}
+    \phi_{2}(y) &= \big((2y-1) - B_{2}\big)\ \phi_{1}(2y-1) - C_{2}\ \phi_{0}(2y-1) \\
+                &= \bigg((2y-1) - \frac{\langle (2y-1) \phi_{1}, \phi_{1} \rangle}{\langle \phi_{1}, \phi_{1} \rangle}\bigg)\ \phi_{1}(2y-1) - \frac{\langle (2y-1) \phi_{1}, \phi_{0} \rangle}{\langle \phi_{0}, \phi_{0} \rangle}\ \phi_{0}(2y-1) \\
+                &= (2y-1)^2 - \frac{\langle (2y-1)(2y-1), (2y-1) \rangle}{\langle 2y-1, 2y-1 \rangle}\ (2y-1) - \frac{\langle (2y-1)(2y-1), 1 \rangle}{\langle 1, 1 \rangle} \\
+                &= (4y^2 - 4y + 1) - \frac{\langle 4y^2 - 4y + 1, 2y-1 \rangle}{\langle 2y-1, 2y-1 \rangle}\ (2y-1) - \frac{\langle 4y^2 - 4y + 1, 1 \rangle}{\langle 1, 1 \rangle} \\
+                &= (4y^2 - 4y + 1) - \frac{\displaystyle \int_{0}^{1} \frac{(4y^2 - 4y + 1)(2y-1)}{\sqrt{4y-4y^2}} dy}{\displaystyle \int_{0}^{1} \frac{(2y-1)(2y-1)}{\sqrt{4y-4y^2}} dy}\ (2y-1) - \frac{\displaystyle \int_{0}^{1} \frac{(4y^2 - 4y + 1)}{\sqrt{4y-4y^2}} dy}{\displaystyle \int_{0}^{1} \frac{1}{\sqrt{4y-4y^2}} dy} \\
+                &= (4y^2 - 4y + 1) - \displaystyle \frac{\pi/4}{\pi/2} \\
+                &= y^2 - y + \frac{1}{8}
+    \end{aligned}
+    \end{equation*}
+    
         \item Use the above to find a quadrature formula of the form
 
             \begin{equation*}
@@ -83,13 +161,173 @@
 
         that is exact for all $f(x)$ of degree $3$.
 
+   \textbf{Solution:} 
+
+    Let $\langle f, g \rangle_{w} = \displaystyle \int_{a}^{b} w(x) f(x) g(x)\ dx$ (the weighted inner product). By the Gram-Schmidt process, there is a sequence
+    $\{\phi_{j}\}$ of orthogonal polynomials where $\phi_{j}$ has degree $j$. $\phi_{j+1}$ has $j+1$ distinct real zeros $x_{0}, ..., x_{n}$ in $[a, b]$. 
+
+    Let $l_{i} (x)$ be the $i$-th Lagrange basis polynomial for these zeros and let
+    
+    \begin{equation*}
+    a_{i} = \int_{a}^{b} l_{i} (x)\ dx
+    \end{equation*}    
+
+    The claim is that with this set of $x_{i}$'s and $a_{i}$'s, $\displaystyle \int_{a}^{b} w(x) f(x)\ dx \approx \sum_{i=0}^{n} a_{i} f(x_{i})$ has degree $2n+1$. \\
+
+    Suppose $f \in \mathbb{P}_{2n+1}$. Since $p_{n+1}$ has degree $n+1$, polynomial division gives
+    \begin{equation*}
+    f = q(x)p_{n+1} (x) + r(x), \hspace{2cm} q, r \in \mathbb{P}_{n}.
+    \end{equation*}
+
+    Plugging this expression into the integral,
+
+    \begin{equation*}
+    \begin{aligned}
+    I &= \int_{a}^{b} (q(x)p_{n+1}(x) + r(x)) w(x) dx \\
+      &= \langle q, p_{n+1} \rangle_{w} + \int_{a}^{b} r(x) w(x)\ dx \\
+      &= \int_{a}^{b} r(x) w(x)\ dx
+    \end{aligned}
+    \end{equation*}
+
+    because $p_{n+1}$ is orthogonal to all polynomials of degree $\le n$, which includes $q$. Now plug the expression into the formula:
+
+    \begin{equation*}
+    \begin{aligned}
+    \text{formula} &= \sum_{i=0}^{n} a_{i} f(x_{i}) \\
+    &= \sum_{i=0}^{n} a_{i} q(x_{i}) p_{n+1}(x_{i}) + \sum_{i=0}^{n} a_{i} r(x_{i}) \\
+    &= \sum_{i=0}^{n} a_{i} r(x_{i})
+    \end{aligned}
+    \end{equation*}
+ 
+    Last, we need to establish that $I$ and the formula are equal. Because $r(x)$ has degree $\le n$, it is equal to its Lagrange interpolant through the nodes $x_{0},...,x_{n}$, so
+
+    \begin{equation*}
+    r(x) = \sum_{i=0}^{n} r(x_{i}) l_{i}(x)
+    \end{equation*}
+
+    Thus, working from the formula for $I$,
+    
+    \begin{equation*}
+    I = \int_{a}^{b} r(x) w(x)\ dx = \sum_{i=0}^{n} \int_{a}^{b} l_{i}(x) w(x)\ dx = \sum_{i=0}^{n} a_{i} r(x_{i})
+    \end{equation*}
+    
+    which establishes equality. To see that the degree of accuracy is exactly $2n+1$, consider
+    
+    \begin{equation*}
+    f(x) = \prod_{j=0}^{n} (x-x_{j})^2
+    \end{equation*}
+
+    Note that the nodes $x_{i}$ depend on the degree, so really they should be written $x_{n,i}\ (\text{for}\ i = 0,...,n)$ for $\phi_{n+1}$. One can show that, unlike with equally spaced interpolation,
+    
+    \begin{equation*}
+    \lim_{x\to\infty} |I - \sum_{i=0}^{n} a_{i} f(x_{n,i})| = 0
+    \end{equation*}
+
+    under reasonable assumptions on $f$. Thus, Gaussian quadrature does well when adding more points to reduce error when function values of $f$ at any point are available.
+
+    In summary, let $\{\phi_{j}\}$ be an orthogonal basis of polynomials in the inner product $\langle f, g \rangle_{w} = \displaystyle \int_{a}^{b} w(x) f(x) g(x)\ dx$ and let $x_{0},...,x_{n}$ be the zeros of the polynomial $\phi_{n+1}$ with Lagrange basis $\{l_{k}(x)\}$. Then
+    \begin{equation*}
+    I = \int_{a}^{b} w(x) f(x)\ dx \approx \sum_{i=0}^{n} a_{i} f(x_{i}), \hspace{2cm} a_{i} = \int_{a}^{b} l_{i}(x) w(x)\ dx,
+    \end{equation*}
+
+    called the Gaussian quadrature formula for $w(x)$, has degree of accuracy $2n+1$.
+
+    Thus,
+    \begin{equation*}
+    I = \int_{0}^{1} \frac{x}{\sqrt{1-x^2}} f(x)\ dx = \sum_{i=0}^{1} a_{i} f(x_{i}), \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(x) w(x)\ dx,
+    \end{equation*}
+    
+    is exact for all $f(x)$ of degree $3$.
+
+    
         \item Use the above to evaluate $\displaystyle \int_{0}^{1} \frac{x \sin(x)}
         {\sqrt{1 - x^{2}}} dx$
+    
+    \textbf{Solution:}
+
+    \begin{equation*}
+    I = \int_{0}^{1} \frac{x sin(x)}{\sqrt{1-x^2}} dx \approx \sum_{i=0}^{n} a_{i} f(x_{i}) \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(x) w(x)\ dx
+    \end{equation*}
+
+    where $l_{i}(x) = \displaystyle \prod_{i \neq j}^{n} \frac{x - x_{j}}{x_{i} - x_{j}}$
+
+    The Chebyshev polynomials of the first kind $T_{n}(y)$ are orthogonal polynomials on $[0, 1]$ with respect to the weight function $w(y) = \displaystyle \frac{1}{\sqrt{4y-4y^2}}$
+
+    \begin{equation*}
+    T_{2}(2y-1) = y^{2} - y + \frac{1}{8}
+    \end{equation*}
+    
+    with nodes $y_{0} = 0.85355339$, $y_{1} = 0.14644661$ and the weights $w_{0} = w_{1} = 0.78539816$
+    \begin{equation*}
+    I = \int_{0}^{1} \frac{(2y-1) sin(2y-1)}{\sqrt{4y-4y^2}} dy \approx \sum_{i=0}^{n} a_{i} f(2y_{i} - 1) \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(2y-1) w(2y-1)\ dy
+    \end{equation*} 
+
+    called the Gaussian quadrature formula for $w(y)$ and has degree of accuracy $2n + 1$.
+ 
+    For the quadrature formula to be exact for all $f(y)$ of degree $2n+1 = 3 \implies n = 1$,
+    \begin{equation*}
+    \begin{aligned}
+    I &= \int_{0}^{1} \frac{(2y-1) sin(2y-1)}{\sqrt{4y-4y^2}} dy = \sum_{i=0}^{1} a_{i} f(2y_{i} - 1) \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(2y-1) w(2y-1)\ dy \\
+    &= a_{0} f(2y_{0} - 1) + a_{1} f(2y_{1} - 1) \\
+    &= \int_{0}^{1} l_{0}(2y-1) w(2y-1) dy\ f(2y_{0} - 1) + \int_{0}^{1} l_{1}(2y-1) w(2y-1) dy\ f(2y_{1} - 1) \\
+    &= \int_{0}^{1} \frac{(2y-1)-(2y_{1}-1)}{(2y_{0}-1)-(2y_{1}-1)} \frac{1}{\sqrt{4y-4y^2}} dy\ f(2y_{0} - 1) \\ 
+    & \hspace{0.5cm} + \int_{0}^{1} \frac{(2y-1)-(2y_{0}-1)}{(2y_{1}-1)-(2y_{0}-1)} \frac{1}{\sqrt{4y-4y^2}} dy\ f(2y_{1} - 1) \\
+    &= \int_{0}^{1} \frac{(2y-1)-(2(0.14644661)-1)}{2(0.85355339)-1)-(2(0.14644661)-1)} \frac{1}{\sqrt{4y-4y^2}} dy\ f(2(0.85355339)-1) \\
+    & \hspace{0.5cm} + \int_{0}^{1} \frac{(2y-1)-(2(0.85355339)-1)}{(2(0.14644661)-1)-(2(0.85355339)-1)} \frac{1}{\sqrt{4y-4y^2}} dy\ f(2(0.14644661)-1) \\
+    &= (0.78539816)\ (2(0.85355339)-1)\ sin(2(0.85355339)-1) \\
+    & \hspace{0.5cm} + (0.78539816)\ (2(0.14644661)-1)\ sin(2(0.14644661)-1) \\
+    &= 0.72156522
+    \end{aligned}
+    \end{equation*}
+
     \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     \item Comment on using the Newton method to compute the root of the function $f(x)
     = x^{1/3}$, i.e., if your initial guess is $x_{0} = 1$, what would be the value of
     $x_{n}$? Does the method converge to the root we want?
+
+    \textbf{Solution:}
+
+    Given, $f(x) = x^{1/3}$, then $f^{\prime}(x) = (1/3)x^{-2/3}$, and the 
+    Newton method iteration becomes
+    \begin{equation*}
+    \begin{aligned}
+    x_{n+1} &= x_{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})} \\
+    &= x_{n} - \frac{x^{1/3}}{(1/3)x^{-2/3}} \\
+    &= x_{n} - 3x_{n} \\
+    &= -2x_{n}
+    \end{aligned}
+    \end{equation*}
+    
+    The next $10$ estimates are $-2.0,\ 4.0,\ -8.0,\ 16.0,\ -32.0,\ 64.0,\
+    -128.0,\ 256.9,\ -512.0,\ 1024.0$. It is obvious that things are going bad.
+    In fact, if we start with any non-zero estimate, the estimates oscillate 
+    more and more wildly.
+
+    If the initial guess is $x_{0} = 1$, then the value of $x_{n} = -2x_{n-1}$.
+    The Newton's method diverges in this case. The tangent line at the root is
+    vertical as in $f(x) = x^{1/3}$.
+
+
+
+
+
 
     \item It is given that a sequence of Newton iterates converge to a root $r$ of the
     function $f(x)$. Further, it is given that the root $r$ is a root of multiplicity
@@ -97,13 +335,146 @@
     function $f$, its derivatives till the second order are continuous in the
     neighbourhood of the root $r$. If $e_{n}$ is the error of the $n^{th}$ iterate,
     i.e., $e_{n} = x_{n} - r$, then obtain
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}}
+    \end{equation*}
 
-        \begin{equation*}
-        \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}}
-        \end{equation*}
+    \textbf{Solution:}
 
-    \item \textbf{Bonus question:} What happens to the above if the root $r$ has a
-    multiplicity $m$?
+    If $e_{n}$ is the error fo the $n^{th}$ iterative method. If
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} = S < 1,
+    \end{equation*}
+
+    the method is said to obey linear convergence with rate $S$.
+
+    Assuming that $g$ is continuously differentiable, that $g(r) = r$, and that 
+    $S = |g^{\prime}(r)| < 1$. Then Fixed-Point Iteration converges linearly 
+    with rate $S$ to the fixed point $r$ for initial guesses sufficiently close
+    to $r$.
+    
+    If $x{n}$ denote the iterate at step $n$. The next iterate is $x_{n+1} = g(x_{n})$. Since $g(r) = r$,
+    \begin{equation*}
+    \begin{aligned}
+    x_{n+1} - r &= g(x_{n}) - g(r) \\
+    &= g^{\prime}(c_{n})(x_{n} - r)
+    \end{aligned}
+    \end{equation*}
+
+    for some $c_{n}$ between $x_{n}$ and $r$, accroding to the Mean Value 
+    Theorem. 
+    
+    Since $e_{n} = |x_{n} - r|$, then $e_{n+1} = |g^{\prime}(c_{n})|e_{n}$.
+
+    If $S = |g^{\prime}(r)|$ is less than one, then by the continuity of 
+    $g^{\prime}$, there is a small neighborhood around $r$ for which 
+    $|g^{\prime}(x)| < (S+1)/2$, slightly larger than $S$, but still less than 
+    one. If $x_{n}$ happens to lie in this neighborhood, then $c_{n}$ does, too
+    (it is trapped between $x_{n}$ and $r$), and so
+    \begin{equation*}
+    e_{n+1} \leq \frac{S+1}{2}e_{n}
+    \end{equation*}
+      
+    Thus, the error decreases by a factor of $(S+1)/2$ or better on this and
+    every future step. That means $\lim_{n \rightarrow \infty} x_{n} = r$, and
+    taking the limit of the equation $e_{n+1} = |g^{\prime}(c_{n})e_{n}$, yields
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} = \lim_{n \rightarrow \infty} |g^{\prime}(c_{n})| = |g^{\prime}(r)| = S
+    \end{equation*}
+
+    The approximate error relationship $e_{n+1} \approx Se_{n}$ holds in the
+    limit as convergence is approached, where $S = |g^{\prime}(r)|$.
+
+    The root $r$ is a root of multiplicity $2$ and the convergence rate is
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} = \frac{1}{2}
+    \end{equation*}
+
+-------------------------------------------------------------------------------
+    If $e_{n}$ is the error of the $n^{th}$ iterate, then the iteration is
+    quadratically convergent if
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} < \infty
+    \end{equation*}
+
+    Let $f$ be twice continuously differentiable and $f(r) = 0$. If $f^{\prime}(r) = 0$, then Newton's Method is locally and quadratically convergent to $r$. The error $e_{n}$ at step $n$ satisfies
+
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} = \frac{f^{\prime\prime}(r)}{2f^{\prime}(r)}
+    \end{equation*}
+
+    To prove local convergence, note that Newton's Method is a particular form 
+    of Fixed-Point Iteration, where
+    \begin{equation*}
+    g(x) = x - \frac{f(x)}{f^{\prime}(x)}
+    \end{equation*}
+
+    with derivative
+    \begin{equation*}
+    g^{\prime}(x) = 1 - \frac{f^{\prime}(x)^{2} - f(x) f^{\prime\prime}(x)}{f^{\prime}(x)^{2}} = \frac{f(x) f^{\prime\prime}(x)}{f^{\prime}(x)^{2}}
+    \end{equation*}
+
+    Since $g^{\prime}(r) = 0$, Newton's Method is locally convergent.
+    
+    To prove quadratic convergence, we derive Newton's Method a second way.
+    Taylor's formula tells us the difference between the values of a function at
+    a given point and another nearby point. For the two points, we will use the
+    root $r$ and the current guess $x_{n}$ after $n$ steps, and we will stop and
+    take a remainder after two terms:
+    
+    \begin{equation*}
+    f(r) = f(x_{n}) + (r-x_{n})f^{\prime}(x_{n}) + \frac{(r-x_{n})^{2}}{2}f^{\prime\prime}(c_{n}) 
+    \end{equation*}
+ 
+    Here $c_{n}$ is between $x_{n}$ and $r$. Because $r$ is the root, we have
+    \begin{equation*}
+    \begin{aligned}
+    0 &= f(x_{n}) + (r-x_{n})f^{\prime}(x_{n}) + \frac{(r-x_{n})^{2}}{2}f^{\prime\prime}(c_{n}) \\
+    - \frac{f(x_{n})}{f^{\prime}(x_{n})} &= r - x_{n} + \frac{(r-x_{n})^{2}}{2} \frac{f^{\prime\prime}(c_{n})}{f^{\prime}(x_{n})}
+    \end{aligned}
+    \end{equation*}
+
+    assuming that $f^{\prime}(x_{n}) \neq 0$. With rearranging, we can compare
+    the next Newton iterate with the root:
+    \begin{equation*}
+    \begin{aligned}
+    x_{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})} - r &= \frac{(r-x_{n})^{2}}{2} \frac{f^{\prime\prime}(c_{n})}{f^{\prime}(x_{n})} \\
+    x_{n+1} - r &= e_{n}^{2} \frac{f^{\prime\prime}(c_{n})}{2f^{\prime}(x_{n})} \\
+    e_{n+1} &= e_{n}^{2} \Bigg| \frac{f^{\prime\prime}(c_{n})}{2f^{\prime}(x_{n})} \Bigg|
+    \end{aligned}
+    \end{equation*} 
+
+    In this equation, we have defined  the error at step $n$ to be $e_{n} = |x_{n} - r|$. Since $c_{n}$ lies between $r$ and $x_{n}$, it converges to $r$ just as $x_{n}$ does, and
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}^2} = \Bigg| \frac{f^{\prime\prime}(r)}{2f^{\prime}(r)} \Bigg|,
+    \end{equation*}
+    
+    the definition of quadratic convergence.    
+--------------------------------------------------------------------------------
+     
+
+
+
+
+
+    \item \textbf{Bonus question:} What happens to the above if the root $r$ has
+     a multiplicity $m$?
+    
+    \textbf{Solution:}
+    
+    Let assume that the $(m+1)$ - times continuously differentiable function
+    $f$ on $[a, b]$ has a multiplicity $m$ root at $r$. Then Newton's method is 
+    locally convergent to $r$, and the error $e_{n}$ at step $n$ satisfies
+    \begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} = \frac{(m-1)}{m}
+    \end{equation*}
+
+
+
+
+
+
+
 
     \item Compute $\displaystyle \int_{-1}^{1} e^{-x^{2}} dx$ using the
 
@@ -199,6 +570,205 @@
     \item Ensure that the font size for title, axes, legend are readable.
     \item Submit the plots obtained, entire code and the write-up.
     \end{itemize}
+
+
+    \textbf{Solution:}
+
+    We first reduce the second order differential equation
+
+    \begin{equation*}
+    \frac{d^{2} \theta}{dt^{2}} = - \sin(\theta)
+    \end{equation*}
+
+    to a system of first order equations.
+
+    \begin{equation*}
+    \begin{aligned}
+    \frac{d \theta}{dt} &= \omega \\ \\
+    \frac{d \omega}{dt} &= -\sin(\theta)
+    \end{aligned}
+    \end{equation*}
+
+    Notice that $(\theta^\prime, \omega^\prime)$ is given as a function of $(\theta,
+    \omega)$. The entire motion of the pendulum is determined if we know $(\theta,
+    \omega)$ at some instant. So we call $(\theta, \omega)$ the phase of the system. We
+    are given the initial phase of the system, \textit{i.e.,}\ we know from which initial
+    angle we have released the pendulum, and with what angular velocity. Our aim is to 
+    know the phase at all time points during the swing.
+
+    Thus, at $t = t_0$, we know
+    
+    \begin{equation*}
+    \begin{aligned}
+    \theta &= \theta_0 = \frac{\pi}{6} \\
+    \omega &= \omega_0 = 0
+    \end{aligned}
+    \end{equation*}
+
+    We want to know the values $\theta(t)$ and $\omega(t)$ at any given $t > t_0$. We 
+    also know the rate at which they are increasing at $t = t_0$:
+
+    \begin{equation*}
+    \begin{aligned}
+    \theta^{\prime}(t_0) &= \omega_0 \\
+    \omega^{\prime}(t_0) &= - \sin(\theta_0)
+    \end{aligned}
+    \end{equation*}
+
+    Now advance time a little to $t_1 = t_0 + \delta t$, say. By this time $\theta$ and
+    $\omega$ will roughly change to
+
+    \begin{equation*}
+    \begin{aligned}
+    \theta_1 &= \theta_0 + \theta^{\prime}(t_0) \delta t = \theta_0 + \omega_0 \delta t \\
+    \omega_1 &= \omega_0 + \omega^{\prime}(t_0) \delta t = \omega_0 - \sin(\theta_0) \delta t
+    \end{aligned}
+    \end{equation*}
+
+    So we get the phase (approximately) at $t_1 = t_0 + \delta t$. Now we keep on
+    advancing time by $\delta t$ increments. The same logic may be used repeatedly to 
+    give, at $t_k = t_0 + k \cdot \delta t$,
+
+    \begin{equation*}
+    \begin{aligned}
+    \theta_k &= \theta_{k-1} + \omega_{k-1} \delta t \\
+    \omega_k &= \omega_{k-1} - \sin(\theta_{k-1}) \delta t
+    \end{aligned}
+    \end{equation*}
+
+    Admittedly, this is a rather crude approximation. However, if $\delta t$ is pretty
+    small, the accuracy increases.
+
+    Physical stability for the simple pendulum:
+    
+    The stability analysis of the simple pendulum problem will be done by 
+    approximating $sin(\theta)$ to be $\theta$.
+
+    \begin{equation*}
+    \frac{d^2 \theta}{dt^2} = - \theta
+    \end{equation*}
+
+    converting into a system of first order ordinary differential equations,
+
+    \begin{equation*}
+    \begin{aligned}
+    \theta^{\prime} &= \frac{d \theta}{dt} = \omega \\
+    \theta^{\prime\prime} &= \frac{d \omega}{dt} = - \theta
+    \end{aligned}
+    \end{equation*}
+
+    rewriting in matrix form,
+        
+    \begin{equation*}
+    \frac{d}{dt} \begin{bmatrix} \theta \\ \omega \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} \begin{bmatrix} \theta \\ \omega \end{bmatrix}
+    \end{equation*}
+
+    then,
+
+    \begin{equation*}
+    det \Bigg( \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} - \lambda \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \Bigg) = 0
+    \end{equation*}
+
+    solving, we obtain $\lambda = \pm i$.
+
+    For the exact solution to be stable and bounded, the $Re(\lambda) \le 0$. 
+    Since, $Re(\lambda) = 0$, the exact solution for the simple pendulum problem
+    is stable and bounded.
+
+
+    \begin{enumerate}
+
+    \item Forward Euler:
+    
+    \begin{equation*}
+    \begin{aligned}
+    \theta_{k+1} &= \theta_{k} + \omega_{k} \delta t \\
+    \omega_{k+1} &= \omega_{k} - \sin(\theta_{k}) \delta t
+    \end{aligned}
+    \end{equation*}
+
+    \item Backward Euler:
+
+    \begin{equation*}
+    \begin{aligned}
+    \theta_{k+1} &= \theta_{k} + \omega_{k+1} \delta t \\
+                 &= \theta_{k} + \Big( \omega_{k} - \sin(\theta_{k}) \delta t \Big) \delta t \\
+    \omega_{k+1} &= \omega_{k} - \sin(\theta_{k+1}) \delta t \\
+                 &= \omega_{k} - \sin(\theta_{k} + \omega_{k} \delta t) \delta t
+    \end{aligned}
+    \end{equation*}
+
+    \item Trapezoidal rule:
+
+    \begin{equation*}
+    \begin{aligned}
+    \theta_{k+1} &= \theta_{k} + \frac{\delta t}{2} \Big( \omega_{k} + \omega_{k+1} \Big) \\
+                 &= \theta_{k} + \frac{\delta t}{2} \Big( \omega_{k} + \omega_{k} - \sin(\theta_{k}) \delta t \Big) \\ \\
+    \omega_{k+1} &= \omega_{k} - \frac{\delta t}{2} \Big( \sin(\theta_{k}) + \sin(\theta_{k+1}) \Big) \\
+                 &= \omega_{k} - \frac{\delta t}{2} \Big( \sin(\theta_{k}) + \sin(\theta_{k} + \omega_{k} \delta t) \Big)
+    \end{aligned}
+    \end{equation*}
+
+    \end{enumerate}
+
+
+    \textbf{Program:}
+    \lstinputlisting[language=Python]{Scripts/Program8/program8.py}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.9\linewidth}{!}{\input{Scripts/Program8/program80.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.9\linewidth}{!}{\input{Scripts/Program8/program81.pgf}}
+    \end{figure}
+    
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.9\linewidth}{!}{\input{Scripts/Program8/program82.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.9\linewidth}{!}{\input{Scripts/Program8/program83.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.9\linewidth}{!}{\input{Scripts/Program8/program84.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.9\linewidth}{!}{\input{Scripts/Program8/program85.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.9\linewidth}{!}{\input{Scripts/Program8/program86.pgf}}
+    \end{figure}
+    
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.9\linewidth}{!}{\input{Scripts/Program8/program87.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.9\linewidth}{!}{\input{Scripts/Program8/program88.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.9\linewidth}{!}{\input{Scripts/Program8/program89.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.9\linewidth}{!}{\input{Scripts/Program8/program810.pgf}}
+    \end{figure}
 
 \end{enumerate}
 \end{document}

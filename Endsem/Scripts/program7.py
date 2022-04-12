@@ -5,14 +5,14 @@
 
 """ Script to evaluate an integral using rectangular rule """
 
-import matplotlib
 import matplotlib.pyplot as plt
-plt.style.use('classic')
 from matplotlib.ticker import ScalarFormatter
 import numpy as np
 
-matplotlib.rcParams["pgf.texsystem"] = "pdflatex"
-matplotlib.rcParams.update(
+plt.style.use("classic")
+plt.rcParams["text.usetex"] = True
+plt.rcParams["pgf.texsystem"] = "pdflatex"
+plt.rcParams.update(
     {
         "font.family": "serif",
         "font.size": 10,
@@ -21,8 +21,6 @@ matplotlib.rcParams.update(
         "figure.titlesize": 12,
     }
 )
-matplotlib.rcParams["text.usetex"] = True
-matplotlib.use("Agg")
 
 # end points of interval
 a, b = 0, 1
@@ -69,12 +67,11 @@ formatter = ScalarFormatter()
 formatter.set_scientific(False)
 
 fig, ax = plt.subplots()
-ax.plot(n, rect_err, 'm.--', label=r'rectangular rule')
-ax.plot(n, recv_err, 'b.--', label=r'rectangular rule (change of variable)')
-ax.set_xscale("log", base=2)
-ax.set_yscale("log", base=10)
+ax.plot(n, rect_err, "m.--", label=r"$rectangular\ rule$")
+ax.plot(n, recv_err, "b.--", label=r"$rectangular\ rule\ (x = t^2)$")
+ax.set(xlabel=r"$number\ of\ grid\ points$", ylabel=r"$error\ in\ quadrature$")
+ax.set_xscale("log", base=2); ax.set_yscale("log", base=10)
 ax.xaxis.set_major_formatter(formatter)
-ax.set(xlabel=r"number of grid points", ylabel=r"error in quadrature")
-ax.set_title(r"Quadrature convergence")
+ax.set_title(r"$Quadrature\ convergence$")
 ax.grid(True); ax.legend(loc="lower left")
 plt.savefig("program7.pgf")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# File: program8.py
+# File: phasediagram.py
 # Name: D.Saravanan
 # Date: 02/12/2021
 
@@ -69,10 +69,10 @@ for n, dt in enumerate([0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20]):
         )
 
     figure, ax = plt.subplots()
-    ax.plot(t, theta1, "r-", label=r"$euler\ explicit$")
-    ax.plot(t, theta2, "b-", label=r"$euler\ implicit$")
-    ax.plot(t, theta3, "k-", label=r"$trapezoidal\ scheme$")
-    ax.set(xlabel=r"$time\ (s)$", ylabel=r"$\theta\ (rad)$")
-    ax.set_title(r"$Simple\ pendulum\ solution\ (time\ step = {}\ s)$".format(dt))
+    ax.plot(theta1, omega1, "r-", label=r"$euler\ explicit$")
+    ax.plot(theta2, omega2, "b-", label=r"$euler\ implicit$")
+    ax.plot(theta3, omega3, "k-", label=r"$trapezoidal\ scheme$")
+    ax.set(xlabel=r"$\theta\ (rad)$", ylabel=r"$\omega\ (s^{-1})$")
+    ax.set_title(r"$Phase\ space\ diagram\ (time\ step = {}\ s)$".format(dt))
     ax.grid(True); ax.legend(loc="best")
-    plt.savefig("program8{}.pgf".format(n))
+    plt.savefig("phasediagram{}.pgf".format(n))
