@@ -462,6 +462,32 @@
     
     \textbf{Solution:}
     
+    Let $f(x) = (x-r)^{m} g(x)$ where $g(r) \neq 0$ then $f^{\prime}(x) = m(x-r)^{m-1} g(x) + (x-r)^{m} g^{\prime}(x)$
+
+    \begin{equation*}
+    x_{n+1} = x{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})} 
+    \end{equation*}
+
+    \begin{equation*}
+    x_{n+1} - r = x_{n} - r - \frac{f(x_{n})}{f^{\prime}(x_{n})}
+    \end{equation*}
+
+    \begin{equation*}
+    e_{n+1} = e_{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})}
+    \end{equation*}
+
+    \begin{equation*}
+    \begin{aligned}
+    e_{n+1} &= e_{n} - \frac{(x_{n} - r)^{m} g(x_{n})}{m(x_{n} - r)^{m-1} g(x_{n}) + (x_{n} - r)^{m} g^{\prime}(x_{n})} \\
+            &= e_{n} - \frac{(x_{n} - r)^{m} g(x_{n})}{m(x_{n} - r)^{m} (x_{n} - r)^{-1} g(x_{n}) + (x_{n} - r)^{m} g^{\prime}(x_{n})} \\
+            &= e_{n} - \frac{(x_{n} - r) g(x_{n})}{m\ g(x_{n}) + (x_{n} - r)\ g^{\prime}(x_{n})} \\
+            &= e_{n} - \frac{e_{n}\ g(x_{n})}{m\ g(x_{n}) + e_{n}\ g^{\prime}(x_{n})} \\
+            &= \frac{m\ e_{n}\ g(x_{n}) + e_{n}^{2}\ g^{\prime}(x_{n}) - e_{n}\ g(x_{n})}{m\ g(x_{n}) + e_{n}\ g^{\prime}(x_{n})} \\
+            &= \frac{(m - 1)e_{n}\ g(x_{n}) + e_{n}^{2}\ g^{\prime}(x_{n})}{m\ g(x_{n}) + e_{n}\ g^{\prime}(x_{n})}
+    \end{aligned}
+    \end{equation*}
+
+    
     Let assume that the $(m+1)$ - times continuously differentiable function
     $f$ on $[a, b]$ has a multiplicity $m$ root at $r$. Then Newton's method is 
     locally convergent to $r$, and the error $e_{n}$ at step $n$ satisfies
