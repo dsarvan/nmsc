@@ -461,17 +461,20 @@
      a multiplicity $m$?
     
     \textbf{Solution:}
-    
-    Let $f(x) = (x-r)^{m} g(x)$ where $g(r) \neq 0$ then $f^{\prime}(x) = m(x-r)^{m-1} g(x) + (x-r)^{m} g^{\prime}(x)$
 
+    Let assume that the $(m+1)$ times continuously differentiable function $f$ has a multiplicity $m$ root at $r$. 
+
+    Let $f(x) = (x-r)^{m} g(x)$ where $g(r) \neq 0$ then $f^{\prime}(x) = m(x-r)^{m-1} g(x) + (x-r)^{m} g^{\prime}(x)$, the Newton's method generates the sequence
     \begin{equation*}
-    x_{n+1} = x{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})} 
+    x_{n+1} = x_{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})} 
     \end{equation*}
 
+    Using the time-honored method of adding and subtracting, we can write this as
     \begin{equation*}
     x_{n+1} - r = x_{n} - r - \frac{f(x_{n})}{f^{\prime}(x_{n})}
     \end{equation*}
-
+    
+    If we let $e_{n+1} = x_{n+1} - r$ and $e_{n} = x_{n} + r$, then we can rewrite the above as
     \begin{equation*}
     e_{n+1} = e_{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})}
     \end{equation*}
@@ -486,11 +489,13 @@
             &= \frac{(m - 1)e_{n}\ g(x_{n}) + e_{n}^{2}\ g^{\prime}(x_{n})}{m\ g(x_{n}) + e_{n}\ g^{\prime}(x_{n})}
     \end{aligned}
     \end{equation*}
-
     
-    Let assume that the $(m+1)$ - times continuously differentiable function
-    $f$ on $[a, b]$ has a multiplicity $m$ root at $r$. Then Newton's method is 
-    locally convergent to $r$, and the error $e_{n}$ at step $n$ satisfies
+    For $x_{n}$ close to $r$ the term $g^{\prime}(x_{n})$ becomes very small relative to $g(x_{n})$, and the Newton iteration reduces to
+    \begin{equation*}
+    e_{n+1} = \frac{(m-1)e_{n}\ g(x_{n})}{m\ g(x_{n})}
+    \end{equation*}
+
+    then Newton's method is locally convergent to $r$, and the error $e_{n}$ at step $n$ satisfies
     \begin{equation*}
     \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} = \frac{(m-1)}{m}
     \end{equation*}
