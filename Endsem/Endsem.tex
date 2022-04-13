@@ -358,8 +358,6 @@
     \end{equation*}
 
 
-
-
     \item \textbf{Bonus question:} What happens to the above if the root $r$ has
      a multiplicity $m$?
     
@@ -450,6 +448,27 @@
     \item Ensure that the font size for title, axes, legend are readable.
     \item Submit the plots obtained, entire code and the write-up.
     \end{itemize}
+    
+    \textbf{Solution:}
+    
+    Given,
+    \begin{equation*}
+    I = \int_{0}^{1} \frac{e^{-x}}{\sqrt{x}} dx
+    \end{equation*}
+
+    make a change of variables $x = t^{2}$, then 
+    \begin{equation*}
+    \begin{aligned}
+    \frac{dx}{dt} &= 2t \\
+    dx &= 2t\ dt
+    \end{aligned}
+    \end{equation*}
+    
+    hence, 
+    \begin{equation*}
+    I = \int_{0}^{1} \frac{e^{-t^{2}}}{t} 2t\ dt = 2 \int_{0}^{1} e^{-t^{2}} dt
+    \end{equation*}
+
 
     \textbf{Program:}
     \lstinputlisting[language=Python]{Scripts/program7.py}
