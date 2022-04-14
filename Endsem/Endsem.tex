@@ -422,6 +422,32 @@
     \item Ensure that the font size for title, axes, legend are readable.
     \item Submit the plots obtained, entire code and the write-up.
     \end{itemize}
+
+    \textbf{Solution:}
+
+    Trapezoidal rule:
+    \begin{equation*}
+    \int_{x_{0}}^{x_{n}} f(x) dx \approx \frac{h}{2} \Big(f(x_{0}) + f(x_{n}) \Big) + h \sum_{k=1}^{n-1} f(x_{k})
+    \end{equation*}
+
+    where $h = \displaystyle \frac{x_{n} - x_{0}}{n-1}$, the grid spacing
+
+    Trapezoidal rule with end corrections using the first derivative:
+    \begin{equation*}
+    \int_{x_{0}}^{x_{n}} f(x) dx \approx \frac{h}{2} \Big(f(x_{0}) + f(x_{n}) \Big) + h \sum_{k=1}^{n-1} f(x_{k}) - \frac{h^{2}}{12} \Big(f^{\prime}(x_{n}) - f^{\prime}(x_{0}) \Big)
+    \end{equation*}
+
+    Trapezoidal rule with end corrections using the first derivative and third derivatives:
+    \begin{equation*}
+    \int_{x_{0}}^{x_{n}} f(x) dx \approx \frac{h}{2} \Big(f(x_{0}) + f(x_{n}) \Big) + h \sum_{k=1}^{n-1} f(x_{k}) - \frac{h^{2}}{12} \Big(f^{\prime}(x_{n}) - f^{\prime}(x_{0}) \Big) + \frac{h^{4}}{720} \Big(f^{\prime\prime\prime}(x_{n}) - f^{\prime\prime\prime}(x_{0}) \Big)
+    \end{equation*}
+
+    Gauss-Legendre quadrature:
+    \begin{equation*}
+    \int_{-1}^{1} f(x) dx \approx \sum_{k=1}^{n} w_{k} f(x_{k})
+    \end{equation*}
+
+    where $n$ is the number of points, $w_{k}$ are quadrature weights and $x_{k}$ are the roots of the $nth$ Legendre polynomial.
         
     \textbf{Program:}
     \lstinputlisting[language=Python]{Scripts/program6.py}
@@ -430,6 +456,13 @@
     \centering
     \resizebox{0.9\linewidth}{!}{\input{Scripts/program6.pgf}}
     \end{figure}
+
+    \lstinputlisting[numbers=none]{Scripts/errorterm6.txt}
+
+    We can see that the Gauss-Legendre quadrature does better than the Trapezoidal rule with end corrections using the first and 
+    third derivatives which in turn does better than the Trapezoidal rule with end corrections using the first derivative which 
+    in turn does better than the Trapezoidal rule without end corrections.
+
 
     \item Evaluate $I = \displaystyle \int_{0}^{1} \frac{e^{-x}}{\sqrt{x}} dx$ by
     subdividing the domain into $N \in \{5, 10, 20, 50, 100, 200, 500, 1000\}$ panels.
@@ -469,6 +502,12 @@
     I = \int_{0}^{1} \frac{e^{-t^{2}}}{t} 2t\ dt = 2 \int_{0}^{1} e^{-t^{2}} dt
     \end{equation*}
 
+    Rectangular rule:
+    \begin{equation*}
+    \int_{x_{0}}^{x_{n}} f(x) dx \approx h \sum_{k=1}^{n} f \Bigg(\frac{x_{k-1} + x_{k}}{2} \Bigg)
+    \end{equation*}
+
+    where $h = \displaystyle \frac{x_{n} - x_{0}}{n-1}$, the grid spacing
 
     \textbf{Program:}
     \lstinputlisting[language=Python]{Scripts/program7.py}
@@ -477,6 +516,10 @@
     \centering
     \resizebox{0.9\linewidth}{!}{\input{Scripts/program7.pgf}}
     \end{figure}
+
+    \lstinputlisting[numbers=none]{Scripts/errorterm7.txt}
+
+    We can see that the rectangular rule with change of variables $x = t^{2}$ does better than the rectangular rule without change of variables.
 
     \item Consider the motion of a simple pendulum. The restoring force is $mg \sin \theta$
     and hence the governing equation is
