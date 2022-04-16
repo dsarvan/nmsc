@@ -757,7 +757,11 @@
     \end{equation*}
 
     \begin{equation*}
-    \det \left( \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} - \lambda \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \right) = 0
+    \begin{aligned}
+    \det \left( \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} - \lambda \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \right) &= 0 \\
+    \det \left( \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} - \begin{bmatrix} \lambda & 0 \\ 0 & \lambda \end{bmatrix} \right) &= 0 \\
+    \det \left( \begin{bmatrix} - \lambda & 1 \\ -1 & - \lambda \end{bmatrix} \right) &= 0
+    \end{aligned}
     \end{equation*}
 
     solving, we obtain $\lambda = \pm i$.
