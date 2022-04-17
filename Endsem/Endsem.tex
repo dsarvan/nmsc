@@ -748,7 +748,10 @@
     rewriting in matrix form,
         
     \begin{equation*}
-    \frac{d}{dt} \begin{bmatrix} \theta \\ \omega \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} \begin{bmatrix} \theta \\ \omega \end{bmatrix}
+    \begin{aligned}
+    \frac{d}{dt} \begin{bmatrix} \theta \\ \omega \end{bmatrix} &= \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} \begin{bmatrix} \theta \\ \omega \end{bmatrix} \\
+    \frac{d}{dt} S(t) &= \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S(t) = F(S, t)
+    \end{aligned}
     \end{equation*}
 
     then,
@@ -770,6 +773,66 @@
     Since, $Re(\lambda) = 0$, the exact solution for the simple pendulum problem
     is stable and bounded.
 
+    \begin{itemize}
+    \item Forward Euler:
+    \begin{equation*}
+    \begin{aligned}
+    S_{n+1} &= S_{n} + \delta t F(S_{n}, t_{n}) \\
+            &= S_{n} + \delta t \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n} \\
+            &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} S_{n} + \delta t \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n}
+    \end{aligned}
+    \end{equation*} 
+
+    \begin{equation*}
+    S_{n+1} = \begin{bmatrix} 1 & \delta t \\ -\delta t & 1 \end{bmatrix} S_{n}
+    \end{equation*}
+
+    \item Backward Euler:
+    \begin{equation*}
+    \begin{aligned}
+    S_{n+1} &= S_{n} + \delta t F(S_{n+1}, t_{n+1}) \\
+            &= S_{n} + \delta t \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n+1}
+    \end{aligned}
+    \end{equation*}
+
+    \begin{equation*}
+    \begin{aligned}
+    \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} S_{n+1} - \delta t \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n+1} &= S_{n} \\
+    \begin{bmatrix} 1 & -\delta t \\ \delta t & 1 \end{bmatrix} S_{n+1} &= S_{n}
+    \end{aligned} 
+    \end{equation*}
+
+    \begin{equation*}
+    S_{n+1} = \begin{bmatrix} 1 & -\delta t \\ \delta t & 1 \end{bmatrix}^{-1} S_{n}
+    \end{equation*}
+
+    \item Trapezoidal rule:
+    \begin{equation*}
+    \begin{aligned}
+    S_{n+1} &= S_{n} + \frac{\delta t}{2} \left[ F(S_{n}, t_{n}) + F(S_{n+1}, t_{n+1}) \right] \\
+            &= S_{n} + \frac{\delta t}{2} \left( \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n} + \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n+1} \right)
+    \end{aligned}
+    \end{equation*}
+     
+    \begin{equation*}
+    \begin{aligned}
+    \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} S_{n+1} - \frac{\delta t}{2} \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n+1} &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} S_{n} + \frac{\delta t}{2} \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n} \\
+    \left( \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} - \begin{bmatrix} 0 & \frac{\delta t}{2} \\ -\frac{\delta t}{2} & 0 \end{bmatrix} \right) S_{n+1} &= \left( \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} + \begin{bmatrix} 0 & \frac{\delta t}{2} \\ -\frac{\delta t}{2} & 0 \end{bmatrix} \right) S_{n}
+    \end{aligned}
+    \end{equation*}
+
+    \begin{equation*}
+    \begin{bmatrix} 1 & -\frac{\delta t}{2} \\ \frac{\delta t}{2} & 1 \end{bmatrix} S_{n+1} = \begin{bmatrix} 1 & \frac{\delta t}{2} \\ -\frac{\delta t}{2} & 1 \end{bmatrix} S_{n}
+    \end{equation*}
+
+    \begin{equation*}
+    S_{n+1} = \begin{bmatrix} 1 & -\frac{\delta t}{2} \\ \frac{\delta t}{2} & 0 \end{bmatrix}^{-1} \begin{bmatrix} 1 & \frac{\delta t}{2} \\ -\frac{\delta t}{2} & 1 \end{bmatrix} S_{n}
+    \end{equation*}
+    
+    \end{itemize}
+       
+    These equations allow us to solve the initial value problem since at each state, $S_{n}$, we can compute the next state at $S_{n+1}$. 
+    In general, this is possible to do when an ODE is linear.
 
 \end{enumerate}
 \end{document}
