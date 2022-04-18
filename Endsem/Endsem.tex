@@ -67,6 +67,19 @@
     the information above. How did he do it? What was his answer? What is the order of
     accuracy of his answer?
 
+    \textbf{Solution:}
+    
+    We obtain a better answer of the integral by the Romberg Integration. It provides a better approximation of the integral by reducing the true error.
+    
+    \begin{equation*}
+    I = \int_{0}^{1} f(x) dx
+    \end{equation*}
+
+    If $I_{1},\ I_{2}$ are the values of $I$ with sub-intervals of width $h_{1},\ h_{2}$ and $E_{1},\ E_{2}$ their corresponding errors.
+
+    Since $I = I_{1} + E_{1} = I_{2} + E_{2}$, then $E_{2} - E_{1} = I_{1} - I_{2}$
+    
+    
     \item Gaussian quadrature:
     \begin{itemize}
         \item Find the first three monic polynomials (i.e., till quadratic) on $[0, 1]$
