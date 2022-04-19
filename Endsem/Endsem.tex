@@ -70,16 +70,61 @@
     \textbf{Solution:}
     
     We obtain a better answer of the integral by the Romberg Integration. It provides a better approximation of the integral by reducing the true error.
-    
     \begin{equation*}
     I = \int_{0}^{1} f(x) dx
     \end{equation*}
-
-    If $I_{1},\ I_{2}$ are the values of $I$ with sub-intervals of width $h_{1},\ h_{2}$ and $E_{1},\ E_{2}$ their corresponding errors.
-
-    Since $I = I_{1} + E_{1} = I_{2} + E_{2}$, then $E_{2} - E_{1} = I_{1} - I_{2}$
     
+    Trapezoidal rule with end point corrections using the first derivative:
+    \begin{equation*}
+    \int_{x_{0}}^{x_{n}} f(x) dx = \frac{h}{2} \left( f(x_{0}) + f(x_{n}) \right) + h \sum_{k=1}^{n-1} f(x_{k}) - \frac{h^{2}}{12} \left( f^{\prime}(x_{n}) - f^{\prime}(x_{0}) \right) + \mathcal{O}(h^{4})
+    \end{equation*} 
+
+    If $I_{1},\ I_{2}$ are the values of $I$ with sub-intervals of width $h_{1},\ h_{2}$ and $E_{1},\ E_{2}$ their corresponding errors, respectively, then
+    \begin{equation*}
+    E_{1} = - \frac{(x_{n} - x_{0})h_{1}^{4}}{480} f^{\romannumeral 4} (y_{i}) \ \text{and} \ E_{2} = - \frac{(x_{n} - x_{0})h_{2}^{4}}{480} f^{\romannumeral 4} (y_{i})
+    \end{equation*}
+
+    Assuming that $f^{\romannumeral 4}$ is constant regardless of step size, we have
+    \begin{equation*}
+    \frac{E_{1}}{E_{2}} = \frac{h_{1}^4}{h_{2}^4}
+    \end{equation*}
+
+    then we have
+    \begin{equation*}
+    E_{1} = \left( \frac{h_{1}}{h_{2}} \right)^{4} E_{2}
+    \end{equation*}
+
+    Since $I = I_{1} + E_{1} = I_{2} + E_{2}$, then 
+    \begin{equation*}
+    I_{1} + \left( \frac{h_{1}}{h_{2}} \right)^{4} E_{2} = I_{2} + E_{2}
+    \end{equation*}
     
+    solving for $E_{2}$,
+    \begin{equation*}
+    E_{2} = \frac{I_{2} - I_{1}}{(h_{1}/h_{2})^{4} - 1}
+    \end{equation*}
+    
+    This estimate can then be substituted into $I = I_{2} + E_{2}$ to yield an improved estimate of the integral,
+    \begin{equation*}
+    I \approx I_{2} + \frac{I_{2} - I_{1}}{(h_{1}/h_{2})^{4} - 1}
+    \end{equation*}
+
+    It can be shown that the error of this estimate is $\mathcal{O}(h^{6})$. Thus, we have combined two trapezoidal rule with end corrections using the first
+    derivative estimates of $\mathcal{O}(h^{4})$ to yield a new estimate of $\mathcal{O}(h^{6})$.
+
+    For the special case where the $h_{1} = h$ and $h_{2} = h/2$,
+    \begin{equation*}
+    I \approx I_{2} + \frac{I_{2} - I_{1}}{2^{4} - 1} = \frac{16}{15} I_{2} - \frac{1}{15} I_{1}
+    \end{equation*}
+
+    Given, $I_{1} = 0.8$ using a grid spacing of $h$ and $I_{2} = 0.75$ using a grid spacing of $h/2$,
+    \begin{equation*}
+    I = \frac{16}{15} (0.75) - \frac{1}{15} (0.8) = 0.7467
+    \end{equation*}
+    
+    with the order of accuracy $\mathcal{O}(h^{6})$.
+    
+
     \item Gaussian quadrature:
     \begin{itemize}
         \item Find the first three monic polynomials (i.e., till quadratic) on $[0, 1]$
