@@ -488,13 +488,18 @@
     \end{itemize}
 
     \textbf{Solution:}
+        
+    Given,
+    \begin{equation*}
+    \int_{-1}^{1} e^{-x^{2}} dx = \sqrt{\pi}\ \text{erf}(1) \approx 1.49365 
+    \end{equation*}
 
     Trapezoidal rule:
     \begin{equation*}
     \int_{x_{0}}^{x_{n}} f(x) dx \approx \frac{h}{2} \Big(f(x_{0}) + f(x_{n}) \Big) + h \sum_{k=1}^{n-1} f(x_{k})
     \end{equation*}
 
-    where $h = \displaystyle \frac{x_{n} - x_{0}}{n-1}$, the grid spacing
+    where $h = \displaystyle \frac{(x_{n} - x_{0})}{N}$, the grid spacing
 
     Trapezoidal rule with end corrections using the first derivative:
     \begin{equation*}
@@ -553,7 +558,7 @@
     
     Given,
     \begin{equation*}
-    I = \int_{0}^{1} \frac{e^{-x}}{\sqrt{x}} dx
+    I = \int_{0}^{1} \frac{e^{-x}}{\sqrt{x}} dx = \sqrt{\pi}\ \text{erf}(1) \approx 1.493648
     \end{equation*}
 
     make a change of variables $x = t^{2}$, then 
@@ -566,7 +571,7 @@
     
     hence, 
     \begin{equation*}
-    I = \int_{0}^{1} \frac{e^{-t^{2}}}{t} 2t\ dt = 2 \int_{0}^{1} e^{-t^{2}} dt
+    I = \int_{0}^{1} \frac{e^{-t^{2}}}{t} 2t\ dt = 2 \int_{0}^{1} e^{-t^{2}} dt = \sqrt{\pi}\ \text{erf}(1) \approx 1.49365
     \end{equation*}
 
     Rectangular rule:
@@ -574,7 +579,9 @@
     \int_{x_{0}}^{x_{n}} f(x) dx \approx h \sum_{k=1}^{n} f \Bigg(\frac{x_{k-1} + x_{k}}{2} \Bigg)
     \end{equation*}
 
-    where $h = \displaystyle \frac{x_{n} - x_{0}}{n-1}$, the grid spacing
+    where $h = \displaystyle \frac{(x_{n} - x_{0})}{N}$, the grid spacing
+
+    \vspace{1 cm}
 
     \textbf{Program:}
     \lstinputlisting[language=Python]{Scripts/program7.py}
@@ -706,6 +713,8 @@
     \end{aligned}
     \end{equation*}
 
+    \vspace{1 cm}
+
     \item Backward Euler:
     \begin{equation*}
     \begin{aligned}
@@ -715,6 +724,8 @@
                  &= \omega_{k} - \sin(\theta_{k} + \omega_{k} \delta t) \delta t
     \end{aligned}
     \end{equation*}
+
+    \vspace{1 cm}
 
     \item Trapezoidal rule:
     \begin{equation*}
@@ -728,7 +739,7 @@
 
     \end{enumerate}
 
-    \vspace{3 cm}
+    \vspace{1 cm}
 
     \textbf{Program:}
     \lstinputlisting[language=Python]{Scripts/Program8/program8.py}
@@ -913,6 +924,8 @@
     \begin{equation*}
     S_{n+1} = \begin{bmatrix} 1 & \delta t \\ -\delta t & 1 \end{bmatrix} S_{n}
     \end{equation*}
+    
+    \vspace{1cm}
 
     \item Backward Euler:
     \begin{equation*}
@@ -932,6 +945,8 @@
     \begin{equation*}
     S_{n+1} = \begin{bmatrix} 1 & -\delta t \\ \delta t & 1 \end{bmatrix}^{-1} S_{n}
     \end{equation*}
+
+    \vspace{1 cm}
 
     \item Trapezoidal rule:
     \begin{equation*}
