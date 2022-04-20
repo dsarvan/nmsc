@@ -590,17 +590,20 @@
 
     We can see that the rectangular rule with change of variables $x = t^{2}$ does better than the rectangular rule without change of variables.
 
-    \vspace{1cm}
+    \pagebreak
 
-    \item Consider the motion of a simple pendulum. The restoring force is $mg \sin \theta$
-    and hence the governing equation is
+    \item Consider the motion of a simple pendulum. 
 
+    \begin{center}
+    \includegraphics{pendulum.pdf}
+    \end{center}
+
+    The restoring force is $mg \sin \theta$ and hence the governing equation is
     \begin{equation*}
     mL \frac{d^{2} \theta}{dt^{2}} + mg \sin(\theta) = 0
     \end{equation*}
 
     Let the length of the string be $g$. Hence, the governing equation simplifies to
-                    
     \begin{equation*}
     \frac{d^{2} \theta}{dt^{2}} + \sin(\theta) = 0
     \end{equation*}
@@ -635,17 +638,14 @@
     \textbf{Solution:}
 
     We first reduce the second order differential equation
-
     \begin{equation*}
     \frac{d^{2} \theta}{dt^{2}} = - \sin(\theta)
     \end{equation*}
 
     to a system of first order equations,
-
     \begin{equation*}
     \frac{d \theta}{dt} = \omega
     \end{equation*}
-
     \begin{equation*}
     \frac{d \omega}{dt} = -\sin(\theta)
     \end{equation*}
@@ -658,7 +658,6 @@
     know the phase at all time points during the swing.
 
     Thus, at $t = t_0$, we know
-    
     \begin{equation*}
     \begin{aligned}
     \theta &= \theta_0 = \frac{\pi}{6} \\
@@ -668,7 +667,6 @@
 
     We want to know the values $\theta(t)$ and $\omega(t)$ at any given $t > t_0$. We 
     also know the rate at which they are increasing at $t = t_0$:
-
     \begin{equation*}
     \begin{aligned}
     \theta^{\prime}(t_0) &= \omega_0 \\
@@ -678,7 +676,6 @@
 
     Now advance time a little to $t_1 = t_0 + \delta t$, say. By this time $\theta$ and
     $\omega$ will roughly change to
-
     \begin{equation*}
     \begin{aligned}
     \theta_1 &= \theta_0 + \theta^{\prime}(t_0) \delta t = \theta_0 + \omega_0 \delta t \\
@@ -689,7 +686,6 @@
     So we get the phase (approximately) at $t_1 = t_0 + \delta t$. Now we keep on
     advancing time by $\delta t$ increments. The same logic may be used repeatedly to 
     give, at $t_k = t_0 + k \cdot \delta t$,
-
     \begin{equation*}
     \begin{aligned}
     \theta_k &= \theta_{k-1} + \omega_{k-1} \delta t \\
@@ -732,10 +728,12 @@
 
     \end{enumerate}
 
-    \vspace{0.5cm}
+    \vspace{3 cm}
 
     \textbf{Program:}
     \lstinputlisting[language=Python]{Scripts/Program8/program8.py}
+
+    \vspace{1 cm}
 
     From the plots, 
     \begin{itemize}
@@ -751,7 +749,17 @@
 
     \begin{figure}[ht!]
     \centering
+    \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram0.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program81.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram1.pgf}}
     \end{figure}
     
     \begin{figure}[ht!]
@@ -761,7 +769,17 @@
 
     \begin{figure}[ht!]
     \centering
+    \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram2.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program83.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram3.pgf}}
     \end{figure}
 
     \begin{figure}[ht!]
@@ -771,7 +789,17 @@
 
     \begin{figure}[ht!]
     \centering
+    \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram4.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program85.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram5.pgf}}
     \end{figure}
 
     \begin{figure}[ht!]
@@ -781,7 +809,17 @@
     
     \begin{figure}[ht!]
     \centering
+    \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram6.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program87.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram7.pgf}}
     \end{figure}
 
     \begin{figure}[ht!]
@@ -791,12 +829,27 @@
 
     \begin{figure}[ht!]
     \centering
+    \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram8.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program89.pgf}}
     \end{figure}
 
     \begin{figure}[ht!]
     \centering
+    \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram9.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program810.pgf}}
+    \end{figure}
+
+    \begin{figure}[ht!]
+    \centering
+    \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram10.pgf}}
     \end{figure}
 
     \pagebreak
