@@ -13,10 +13,12 @@
 \usepackage{tcolorbox}
 \usepackage{fancyhdr}
 \usepackage{setspace}
+\usepackage[font=small, skip=0pt]{caption}
 \usepackage{cancel}
 \usepackage{placeins}
 \usepackage{multirow}
 \usepackage{algorithm2e}
+\usepackage{float}
 \usepackage{booktabs}
 \usepackage{bbding}
 \pagecolor{white}
@@ -58,35 +60,45 @@
 \doublespacing
 \begin{enumerate}
 
-    \item An integral of the form $\displaystyle \int_{0}^{1} f(x) dx$ was computed
-    by two students using trapezoidal rule with end point corrections involving only
-    the first derivative. The first student reported the value as $0.8$ using a grid
-    spacing of $h$, while the second student reported the value as $0.75$ using a grid
-    spacing of $h/2$. A smart, lazy student from NMSC class enters their discussion
-    and gives a better answer of the integral with a higher order of accuracy by processing
-    the information above. How did he do it? What was his answer? What is the order of
-    accuracy of his answer?
+    \item An integral of the form $\displaystyle \int_{0}^{1} f(x) dx$ was 
+    computed by two students using trapezoidal rule with end point corrections 
+    involving only the first derivative. The first student reported the value 
+    as $0.8$ using a grid spacing of $h$, while the second student reported the
+    value as $0.75$ using a grid spacing of $h/2$. A smart, lazy student from 
+    NMSC class enters their discussion and gives a better answer of the 
+    integral with a higher order of accuracy by processing the information 
+    above. How did he do it? What was his answer? What is the order of accuracy
+    of his answer?
 
     \textbf{Solution:}
     
-    We obtain a better answer of the integral by the Romberg Integration. It provides a better approximation of the integral by reducing the true error.
+    We obtain a better answer of the integral by the Romberg Integration. 
+    It provides a better approximation of the integral by reducing the true 
+    error.
     \begin{equation*}
     I = \int_{0}^{1} f(x) dx
     \end{equation*}    
 
     Trapezoidal rule with end point corrections using the first derivative:
     \begin{equation*}
-    \int_{x_{0}}^{x_{n}} f(x) dx = \frac{h}{2} \left( f(x_{0}) + f(x_{n}) \right) + h \sum_{k=1}^{n-1} f(x_{k}) - \frac{h^{2}}{12} \left( f^{\prime}(x_{n}) - f^{\prime}(x_{0}) \right) + \mathcal{O}(h^{4})
+    \int_{x_{0}}^{x_{n}} f(x) dx = \frac{h}{2} \left( f(x_{0}) + f(x_{n}) 
+    \right) + h \sum_{k=1}^{n-1} f(x_{k}) - \frac{h^{2}}{12} \left( f^{\prime}
+    (x_{n}) - f^{\prime}(x_{0}) \right) + \mathcal{O}(h^{4})
     \end{equation*} 
     
     with step size $h = \displaystyle \frac{(x_{n} - x_{0})}{N}$ \\
     
-    If $I_{1},\ I_{2}$ are the values of $I$ with sub-intervals of width $h_{1},\ h_{2}$ and $E_{1},\ E_{2}$ their corresponding errors, respectively, then
+    If $I_{1},\ I_{2}$ are the values of $I$ with sub-intervals of width 
+    $h_{1},\ h_{2}$ and $E_{1},\ E_{2}$ their corresponding errors, 
+    respectively, then
     \begin{equation*}
-    E_{1} = - \frac{(x_{n} - x_{0})h_{1}^{4}}{480} f^{\romannumeral 4} (y_{i}) \ \text{and} \ E_{2} = - \frac{(x_{n} - x_{0})h_{2}^{4}}{480} f^{\romannumeral 4} (y_{i})
+    E_{1} = - \frac{(x_{n} - x_{0})h_{1}^{4}}{480} f^{\romannumeral 4} 
+    (y_{i}) \ \text{and} \ E_{2} = - \frac{(x_{n} - x_{0})h_{2}^{4}}{480} 
+    f^{\romannumeral 4} (y_{i})
     \end{equation*}
 
-    Assuming that $f^{\romannumeral 4}$ is constant regardless of step size, we have
+    Assuming that $f^{\romannumeral 4}$ is constant regardless of step size, 
+    we have
     \begin{equation*}
     \frac{E_{1}}{E_{2}} = \frac{h_{1}^4}{h_{2}^4}
     \end{equation*}
@@ -106,20 +118,25 @@
     E_{2} = \frac{I_{2} - I_{1}}{(h_{1}/h_{2})^{4} - 1}
     \end{equation*}
     
-    This estimate can then be substituted into $I = I_{2} + E_{2}$ to yield an improved estimate of the integral,
+    This estimate can then be substituted into $I = I_{2} + E_{2}$ to yield 
+    an improved estimate of the integral,
     \begin{equation*}
     I \approx I_{2} + \frac{I_{2} - I_{1}}{(h_{1}/h_{2})^{4} - 1}
     \end{equation*}
 
-    It can be shown that the error of this estimate is $\mathcal{O}(h^{6})$. Thus, we have combined two trapezoidal rule with end corrections using the first
-    derivative estimates of $\mathcal{O}(h^{4})$ to yield a new estimate of $\mathcal{O}(h^{6})$.
+    It can be shown that the error of this estimate is $\mathcal{O}(h^{6})$. 
+    Thus, we have combined two trapezoidal rule with end corrections using the 
+    first derivative estimates of $\mathcal{O}(h^{4})$ to yield a new estimate 
+    of $\mathcal{O}(h^{6})$.
 
     For the special case where the $h_{1} = h$ and $h_{2} = h/2$,
     \begin{equation*}
-    I \approx I_{2} + \frac{I_{2} - I_{1}}{2^{4} - 1} = \frac{16}{15} I_{2} - \frac{1}{15} I_{1}
+    I \approx I_{2} + \frac{I_{2} - I_{1}}{2^{4} - 1} = \frac{16}{15} I_{2} - 
+    \frac{1}{15} I_{1}
     \end{equation*}
 
-    Given, $I_{1} = 0.8$ using a grid spacing of $h$ and $I_{2} = 0.75$ using a grid spacing of $h/2$,
+    Given, $I_{1} = 0.8$ using a grid spacing of $h$ and $I_{2} = 0.75$ using 
+    a grid spacing of $h/2$,
     \begin{equation*}
     I = \frac{16}{15} (0.75) - \frac{1}{15} (0.8) = 0.7467
     \end{equation*}
@@ -130,31 +147,37 @@
 
     \item Gaussian quadrature:
     \begin{itemize}
-        \item Find the first three monic polynomials (i.e., till quadratic) on $[0, 1]$
-        orthogonal with respect to the inner product
+    \item Find the first three monic polynomials (i.e., till quadratic) on 
+    $[0, 1]$ orthogonal with respect to the inner product
 
-            \begin{equation*}
-            \langle f, g \rangle = \int_{0}^{1} \frac{x}{\sqrt{1 - x^{2}}} f(x) g(x) dx
-            \end{equation*}
+    \begin{equation*}
+    \langle f, g \rangle = \int_{0}^{1} \frac{x}{\sqrt{1 - x^{2}}} f(x) g(x) dx
+    \end{equation*}
 
     \textbf{Solution:}
 
-    Given two functions $f, g \in C[0, 1]$. we define an inner product of these two functions by
+    Given two functions $f, g \in C[0, 1]$, we define an inner product of 
+    these two functions by
     \begin{equation*}
-    \langle f, g \rangle = \int_{0}^{1} w(x) f(x) g(x) dx, \hspace{2cm} w(x) > 0
+    \langle f, g \rangle = \int_{0}^{1} w(x) f(x) g(x) dx, \hspace{2cm} 
+    w(x) > 0
     \end{equation*}
         
-    Thus the definition of the inner product depends on the integration interval $[0, 1]$ and a given weight function $w(x)$.
+    Thus the definition of the inner product depends on the integration 
+    interval $[0, 1]$ and a given weight function $w(x)$.
 
     For the above inner product we also have
     \begin{equation*}
-    \langle xf, g \rangle_{w} = \int_{0}^{1} w(x)\ x f(x) g(x)\ dx = \langle f, xg \rangle_{w}
+    \langle xf, g \rangle_{w} = \int_{0}^{1} w(x)\ x f(x) g(x)\ dx = 
+    \langle f, xg \rangle_{w}
     \end{equation*}
 
-    We create a sequence of polynomials $\phi_{k}(x)$ of degree $k$ for $k = 0, 1, 2, 3, ...$ such that
-    $\langle \phi_{i}, \phi_{j} \rangle_{w} = 0$ for all $i \neq j$.
+    We create a sequence of polynomials $\phi_{k}(x)$ of degree $k$ for 
+    $k = 0, 1, 2, 3, ...$ such that $\langle \phi_{i}, \phi_{j} \rangle_{w} = 
+    0$ for all $i \neq j$.
 
-    We know that the Chebyshev polynomials of the first kind $T_{n}(x)$ are orthogonal within the interval $x \in [-1, 1]$ with a weight function 
+    We know that the Chebyshev polynomials of the first kind $T_{n}(x)$ are 
+    orthogonal within the interval $x \in [-1, 1]$ with a weight function 
     $w(x) = \displaystyle \frac{1}{\sqrt{1 - x^{2}}}$,
 
     \begin{equation*}
@@ -166,7 +189,8 @@
     \end{cases}
     \end{equation*}
 
-    We also know that the Chebyshev polynomials of the first kind $T_{n}(y)$ are orthogonal polynomials on $[0,1]$ with respect to the weight function
+    We also know that the Chebyshev polynomials of the first kind $T_{n}(y)$ 
+    are orthogonal polynomials on $[0,1]$ with respect to the weight function
     $w(y) = \displaystyle \frac{1}{\sqrt{4y - 4y^2}}$,
 
     \begin{equation*}
@@ -178,56 +202,87 @@
     \end{cases}
     \end{equation*}
 
-    We can transform any finite domain $a \le y \le b$ to the basic domain $-1 \le x \le 1$ with the change of variable
-    $y = \displaystyle \frac{1}{2} (b - a)x + \frac{1}{2} (b + a)$.
+    We can transform any finite domain $a \le y \le b$ to the basic domain 
+    $-1 \le x \le 1$ with the change of variable $y = \displaystyle \frac{1}{2}
+    (b - a)x + \frac{1}{2} (b + a)$.
 
-    For the domain $0 \le y \le 1$, we can write $y = \displaystyle \frac{1}{2} (x + 1)$.
+    For the domain $0 \le y \le 1$, we can write $y = \displaystyle \frac{1}{2}
+    (x + 1)$.
     
-    Let us now find the sequence of orthogonal polynomials. This is done by a Gram-Schmidt process. 
+    Let us now find the sequence of orthogonal polynomials. This is done by a 
+    Gram-Schmidt process. 
 
-    let, $\phi_{0}(x) = 1$
+    let, $\phi_{0}(x) = 1 \implies \phi_{0}(2y-1) = 1$
 
-    then, $\phi_{1}(x) = x - B_{1} \phi_{0}(x)$, where $B_{1} = \displaystyle \frac{\langle x \phi_{0}, \phi_{0} \rangle_{w}}{\| \phi_{0} \|_{w}^{2}}$
+    then, $\phi_{1}(x) = x - B_{1} \phi_{0}(x)$, where $B_{1} = \displaystyle 
+    \frac{\langle x \phi_{0}, \phi_{0} \rangle_{w}}{\| \phi_{0} \|_{w}^{2}}$
     
     \begin{equation*}
     \begin{aligned}
-    \phi_{1}(y) &= (2y-1) - \displaystyle \frac{\langle (2y-1) \phi_{0}, \phi{0} \rangle}{\langle \phi_{0}, \phi_{0} \rangle}\ \phi_{0}(2y-1) \\
-                &= (2y-1) - \displaystyle \frac{\langle (2y-1), 1 \rangle}{\langle 1, 1 \rangle} \\
-                &= (2y-1) - \displaystyle \frac{\displaystyle\int_{0}^{1} \frac{1}{\sqrt{4y-y^2}} (2y-1) dy}{\displaystyle\int_{0}^{1} \frac{1}{\sqrt{4y-y^2}} dy} \\
+    \phi_{1}(y) &= (2y-1) - \displaystyle \frac{\langle (2y-1) \phi_{0}, 
+    \phi_{0} \rangle}{\langle \phi_{0}, \phi_{0} \rangle}\ \phi_{0}(2y-1) \\
+                &= (2y-1) - \displaystyle \frac{\langle (2y-1), 1 \rangle}
+    {\langle 1, 1 \rangle} \\
+                &= (2y-1) - \displaystyle \frac{\displaystyle\int_{0}^{1} 
+    \frac{1}{\sqrt{4y-y^2}} (2y-1) dy}{\displaystyle\int_{0}^{1} 
+    \frac{1}{\sqrt{4y-y^2}} dy} \\
                 &= y - \frac{1}{2}
     \end{aligned}
     \end{equation*}
 
-    and $\phi_{k}(x) = (x - B_{k}) \phi_{k-1}(x) - C_{k} \phi_{k-2}(x), \hspace{1cm} k \ge 2$ 
+    and $\phi_{k}(x) = (x - B_{k}) \phi_{k-1}(x) - C_{k} \phi_{k-2}(x), 
+    \hspace{1cm} k \ge 2$ 
 
-    with, $B_{k} = \displaystyle \frac{\langle x \phi_{k-1}, \phi_{k-1} \rangle_{w}}{\| \phi_{k-1} \|_{w}^{2}}$ and
+    with, $B_{k} = \displaystyle \frac{\langle x \phi_{k-1}, \phi_{k-1} 
+    \rangle_{w}}{\| \phi_{k-1} \|_{w}^{2}}$ and
 
-    $C_{k} = \displaystyle \frac{\langle x \phi_{k-1}, \phi_{k-2} \rangle_{w}}{\| \phi_{k-2} \|_{w}^{2}} = \frac{\| \phi_{k-1} \|_{w}^{2}}{\| \phi_{k-2} \|_{w}^{2}}$
+    $C_{k} = \displaystyle \frac{\langle x \phi_{k-1}, \phi_{k-2} \rangle_{w}}
+    {\| \phi_{k-2} \|_{w}^{2}} = \frac{\| \phi_{k-1} \|_{w}^{2}}{\| \phi_{k-2}
+    \|_{w}^{2}}$
     \begin{equation*}
     \begin{aligned}
-    \phi_{2}(y) &= \big((2y-1) - B_{2}\big)\ \phi_{1}(2y-1) - C_{2}\ \phi_{0}(2y-1) \\
-                &= \bigg((2y-1) - \frac{\langle (2y-1) \phi_{1}, \phi_{1} \rangle}{\langle \phi_{1}, \phi_{1} \rangle}\bigg)\ \phi_{1}(2y-1) - \frac{\langle (2y-1) \phi_{1}, \phi_{0} \rangle}{\langle \phi_{0}, \phi_{0} \rangle}\ \phi_{0}(2y-1) \\
-                &= (2y-1)^2 - \frac{\langle (2y-1)(2y-1), (2y-1) \rangle}{\langle 2y-1, 2y-1 \rangle}\ (2y-1) - \frac{\langle (2y-1)(2y-1), 1 \rangle}{\langle 1, 1 \rangle} \\
-                &= (4y^2 - 4y + 1) - \frac{\langle 4y^2 - 4y + 1, 2y-1 \rangle}{\langle 2y-1, 2y-1 \rangle}\ (2y-1) - \frac{\langle 4y^2 - 4y + 1, 1 \rangle}{\langle 1, 1 \rangle} \\
-                &= (4y^2 - 4y + 1) - \frac{\displaystyle \int_{0}^{1} \frac{(4y^2 - 4y + 1)(2y-1)}{\sqrt{4y-4y^2}} dy}{\displaystyle \int_{0}^{1} \frac{(2y-1)(2y-1)}{\sqrt{4y-4y^2}} dy}\ (2y-1) - \frac{\displaystyle \int_{0}^{1} \frac{(4y^2 - 4y + 1)}{\sqrt{4y-4y^2}} dy}{\displaystyle \int_{0}^{1} \frac{1}{\sqrt{4y-4y^2}} dy} \\
+    \phi_{2}(y) &= \big((2y-1) - B_{2}\big)\ \phi_{1}(2y-1) - C_{2}\ 
+    \phi_{0}(2y-1) \\
+                &= \bigg((2y-1) - \frac{\langle (2y-1) \phi_{1}, \phi_{1} 
+    \rangle}{\langle \phi_{1}, \phi_{1} \rangle}\bigg)\ \phi_{1}(2y-1) - 
+    \frac{\langle (2y-1) \phi_{1}, \phi_{0} \rangle}{\langle \phi_{0}, 
+    \phi_{0} \rangle}\ \phi_{0}(2y-1) \\
+                &= (2y-1)^2 - \frac{\langle (2y-1)(2y-1), (2y-1) \rangle}
+    {\langle 2y-1, 2y-1 \rangle}\ (2y-1) - \frac{\langle (2y-1)(2y-1), 1 
+    \rangle}{\langle 1, 1 \rangle} \\
+                &= (4y^2 - 4y + 1) - \frac{\langle 4y^2 - 4y + 1, 2y-1 \rangle}
+    {\langle 2y-1, 2y-1 \rangle}\ (2y-1) - \frac{\langle 4y^2 - 4y + 1, 1 
+    \rangle}{\langle 1, 1 \rangle} \\
+                &= (4y^2 - 4y + 1) - \frac{\displaystyle \int_{0}^{1} 
+    \frac{(4y^2 - 4y + 1)(2y-1)}{\sqrt{4y-4y^2}} dy}{\displaystyle \int_{0}^{1}
+    \frac{(2y-1)(2y-1)}{\sqrt{4y-4y^2}} dy}\ (2y-1) - \frac{\displaystyle 
+    \int_{0}^{1} \frac{(4y^2 - 4y + 1)}{\sqrt{4y-4y^2}} dy}{\displaystyle 
+    \int_{0}^{1} \frac{1}{\sqrt{4y-4y^2}} dy} \\
                 &= (4y^2 - 4y + 1) - \displaystyle \frac{\pi/4}{\pi/2} \\
                 &= y^2 - y + \frac{1}{8}
     \end{aligned}
     \end{equation*}
+
+    \vspace{0.5cm}
     
-        \item Use the above to find a quadrature formula of the form
-            \begin{equation*}
-            \int_{0}^{1} \frac{x}{\sqrt{1 - x^{2}}} f(x) dx = \sum_{i=0}^{n} a_{i} f(x_{i})
-            \end{equation*}
+    \item Use the above to find a quadrature formula of the form
+    \begin{equation*}
+    \int_{0}^{1} \frac{x}{\sqrt{1 - x^{2}}} f(x) dx = \sum_{i=0}^{n} a_{i} 
+    f(x_{i})
+    \end{equation*}
 
-        that is exact for all $f(x)$ of degree $3$.
+    that is exact for all $f(x)$ of degree $3$.
 
-   \textbf{Solution:} 
+    \textbf{Solution:} 
 
-    Let $\langle f, g \rangle_{w} = \displaystyle \int_{a}^{b} w(x) f(x) g(x)\ dx$ (the weighted inner product). By the Gram-Schmidt process, there is a sequence
-    $\{\phi_{j}\}$ of orthogonal polynomials where $\phi_{j}$ has degree $j$. $\phi_{j+1}$ has $j+1$ distinct real zeros $x_{0}, ..., x_{n}$ in $[a, b]$. 
+    Let $\langle f, g \rangle_{w} = \displaystyle \int_{a}^{b} w(x) f(x) 
+    g(x)\ dx$ (the weighted inner product). By the Gram-Schmidt process, 
+    there is a sequence $\{\phi_{j}\}$ of orthogonal polynomials where 
+    $\phi_{j}$ has degree $j$. $\phi_{j+1}$ has $j+1$ distinct real zeros 
+    $x_{0}, ..., x_{n}$ in $[a, b]$. 
 
-    Let $l_{i} (x)$ be the $i$-th Lagrange basis polynomial for these zeros and let
+    Let $l_{i} (x)$ be the $i$-th Lagrange basis polynomial for these zeros 
+    and let
     \begin{equation*}
     a_{i} = \int_{a}^{b} l_{i} (x)\ dx
     \end{equation*}    
@@ -236,9 +291,10 @@
     \begin{equation*}
     \int_{a}^{b} w(x) f(x)\ dx \approx \sum_{i=0}^{n} a_{i} f(x_{i})
     \end{equation*}
-     has degree $2n+1$. 
+    has degree $2n+1$. 
 
-    Suppose $f \in \mathbb{P}_{2n+1}$. Since $p_{n+1}$ has degree $n+1$, polynomial division gives
+    Suppose $f \in \mathbb{P}_{2n+1}$. Since $p_{n+1}$ has degree $n+1$, 
+    polynomial division gives
     \begin{equation*}
     f = q(x)p_{n+1} (x) + r(x), \hspace{2cm} q, r \in \mathbb{P}_{n}.
     \end{equation*}
@@ -252,94 +308,127 @@
     \end{aligned}
     \end{equation*}
 
-    because $p_{n+1}$ is orthogonal to all polynomials of degree $\le n$, which includes $q$. Now plug the expression into the formula:
+    because $p_{n+1}$ is orthogonal to all polynomials of degree $\le n$, 
+    which includes $q$. Now plug the expression into the formula:
     \begin{equation*}
     \begin{aligned}
     \text{formula} &= \sum_{i=0}^{n} a_{i} f(x_{i}) \\
-    &= \sum_{i=0}^{n} a_{i} q(x_{i}) p_{n+1}(x_{i}) + \sum_{i=0}^{n} a_{i} r(x_{i}) \\
+    &= \sum_{i=0}^{n} a_{i} q(x_{i}) p_{n+1}(x_{i}) + \sum_{i=0}^{n} a_{i} 
+    r(x_{i}) \\
     &= \sum_{i=0}^{n} a_{i} r(x_{i})
     \end{aligned}
     \end{equation*}
  
-    Last, we need to establish that $I$ and the formula are equal. Because $r(x)$ has degree $\le n$, it is equal to its Lagrange interpolant through the nodes $x_{0},...,x_{n}$, so
+    Last, we need to establish that $I$ and the formula are equal. Because 
+    $r(x)$ has degree $\le n$, it is equal to its Lagrange interpolant through
+    the nodes $x_{0},...,x_{n}$, so
     \begin{equation*}
     r(x) = \sum_{i=0}^{n} r(x_{i}) l_{i}(x)
     \end{equation*}
 
     Thus, working from the formula for $I$,
     \begin{equation*}
-    I = \int_{a}^{b} r(x) w(x)\ dx = \sum_{i=0}^{n} \int_{a}^{b} l_{i}(x) w(x)\ dx = \sum_{i=0}^{n} a_{i} r(x_{i})
+    I = \int_{a}^{b} r(x) w(x)\ dx = \sum_{i=0}^{n} \int_{a}^{b} l_{i}(x) 
+    w(x)\ dx = \sum_{i=0}^{n} a_{i} r(x_{i})
     \end{equation*}
     
-    which establishes equality. To see that the degree of accuracy is exactly $2n+1$, consider
+    which establishes equality. To see that the degree of accuracy is exactly 
+    $2n+1$, consider
     \begin{equation*}
     f(x) = \prod_{j=0}^{n} (x-x_{j})^2
     \end{equation*}
 
-    Note that the nodes $x_{i}$ depend on the degree, so really they should be written $x_{n,i}\ (\text{for}\ i = 0,...,n)$ for $\phi_{n+1}$. One can show that, unlike with equally spaced interpolation,
+    Note that the nodes $x_{i}$ depend on the degree, so really they should be
+    written $x_{n,i}\ (\text{for}\ i = 0,...,n)$ for $\phi_{n+1}$. One can 
+    show that, unlike with equally spaced interpolation,
     \begin{equation*}
     \lim_{x\to\infty} |I - \sum_{i=0}^{n} a_{i} f(x_{n,i})| = 0
     \end{equation*}
 
-    under reasonable assumptions on $f$. Thus, Gaussian quadrature does well when adding more points to reduce error when function values of $f$ at any point are available. \\
+    under reasonable assumptions on $f$. Thus, Gaussian quadrature does well 
+    when adding more points to reduce error when function values of $f$ at any
+    point are available.
 
-    In summary, let $\{\phi_{j}\}$ be an orthogonal basis of polynomials in the inner product $\langle f, g \rangle_{w} = \displaystyle \int_{a}^{b} w(x) f(x) g(x)\ dx$ and let $x_{0},...,x_{n}$ be the zeros of the polynomial $\phi_{n+1}$ with Lagrange basis $\{l_{k}(x)\}$. Then
+    In summary, let $\{\phi_{j}\}$ be an orthogonal basis of polynomials in the
+    inner product $\langle f, g \rangle_{w} = \displaystyle \int_{a}^{b} w(x) 
+    f(x) g(x)\ dx$ and let $x_{0},...,x_{n}$ be the zeros of the polynomial 
+    $\phi_{n+1}$ with Lagrange basis $\{l_{k}(x)\}$. Then
     \begin{equation*}
-    I = \int_{a}^{b} w(x) f(x)\ dx \approx \sum_{i=0}^{n} a_{i} f(x_{i}), \hspace{2cm} a_{i} = \int_{a}^{b} l_{i}(x) w(x)\ dx,
+    I = \int_{a}^{b} w(x) f(x)\ dx \approx \sum_{i=0}^{n} a_{i} f(x_{i}), 
+    \hspace{2cm} a_{i} = \int_{a}^{b} l_{i}(x) w(x)\ dx,
     \end{equation*}
 
-    called the Gaussian quadrature formula for $w(x)$, has degree of accuracy $2n+1$.
+    called the Gaussian quadrature formula for $w(x)$, has degree of accuracy 
+    $2n+1$.
 
     Thus,
     \begin{equation*}
-    I = \int_{0}^{1} \frac{x}{\sqrt{1-x^2}} f(x)\ dx = \sum_{i=0}^{1} a_{i} f(x_{i}), \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(x) w(x)\ dx,
+    I = \int_{0}^{1} \frac{x}{\sqrt{1-x^2}} f(x)\ dx = \sum_{i=0}^{1} a_{i} 
+    f(x_{i}), \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(x) w(x)\ dx,
     \end{equation*}
-    
     is exact for all $f(x)$ of degree $3$.
 
+    \vspace{1cm}
     
-        \item Use the above to evaluate $\displaystyle \int_{0}^{1} \frac{x \sin(x)}
-        {\sqrt{1 - x^{2}}} dx$
+    \item Use the above to evaluate $\displaystyle \int_{0}^{1} \frac{x 
+    \sin(x)}{\sqrt{1 - x^{2}}} dx$
     
     \textbf{Solution:}
 
     \begin{equation*}
-    I = \int_{0}^{1} \frac{x sin(x)}{\sqrt{1-x^2}} dx \approx \sum_{i=0}^{n} a_{i} f(x_{i}) \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(x) w(x)\ dx
+    I = \int_{0}^{1} \frac{x\ sin(x)}{\sqrt{1-x^2}} dx \approx \sum_{i=0}^{n} 
+    a_{i} f(x_{i}) \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(x) w(x)\ dx
     \end{equation*}
 
-    where $l_{i}(x) = \displaystyle \prod_{i \neq j}^{n} \frac{x - x_{j}}{x_{i} - x_{j}}$
+    where $l_{i}(x) = \displaystyle \prod_{i \neq j}^{n} \frac{x - x_{j}}{x_{i}
+    - x_{j}}$
 
-    The Chebyshev polynomials of the first kind $T_{n}(y)$ are orthogonal polynomials on $[0, 1]$ with respect to the weight function $w(y) = \displaystyle \frac{1}{\sqrt{4y-4y^2}}$
+    The Chebyshev polynomials of the first kind $T_{n}(y)$ are orthogonal 
+    polynomials on $[0, 1]$ with respect to the weight function $w(y) = 
+    \displaystyle \frac{1}{\sqrt{4y-4y^2}}$
 
     \begin{equation*}
     T_{2}(2y-1) = y^{2} - y + \frac{1}{8}
     \end{equation*}
     
-    with nodes $y_{0} = 0.85355339$, $y_{1} = 0.14644661$ and the weights $w_{0} = w_{1} = 0.78539816$
+    with nodes $y_{0} = 0.85355339$, $y_{1} = 0.14644661$ and the weights 
+    $w_{0} = w_{1} = 0.78539816$
     \begin{equation*}
-    I = \int_{0}^{1} \frac{(2y-1) sin(2y-1)}{\sqrt{4y-4y^2}} dy \approx \sum_{i=0}^{n} a_{i} f(2y_{i} - 1) \hspace{2cm} a_{i} = \int_{0}^{1} l_{i}(2y-1) w(2y-1)\ dy
+    I = \int_{0}^{1} \frac{(2y-1)\ sin(2y-1)}{\sqrt{4y-4y^2}} dy \approx 
+    \sum_{i=0}^{n} a_{i} f(2y_{i} - 1) \hspace{2cm} a_{i} = \int_{0}^{1} 
+    l_{i}(2y-1) w(2y-1)\ dy
     \end{equation*} 
 
-    called the Gaussian quadrature formula for $w(y)$ and has degree of accuracy $2n + 1$.
+    called the Gaussian quadrature formula for $w(y)$ and has degree of 
+    accuracy $2n + 1$.
  
-    For the quadrature formula to be exact for all $f(y)$ of degree $2n+1 = 3 \implies n = 1$,
+    For the quadrature formula to be exact for all $f(y)$ of degree $2n+1 = 3 
+    \implies n = 1$,
     \begin{equation*}
-    I = \int_{0}^{1} \frac{(2y-1) sin(2y-1)}{\sqrt{4y-4y^2}} dy = \sum_{i=0}^{1} a_{i} f(2y_{i} - 1) 
+    I = \int_{0}^{1} \frac{(2y-1)\ sin(2y-1)}{\sqrt{4y-4y^2}} dy = 
+    \sum_{i=0}^{1} a_{i} f(2y_{i} - 1) 
     \end{equation*}
 
-    where $a_{i} = \displaystyle \int_{0}^{1} l_{i}(2y-1) w(2y-1)\ dy$ 
+    where $a_{i} = \displaystyle \int_{0}^{1} l_{i}(2y-1)\ w(2y-1)\ dy$ 
 
     \begin{equation*}
     \begin{aligned}
     I &= a_{0} f(2y_{0} - 1) + a_{1} f(2y_{1} - 1) \\
-    &= \int_{0}^{1} l_{0}(2y-1) w(2y-1) dy\ f(2y_{0} - 1) + \int_{0}^{1} l_{1}(2y-1) w(2y-1) dy\ f(2y_{1} - 1) \\
-    &= \int_{0}^{1} \frac{(2y-1)-(2y_{1}-1)}{(2y_{0}-1)-(2y_{1}-1)} \frac{1}{\sqrt{4y-4y^2}} dy\ f(2y_{0} - 1) \\ 
-    & \hspace{0.5cm} + \int_{0}^{1} \frac{(2y-1)-(2y_{0}-1)}{(2y_{1}-1)-(2y_{0}-1)} \frac{1}{\sqrt{4y-4y^2}} dy\ f(2y_{1} - 1) \\
-    &= \int_{0}^{1} \frac{(2y-1)-(2(0.14644661)-1)}{2(0.85355339)-1)-(2(0.14644661)-1)} \frac{1}{\sqrt{4y-4y^2}} dy\ f(2(0.85355339)-1) \\
-    & \hspace{0.5cm} + \int_{0}^{1} \frac{(2y-1)-(2(0.85355339)-1)}{(2(0.14644661)-1)-(2(0.85355339)-1)} \frac{1}{\sqrt{4y-4y^2}} dy\ f(2(0.14644661)-1) \\
-    &= (0.78539816)\ (2(0.85355339)-1)\ sin(2(0.85355339)-1) \\
-    & \hspace{0.5cm} + (0.78539816)\ (2(0.14644661)-1)\ sin(2(0.14644661)-1) \\
-    &= 0.72156522
+      &= \int_{0}^{1} l_{0}(2y-1)\ w(2y-1)\ dy\ f(2y_{0} - 1) + \int_{0}^{1} 
+    l_{1}(2y-1)\ w(2y-1)\ dy\ f(2y_{1} - 1) \\
+      &= \int_{0}^{1} \frac{(2y-1)-(2y_{1}-1)}{(2y_{0}-1)-(2y_{1}-1)} 
+    \frac{1}{\sqrt{4y-4y^2}}\ dy\ f(2y_{0} - 1) \\ 
+      & \hspace{0.5cm} + \int_{0}^{1} \frac{(2y-1)-(2y_{0}-1)}
+    {(2y_{1}-1)-(2y_{0}-1)} \frac{1}{\sqrt{4y-4y^2}}\ dy\ f(2y_{1} - 1) \\
+      &= \int_{0}^{1} \frac{(2y-1)-(2(0.14644661)-1)}{2(0.85355339)-1)-
+    (2(0.14644661)-1)} \frac{1}{\sqrt{4y-4y^2}}\ dy\ f(2(0.85355339)-1) \\
+      & \hspace{0.5cm} + \int_{0}^{1} \frac{(2y-1)-(2(0.85355339)-1)}
+    {(2(0.14644661)-1)-(2(0.85355339)-1)} \frac{1}{\sqrt{4y-4y^2}}\ dy\ 
+    f(2(0.14644661)-1) \\
+      &= (0.78539816)\ (2(0.85355339)-1)\ sin(2(0.85355339)-1) \\
+      & \hspace{0.5cm} + (0.78539816)\ (2(0.14644661)-1)\ 
+    sin(2(0.14644661)-1) \\
+      &= 0.72156522
     \end{aligned}
     \end{equation*}
 
@@ -347,9 +436,10 @@
 
     \vspace{1cm}
 
-    \item Comment on using the Newton method to compute the root of the function $f(x)
-    = x^{1/3}$, i.e., if your initial guess is $x_{0} = 1$, what would be the value of
-    $x_{n}$? Does the method converge to the root we want?
+    \item Comment on using the Newton method to compute the root of the 
+    function $f(x) = x^{1/3}$, i.e., if your initial guess is $x_{0} = 1$, 
+    what would be the value of $x_{n}$? Does the method converge to the root 
+    we want?
 
     \textbf{Solution:}
 
@@ -374,93 +464,118 @@
     vertical as in $f(x) = x^{1/3}$.
 
 
-    \item It is given that a sequence of Newton iterates converge to a root $r$ of the
-    function $f(x)$. Further, it is given that the root $r$ is a root of multiplicity
-    $2$, i.e., $f(x) = (x - r)^{2} g(x)$, where $g(r) \ne 0$. It is also given that the
-    function $f$, its derivatives till the second order are continuous in the
-    neighbourhood of the root $r$. If $e_{n}$ is the error of the $n^{th}$ iterate,
-    i.e., $e_{n} = x_{n} - r$, then obtain
+    \item It is given that a sequence of Newton iterates converge to a root 
+    $r$ of the function $f(x)$. Further, it is given that the root $r$ is a 
+    root of multiplicity $2$, i.e., $f(x) = (x - r)^{2} g(x)$, where $g(r) 
+    \ne 0$. It is also given that the function $f$, its derivatives till the 
+    second order are continuous in the neighbourhood of the root $r$. If 
+    $e_{n}$ is the error of the $n^{th}$ iterate, i.e., $e_{n} = x_{n} - r$, 
+    then obtain
     \begin{equation*}
     \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}}
     \end{equation*}
 
     \textbf{Solution:}
     
-    Given, $f(x) = (x-r)^{2} g(x)$, where $g(r) \ne 0$ then $f^{\prime}(x) = 2(x-r) g(x) + (x-r)^{2} g^{\prime}(x)$, the Newton's method generates the sequence
+    Given, $f(x) = (x-r)^{2} g(x)$, where $g(r) \ne 0$ then $f^{\prime}(x) = 
+    2(x-r) g(x) + (x-r)^{2} g^{\prime}(x)$, the Newton's method generates the 
+    sequence
     \begin{equation*}
     x_{n+1} = x_{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})} 
     \end{equation*}
 
-    Using the time-honored method of adding and subtracting, we can write this as
+    Using the time-honored method of adding and subtracting, we can write this 
+    as
     \begin{equation*}
     x_{n+1} - r = x_{n} - r - \frac{f(x_{n})}{f^{\prime}(x_{n})}
     \end{equation*}
     
-    If we let $e_{n+1} = x_{n+1} - r$ and $e_{n} = x_{n} + r$, then we can rewrite the above as
+    If we let $e_{n+1} = x_{n+1} - r$ and $e_{n} = x_{n} - r$, then we can 
+    rewrite the above as
     \begin{equation*}
     e_{n+1} = e_{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})}
     \end{equation*}
 
     \begin{equation*}
     \begin{aligned}
-    e_{n+1} &= e_{n} - \frac{(x_{n} - r)^{2} g(x_{n})}{2(x_{n} - r) g(x_{n}) + (x_{n} - r)^{2} g^{\prime}(x_{n})} \\
-            &= e_{n} - \frac{(x_{n} - r) g(x_{n})}{2 g(x_{n}) + (x_{n} - r) g^{\prime}(x_{n})} \\
-            &= e_{n} - \frac{e_{n}\ g(x_{n})}{2 g(x_{n}) + e_{n}\ g^{\prime}(x_{n})} \\
-            &= \frac{2\ e_{n}\ g(x_{n}) + e_{n}^{2}\ g^{\prime}(x_{n}) - e_{n}\ g(x_{n})}{2\ g(x_{n}) + e_{n}\ g^{\prime}(x_{n})} \\
-            &= \frac{(2 - 1)e_{n}\ g(x_{n}) + e_{n}^{2}\ g^{\prime}(x_{n})}{2\ g(x_{n}) + e_{n}\ g^{\prime}(x_{n})}
+    e_{n+1} &= e_{n} - \frac{(x_{n} - r)^{2} g(x_{n})}{2(x_{n} - r) g(x_{n}) 
+    + (x_{n} - r)^{2} g^{\prime}(x_{n})} \\
+            &= e_{n} - \frac{(x_{n} - r) g(x_{n})}{2 g(x_{n}) + (x_{n} - r) 
+    g^{\prime}(x_{n})} \\
+            &= e_{n} - \frac{e_{n}\ g(x_{n})}{2 g(x_{n}) + e_{n}\ g^{\prime}
+    (x_{n})} \\
+            &= \frac{2\ e_{n}\ g(x_{n}) + e_{n}^{2}\ g^{\prime}(x_{n}) - 
+    e_{n}\ g(x_{n})}{2\ g(x_{n}) + e_{n}\ g^{\prime}(x_{n})} \\
+            &= \frac{(2 - 1)e_{n}\ g(x_{n}) + e_{n}^{2}\ g^{\prime}(x_{n})}
+    {2\ g(x_{n}) + e_{n}\ g^{\prime}(x_{n})}
     \end{aligned}
     \end{equation*}
     
-    For $x_{n}$ close to $r$ the term $g^{\prime}(x_{n})$ becomes very small relative to $g(x_{n})$, and the Newton iteration reduces to
+    For $x_{n}$ close to $r$ the term $g^{\prime}(x_{n})$ becomes very small 
+    relative to $g(x_{n})$, and the Newton iteration reduces to
     \begin{equation*}
     e_{n+1} = \frac{(2-1)e_{n}\ g(x_{n})}{2\ g(x_{n})}
     \end{equation*}
 
-    then Newton's method is locally convergent to $r$, and the error $e_{n}$ at step $n$ satisfies
+    then Newton's method is locally convergent to $r$, and the error $e_{n}$ 
+    at step $n$ satisfies
     \begin{equation*}
     \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} = \frac{1}{2}
     \end{equation*}
 
 
-    \item \textbf{Bonus question:} What happens to the above if the root $r$ has
-     a multiplicity $m$?
+    \item \textbf{Bonus question:} What happens to the above if the root $r$ 
+    has a multiplicity $m$?
     
     \textbf{Solution:}
 
-    Let assume that the $(m+1)$ times continuously differentiable function $f$ has a multiplicity $m$ root at $r$. 
+    Let assume that the $(m+1)$ times continuously differentiable function 
+    $f$ has a multiplicity $m$ root at $r$. 
 
-    Let $f(x) = (x-r)^{m} g(x)$ where $g(r) \neq 0$ then $f^{\prime}(x) = m(x-r)^{m-1} g(x) + (x-r)^{m} g^{\prime}(x)$, the Newton's method generates the sequence
+    Let $f(x) = (x-r)^{m} g(x)$ where $g(r) \neq 0$ then $f^{\prime}(x) = 
+    m(x-r)^{m-1} g(x) + (x-r)^{m} g^{\prime}(x)$, the Newton's method generates
+    the sequence
     \begin{equation*}
     x_{n+1} = x_{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})} 
     \end{equation*}
 
-    Using the time-honored method of adding and subtracting, we can write this as
+    Using the time-honored method of adding and subtracting, we can write this
+    as
     \begin{equation*}
     x_{n+1} - r = x_{n} - r - \frac{f(x_{n})}{f^{\prime}(x_{n})}
     \end{equation*}
     
-    If we let $e_{n+1} = x_{n+1} - r$ and $e_{n} = x_{n} + r$, then we can rewrite the above as
+    If we let $e_{n+1} = x_{n+1} - r$ and $e_{n} = x_{n} - r$, then we can 
+    rewrite the above as
     \begin{equation*}
     e_{n+1} = e_{n} - \frac{f(x_{n})}{f^{\prime}(x_{n})}
     \end{equation*}
 
     \begin{equation*}
     \begin{aligned}
-    e_{n+1} &= e_{n} - \frac{(x_{n} - r)^{m} g(x_{n})}{m(x_{n} - r)^{m-1} g(x_{n}) + (x_{n} - r)^{m} g^{\prime}(x_{n})} \\
-            &= e_{n} - \frac{(x_{n} - r)^{m} g(x_{n})}{m(x_{n} - r)^{m} (x_{n} - r)^{-1} g(x_{n}) + (x_{n} - r)^{m} g^{\prime}(x_{n})} \\
-            &= e_{n} - \frac{(x_{n} - r) g(x_{n})}{m\ g(x_{n}) + (x_{n} - r)\ g^{\prime}(x_{n})} \\
-            &= e_{n} - \frac{e_{n}\ g(x_{n})}{m\ g(x_{n}) + e_{n}\ g^{\prime}(x_{n})} \\
-            &= \frac{m\ e_{n}\ g(x_{n}) + e_{n}^{2}\ g^{\prime}(x_{n}) - e_{n}\ g(x_{n})}{m\ g(x_{n}) + e_{n}\ g^{\prime}(x_{n})} \\
-            &= \frac{(m - 1)e_{n}\ g(x_{n}) + e_{n}^{2}\ g^{\prime}(x_{n})}{m\ g(x_{n}) + e_{n}\ g^{\prime}(x_{n})}
+    e_{n+1} &= e_{n} - \frac{(x_{n} - r)^{m} g(x_{n})}{m(x_{n} - r)^{m-1} 
+    g(x_{n}) + (x_{n} - r)^{m} g^{\prime}(x_{n})} \\
+            &= e_{n} - \frac{(x_{n} - r)^{m} g(x_{n})}{m(x_{n} - r)^{m} 
+    (x_{n} - r)^{-1} g(x_{n}) + (x_{n} - r)^{m} g^{\prime}(x_{n})} \\
+            &= e_{n} - \frac{(x_{n} - r) g(x_{n})}{m\ g(x_{n}) + (x_{n} - r)\ 
+    g^{\prime}(x_{n})} \\
+            &= e_{n} - \frac{e_{n}\ g(x_{n})}{m\ g(x_{n}) + e_{n}\ g^{\prime}
+    (x_{n})} \\
+            &= \frac{m\ e_{n}\ g(x_{n}) + e_{n}^{2}\ g^{\prime}(x_{n}) - 
+    e_{n}\ g(x_{n})}{m\ g(x_{n}) + e_{n}\ g^{\prime}(x_{n})} \\
+            &= \frac{(m - 1)e_{n}\ g(x_{n}) + e_{n}^{2}\ g^{\prime}(x_{n})}
+    {m\ g(x_{n}) + e_{n}\ g^{\prime}(x_{n})}
     \end{aligned}
     \end{equation*}
     
-    For $x_{n}$ close to $r$ the term $g^{\prime}(x_{n})$ becomes very small relative to $g(x_{n})$, and the Newton iteration reduces to
+    For $x_{n}$ close to $r$ the term $g^{\prime}(x_{n})$ becomes very small 
+    relative to $g(x_{n})$, and the Newton iteration reduces to
     \begin{equation*}
     e_{n+1} = \frac{(m-1)e_{n}\ g(x_{n})}{m\ g(x_{n})}
     \end{equation*}
 
-    then Newton's method is locally convergent to $r$, and the error $e_{n}$ at step $n$ satisfies
+    then Newton's method is locally convergent to $r$, and the error $e_{n}$ 
+    at step $n$ satisfies
     \begin{equation*}
     \lim_{n \rightarrow \infty} \frac{e_{n+1}}{e_{n}} = \frac{(m-1)}{m}
     \end{equation*}
@@ -471,17 +586,17 @@
     \begin{enumerate}
     \item Trapezoidal rule
     \item Trapezoidal rule with end corrections using the first derivative
-    \item Trapezoidal rule with end corrections using the first derivative and third
-    derivatives
+    \item Trapezoidal rule with end corrections using the first derivative 
+    and third derivatives
     \item Gauss-Legendre quadrature
     \end{enumerate}
 
     \begin{itemize}
-    \item Perform this by subdividing $[-1, 1]$ into $N \in \{2, 5, 10, 20, 50, 100\}$ 
-    panels.
+    \item Perform this by subdividing $[-1, 1]$ into $N \in \{2, 5, 10, 20, 50,
+    100\}$ panels.
     \item Plot the decay of the absolute error using the above methods.
-    \item You may obtain the exact value of the integral up to $20$ digits using
-    wolfram alpha.
+    \item You may obtain the exact value of the integral up to $20$ digits 
+    using wolfram alpha.
     \item Make sure the figure has a legend and the axes are clearly marked.
     \item Ensure that the font size for title, axes, legend are readable.
     \item Submit the plots obtained, entire code and the write-up.
@@ -496,27 +611,35 @@
 
     Trapezoidal rule:
     \begin{equation*}
-    \int_{x_{0}}^{x_{n}} f(x) dx \approx \frac{h}{2} \Big(f(x_{0}) + f(x_{n}) \Big) + h \sum_{k=1}^{n-1} f(x_{k})
+    \int_{x_{0}}^{x_{n}} f(x) dx \approx \frac{h}{2} \Big(f(x_{0}) + 
+    f(x_{n}) \Big) + h \sum_{k=1}^{n-1} f(x_{k})
     \end{equation*}
 
     where $h = \displaystyle \frac{(x_{n} - x_{0})}{N}$, the grid spacing
 
     Trapezoidal rule with end corrections using the first derivative:
     \begin{equation*}
-    \int_{x_{0}}^{x_{n}} f(x) dx \approx \frac{h}{2} \Big(f(x_{0}) + f(x_{n}) \Big) + h \sum_{k=1}^{n-1} f(x_{k}) - \frac{h^{2}}{12} \Big(f^{\prime}(x_{n}) - f^{\prime}(x_{0}) \Big)
+    \int_{x_{0}}^{x_{n}} f(x) dx \approx \frac{h}{2} \Big(f(x_{0}) + 
+    f(x_{n}) \Big) + h \sum_{k=1}^{n-1} f(x_{k}) - \frac{h^{2}}{12} 
+    \Big(f^{\prime}(x_{n}) - f^{\prime}(x_{0}) \Big)
     \end{equation*}
 
-    Trapezoidal rule with end corrections using the first derivative and third derivatives:
+    Trapezoidal rule with end corrections using the first derivative and 
+    third derivatives:
     \begin{equation*}
-    \int_{x_{0}}^{x_{n}} f(x) dx \approx \frac{h}{2} \Big(f(x_{0}) + f(x_{n}) \Big) + h \sum_{k=1}^{n-1} f(x_{k}) - \frac{h^{2}}{12} \Big(f^{\prime}(x_{n}) - f^{\prime}(x_{0}) \Big) + \frac{h^{4}}{720} \Big(f^{\prime\prime\prime}(x_{n}) - f^{\prime\prime\prime}(x_{0}) \Big)
+    \int_{x_{0}}^{x_{n}} f(x) dx \approx \frac{h}{2} \Big(f(x_{0}) + 
+    f(x_{n}) \Big) + h \sum_{k=1}^{n-1} f(x_{k}) - \frac{h^{2}}{12} 
+    \Big(f^{\prime}(x_{n}) - f^{\prime}(x_{0}) \Big) + \frac{h^{4}}{720} 
+    \Big(f^{\prime\prime\prime}(x_{n}) - f^{\prime\prime\prime}(x_{0}) \Big)
     \end{equation*}
 
     Gauss-Legendre quadrature:
     \begin{equation*}
-    \int_{-1}^{1} f(x) dx \approx \sum_{k=1}^{n} w_{k} f(x_{k})
+    \int_{-1}^{1} f(x) dx \approx \sum_{k=1}^{n} w_{k}\ f(x_{k})
     \end{equation*}
 
-    where $n$ is the number of points, $w_{k}$ are quadrature weights and $x_{k}$ are the roots of the $nth$ Legendre polynomial. 
+    where $n$ is the number of points, $w_{k}$ are quadrature weights and 
+    $x_{k}$ are the roots of the $n^{th}$ Legendre polynomial. 
             
     \pagebreak
 
@@ -526,28 +649,35 @@
     \begin{figure}[ht!]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/program6.pgf}}
-    %\caption{Plot of decay of the absolute error of $\displaystyle \int_{-1}^{1} e^{-x^2} dx$ with $N \in \{2, 5, 10, 20, 50, 100\}$}
+    \caption{Plot of decay of the absolute error of $\displaystyle 
+    \int_{-1}^{1} e^{-x^2} dx$ with $N \in \{2, 5, 10, 20, 50, 100\}$}
     \end{figure}
-
+    
+    \vspace{-0.5cm}
     \lstinputlisting[numbers=none]{Scripts/errorterm6.txt}
 
-    We can see that the Gauss-Legendre quadrature does better than the Trapezoidal rule with end corrections using the first and 
-    third derivatives which in turn does better than the Trapezoidal rule with end corrections using the first derivative which 
-    in turn does better than the Trapezoidal rule without end corrections.
+    We can see that the Gauss-Legendre quadrature does better than the 
+    Trapezoidal rule with end corrections using the first and third derivatives
+    which in turn does better than the Trapezoidal rule with end corrections
+    using the first derivative which in turn does better than the Trapezoidal 
+    rule without end corrections.
 
     \vspace{1cm}
 
-    \item Evaluate $I = \displaystyle \int_{0}^{1} \frac{e^{-x}}{\sqrt{x}} dx$ by
-    subdividing the domain into $N \in \{5, 10, 20, 50, 100, 200, 500, 1000\}$ panels.
+    \item Evaluate $I = \displaystyle \int_{0}^{1} \frac{e^{-x}}{\sqrt{x}}\ dx$
+    by subdividing the domain into $N \in \{5, 10, 20, 50, 100, 200, 500, 
+    1000\}$ panels.
 
     \begin{enumerate}
     \item Using a rectangular rule
-    \item Make a change of variables $x = t^{2}$ and use rectangular rule on new variable.
+    \item Make a change of variables $x = t^{2}$ and use rectangular rule on 
+    new variable.
     \end{enumerate}
 
     \begin{itemize}
     \item Plot the decay of the absolute error using the above two methods.
-    \item You may obtain the exact value of the integral up to $20$ digits using wolfram alpha
+    \item You may obtain the exact value of the integral up to $20$ digits 
+    using wolfram alpha.
     \item Compare the two methods above in terms of accuracy and cost.
     \item Explain the difference in solution, if any.
     \item Make sure the figure has a legend and the axes are clearly marked.
@@ -559,7 +689,8 @@
     
     Given,
     \begin{equation*}
-    I = \int_{0}^{1} \frac{e^{-x}}{\sqrt{x}} dx = \sqrt{\pi}\ \text{erf}(1) \approx 1.493648
+    I = \int_{0}^{1} \frac{e^{-x}}{\sqrt{x}}\ dx = \sqrt{\pi}\ \text{erf}(1) 
+    \approx 1.493648
     \end{equation*}
 
     make a change of variables $x = t^{2}$, then 
@@ -572,12 +703,14 @@
     
     hence, 
     \begin{equation*}
-    I = \int_{0}^{1} \frac{e^{-t^{2}}}{t} 2t\ dt = 2 \int_{0}^{1} e^{-t^{2}} dt = \sqrt{\pi}\ \text{erf}(1) \approx 1.49365
+    I = \int_{0}^{1} \frac{e^{-t^{2}}}{t} 2t\ dt = 2 \int_{0}^{1} e^{-t^{2}} dt
+    = \sqrt{\pi}\ \text{erf}(1) \approx 1.49365
     \end{equation*}
 
     Rectangular rule:
     \begin{equation*}
-    \int_{x_{0}}^{x_{n}} f(x) dx \approx h \sum_{k=1}^{n} f \Bigg(\frac{x_{k-1} + x_{k}}{2} \Bigg)
+    \int_{x_{0}}^{x_{n}} f(x)\ dx \approx h \sum_{k=1}^{n} 
+    f \Bigg(\frac{x_{k-1} + x_{k}}{2} \Bigg)
     \end{equation*}
 
     where $h = \displaystyle \frac{(x_{n} - x_{0})}{N}$, the grid spacing
@@ -592,15 +725,19 @@
     \begin{figure}[ht!]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/program7.pgf}}
-    %\caption{Plot of decay of the absolute error of $\displaystyle \int_{0}^{1} \frac{e^{-x}}{\sqrt{x}} dx$ with $N \in \{5, 10, 20, 50, 100, 200, 500, 1000\}$}
+    \caption{Plot of decay of the absolute error of $\displaystyle 
+    \int_{0}^{1} \frac{e^{-x}}{\sqrt{x}} dx$ with $N \in \{5, 10, 20, 50, 
+    100, 200, 500, 1000\}$}
     \end{figure} 
 
     \lstinputlisting[numbers=none]{Scripts/errorterm7.txt}
 
     \vspace{0.5cm}
 
-    We can see that the rectangular rule with change of variables $x = t^{2}$ does better than the rectangular rule without change of variables.
-    The rectangular rule with change of variables $x = t^{2}$ generate an integration method with error $\mathcal{O}(h^{2})$.
+    We can see that the rectangular rule with change of variables $x = t^{2}$ 
+    does better than the rectangular rule without change of variables. The 
+    rectangular rule with change of variables $x = t^{2}$ generate an 
+    integration method with error $\mathcal{O}(h^{2})$.
 
     \pagebreak
 
@@ -610,20 +747,22 @@
     \includegraphics{pendulum.pdf}
     \end{center}
 
-    The restoring force is $mg \sin \theta$ and hence the governing equation is
+    The restoring force is $mg \sin(\theta)$ and hence the governing equation 
+    is
     \begin{equation*}
     mL \frac{d^{2} \theta}{dt^{2}} + mg \sin(\theta) = 0
     \end{equation*}
 
-    Let the length of the string be $g$. Hence, the governing equation simplifies to
+    Let the length of the string be $g$. Hence, the governing equation 
+    simplifies to
     \begin{equation*}
     \frac{d^{2} \theta}{dt^{2}} + \sin(\theta) = 0
     \end{equation*}
 
-    At the initial time, the pendulum is pulled to an angle of $\theta = 30^{\circ} =
-    \displaystyle \frac{\pi}{6}$
-    before being let loose without any velocity imparted. Write a code to solve for the
-    motion of the pendulum till $t = 100$ seconds using
+    At the initial time, the pendulum is pulled to an angle of $\theta = 
+    30^{\circ} = \displaystyle \frac{\pi}{6}$ before being let loose without 
+    any velocity imparted. Write a code to solve for the motion of the 
+    pendulum till $t = 100$ seconds using
 
     \begin{enumerate}
     \item Forward Euler
@@ -632,16 +771,17 @@
     \end{enumerate}
 
     \begin{itemize}
-    \item Recall that you need to reformulate the second order differential equation as a
-    system of first order differential equation.
-    \item Vary your time step $\Delta t$ in $\{0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5,
-    10, 20\}$.
-    \item For each $\Delta t$ plot the solution obtained by the three methods on a separate
-    figure till the final time of $100$.
-    \item Discuss the stability of the schemes. From your plots, at what $\Delta t$ do these
-    schemes become unstable (if at all they become unstable)?
-    \item Analyse the stability of the three numerical methods to solve the differential
-    equation by approximating $\sin(\theta)$ to be $\theta$.
+    \item Recall that you need to reformulate the second order differential 
+    equation as a system of first order differential equation.
+    \item Vary your time step $\Delta t$ in $\{0.01, 0.02, 0.05, 0.1, 0.2, 
+    0.5, 1, 2, 5, 10, 20\}$.
+    \item For each $\Delta t$ plot the solution obtained by the three methods 
+    on a separate figure till the final time of $100$.
+    \item Discuss the stability of the schemes. From your plots, at what 
+    $\Delta t$ do these schemes become unstable (if at all they become 
+    unstable)?
+    \item Analyse the stability of the three numerical methods to solve the 
+    differential equation by approximating $\sin(\theta)$ to be $\theta$.
     \item Make sure each figure has a legend and the axes are clearly marked.
     \item Ensure that the font size for title, axes, legend are readable.
     \item Submit the plots obtained, entire code and the write-up.
@@ -662,12 +802,13 @@
     \frac{d \omega}{dt} = -\sin(\theta)
     \end{equation*}
 
-    Notice that $(\theta^\prime, \omega^\prime)$ is given as a function of $(\theta,
-    \omega)$. The entire motion of the pendulum is determined if we know $(\theta,
-    \omega)$ at some instant. So we call $(\theta, \omega)$ the phase of the system. We
-    are given the initial phase of the system, \textit{i.e.,}\ we know from which initial
-    angle we have released the pendulum, and with what angular velocity. Our aim is to 
-    know the phase at all time points during the swing.
+    Notice that $(\theta^\prime, \omega^\prime)$ is given as a function of 
+    $(\theta, \omega)$. The entire motion of the pendulum is determined if we 
+    know $(\theta, \omega)$ at some instant. So we call $(\theta, \omega)$ the
+    phase of the system. We are given the initial phase of the system, 
+    \textit{i.e.,}\ we know from which initial angle we have released the 
+    pendulum, and with what angular velocity. Our aim is to know the phase at 
+    all time points during the swing.
 
     Thus, at $t = t_0$, we know
     \begin{equation*}
@@ -677,8 +818,8 @@
     \end{aligned}
     \end{equation*}
 
-    We want to know the values $\theta(t)$ and $\omega(t)$ at any given $t > t_0$. We 
-    also know the rate at which they are increasing at $t = t_0$:
+    We want to know the values $\theta(t)$ and $\omega(t)$ at any given 
+    $t > t_0$. We also know the rate at which they are increasing at $t = t_0$:
     \begin{equation*}
     \begin{aligned}
     \theta^{\prime}(t_0) &= \omega_0 \\
@@ -686,18 +827,20 @@
     \end{aligned}
     \end{equation*}
 
-    Now advance time a little to $t_1 = t_0 + \delta t$, say. By this time $\theta$ and
-    $\omega$ will roughly change to
+    Now advance time a little to $t_1 = t_0 + \delta t$, say. By this time 
+    $\theta$ and $\omega$ will roughly change to
     \begin{equation*}
     \begin{aligned}
-    \theta_1 &= \theta_0 + \theta^{\prime}(t_0) \delta t = \theta_0 + \omega_0 \delta t \\
-    \omega_1 &= \omega_0 + \omega^{\prime}(t_0) \delta t = \omega_0 - \sin(\theta_0) \delta t
+    \theta_1 &= \theta_0 + \theta^{\prime}(t_0) \delta t = \theta_0 + 
+    \omega_0 \delta t \\
+    \omega_1 &= \omega_0 + \omega^{\prime}(t_0) \delta t = \omega_0 - 
+    \sin(\theta_0) \delta t
     \end{aligned}
     \end{equation*}
 
-    So we get the phase (approximately) at $t_1 = t_0 + \delta t$. Now we keep on
-    advancing time by $\delta t$ increments. The same logic may be used repeatedly to 
-    give, at $t_k = t_0 + k \cdot \delta t$,
+    So we get the phase (approximately) at $t_1 = t_0 + \delta t$. Now we 
+    keep on advancing time by $\delta t$ increments. The same logic may be 
+    used repeatedly to give, at $t_k = t_0 + k \cdot \delta t$,
     \begin{equation*}
     \begin{aligned}
     \theta_k &= \theta_{k-1} + \omega_{k-1} \delta t \\
@@ -705,8 +848,8 @@
     \end{aligned}
     \end{equation*}
 
-    Admittedly, this is a rather crude approximation. However, if $\delta t$ is pretty
-    small, the accuracy increases.
+    Admittedly, this is a rather crude approximation. However, if $\delta t$ 
+    is pretty small, the accuracy increases.
 
     \begin{enumerate}
 
@@ -724,9 +867,11 @@
     \begin{equation*}
     \begin{aligned}
     \theta_{k+1} &= \theta_{k} + \omega_{k+1} \delta t \\
-                 &= \theta_{k} + \Big( \omega_{k} - \sin(\theta_{k}) \delta t \Big) \delta t \\
+                 &= \theta_{k} + \Big( \omega_{k} - \sin(\theta_{k}) \delta t 
+    \Big) \delta t \\
     \omega_{k+1} &= \omega_{k} - \sin(\theta_{k+1}) \delta t \\
-                 &= \omega_{k} - \sin(\theta_{k} + \omega_{k} \delta t) \delta t
+                 &= \omega_{k} - \sin(\theta_{k} + \omega_{k} \delta t) 
+    \delta t
     \end{aligned}
     \end{equation*}
 
@@ -735,10 +880,14 @@
     \item Trapezoidal rule:
     \begin{equation*}
     \begin{aligned}
-    \theta_{k+1} &= \theta_{k} + \frac{\delta t}{2} \Big( \omega_{k} + \omega_{k+1} \Big) \\
-                 &= \theta_{k} + \frac{\delta t}{2} \Big( \omega_{k} + \omega_{k} - \sin(\theta_{k}) \delta t \Big) \\ \\
-    \omega_{k+1} &= \omega_{k} - \frac{\delta t}{2} \Big( \sin(\theta_{k}) + \sin(\theta_{k+1}) \Big) \\
-                 &= \omega_{k} - \frac{\delta t}{2} \Big( \sin(\theta_{k}) + \sin(\theta_{k} + \omega_{k} \delta t) \Big)
+    \theta_{k+1} &= \theta_{k} + \frac{\delta t}{2} \Big( \omega_{k} + 
+    \omega_{k+1} \Big) \\
+                 &= \theta_{k} + \frac{\delta t}{2} \Big( \omega_{k} + 
+    \omega_{k} - \sin(\theta_{k}) \delta t \Big) \\ \\
+    \omega_{k+1} &= \omega_{k} - \frac{\delta t}{2} \Big( \sin(\theta_{k}) + 
+    \sin(\theta_{k+1}) \Big) \\
+                 &= \omega_{k} - \frac{\delta t}{2} \Big( \sin(\theta_{k}) + 
+    \sin(\theta_{k} + \omega_{k} \delta t) \Big)
     \end{aligned}
     \end{equation*}
 
@@ -758,114 +907,136 @@
     \item Trapezoidal Rule scheme become unstable at time step, $\delta t = 1s$
     \end{itemize}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program80.pgf}}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram0.pgf}}
+    \caption{Numerical results for the nonlinear simple pendulum equation
+    with $\delta t = 0.01s$}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program81.pgf}}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram1.pgf}}
+    \caption{Numerical results for the nonlinear simple pendulum equation
+    with $\delta t = 0.02s$}
     \end{figure}
     
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program82.pgf}}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram2.pgf}}
+    \caption{Numerical results for the nonlinear simple pendulum equation
+    with $\delta t = 0.05s$}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program83.pgf}}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram3.pgf}}
+    \caption{Numerical results for the nonlinear simple pendulum equation
+    with $\delta t = 0.1s$}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program84.pgf}}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram4.pgf}}
+    \caption{Numerical results for the nonlinear simple pendulum equation
+    with $\delta t = 0.2s$}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program85.pgf}}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram5.pgf}}
+    \caption{Numerical results for the nonlinear simple pendulum equation
+    with $\delta t = 0.5s$}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program86.pgf}}
     \end{figure}
     
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram6.pgf}}
+    \caption{Numerical results for the nonlinear simple pendulum equation
+    with $\delta t = 1s$}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program87.pgf}}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram7.pgf}}
+    \caption{Numerical results for the nonlinear simple pendulum equation
+    with $\delta t = 2s$}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program88.pgf}}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram8.pgf}}
+    \caption{Numerical results for the nonlinear simple pendulum equation
+    with $\delta t = 5s$}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program89.pgf}}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram9.pgf}}
+    \caption{Numerical results for the nonlinear simple pendulum equation
+    with $\delta t = 10s$}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/program810.pgf}}
     \end{figure}
 
-    \begin{figure}[ht!]
+    \begin{figure}[H]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/Program8/phasediagram10.pgf}}
+    \caption{Numerical results for the nonlinear simple pendulum equation
+    with $\delta t = 20s$}
     \end{figure}
 
     \pagebreak
@@ -892,8 +1063,11 @@
         
     \begin{equation*}
     \begin{aligned}
-    \frac{d}{dt} \begin{bmatrix} \theta \\ \omega \end{bmatrix} &= \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} \begin{bmatrix} \theta \\ \omega \end{bmatrix} \\
-    \frac{d}{dt} S(t) &= \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S(t) = F(S, t)
+    \frac{d}{dt} \begin{bmatrix} \theta \\ \omega \end{bmatrix} &= 
+    \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} \begin{bmatrix} \theta \\ 
+    \omega \end{bmatrix} \\
+    \frac{d}{dt} S(t) &= \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S(t) 
+    = F(S, t)
     \end{aligned}
     \end{equation*}
 
@@ -904,25 +1078,30 @@
 
     \begin{equation*}
     \begin{aligned}
-    \det \left( \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} - \lambda \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \right) &= 0 \\
-    \det \left( \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} - \begin{bmatrix} \lambda & 0 \\ 0 & \lambda \end{bmatrix} \right) &= 0 \\
-    \det \left( \begin{bmatrix} - \lambda & 1 \\ -1 & - \lambda \end{bmatrix} \right) &= 0
+    \det \left( \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} - \lambda 
+    \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \right) &= 0 \\
+    \det \left( \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} - 
+    \begin{bmatrix} \lambda & 0 \\ 0 & \lambda \end{bmatrix} \right) &= 0 \\
+    \det \left( \begin{bmatrix} - \lambda & 1 \\ -1 & - \lambda \end{bmatrix} 
+    \right) &= 0
     \end{aligned}
     \end{equation*}
 
     solving, we obtain $\lambda = \pm i$.
 
     For the exact solution to be stable and bounded, the $Re(\lambda) \le 0$. 
-    Since, $Re(\lambda) = 0$, the exact solution for the simple pendulum problem
-    is stable and bounded.
+    Since, $Re(\lambda) = 0$, the exact solution for the simple pendulum 
+    problem is stable and bounded.
 
     \begin{itemize}
     \item Forward Euler:
     \begin{equation*}
     \begin{aligned}
-    S_{n+1} &= S_{n} + \delta t F(S_{n}, t_{n}) \\
-            &= S_{n} + \delta t \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n} \\
-            &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} S_{n} + \delta t \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n}
+    S_{n+1} &= S_{n} + \delta t\ F(S_{n}, t_{n}) \\
+            &= S_{n} + \delta t \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} 
+    S_{n} \\
+            &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} S_{n} + \delta t 
+    \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n}
     \end{aligned}
     \end{equation*} 
 
@@ -935,20 +1114,24 @@
     \item Backward Euler:
     \begin{equation*}
     \begin{aligned}
-    S_{n+1} &= S_{n} + \delta t F(S_{n+1}, t_{n+1}) \\
-            &= S_{n} + \delta t \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n+1}
+    S_{n+1} &= S_{n} + \delta t\ F(S_{n+1}, t_{n+1}) \\
+            &= S_{n} + \delta t \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} 
+    S_{n+1}
     \end{aligned}
     \end{equation*}
 
     \begin{equation*}
     \begin{aligned}
-    \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} S_{n+1} - \delta t \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n+1} &= S_{n} \\
-    \begin{bmatrix} 1 & -\delta t \\ \delta t & 1 \end{bmatrix} S_{n+1} &= S_{n}
+    \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} S_{n+1} - \delta t 
+    \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n+1} &= S_{n} \\
+    \begin{bmatrix} 1 & -\delta t \\ \delta t & 1 \end{bmatrix} S_{n+1} 
+    &= S_{n}
     \end{aligned} 
     \end{equation*}
 
     \begin{equation*}
-    S_{n+1} = \begin{bmatrix} 1 & -\delta t \\ \delta t & 1 \end{bmatrix}^{-1} S_{n}
+    S_{n+1} = \begin{bmatrix} 1 & -\delta t \\ \delta t & 1 \end{bmatrix}^{-1}
+    S_{n}
     \end{equation*}
 
     \vspace{1 cm}
@@ -956,30 +1139,45 @@
     \item Trapezoidal rule:
     \begin{equation*}
     \begin{aligned}
-    S_{n+1} &= S_{n} + \frac{\delta t}{2} \left[ F(S_{n}, t_{n}) + F(S_{n+1}, t_{n+1}) \right] \\
-            &= S_{n} + \frac{\delta t}{2} \left( \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n} + \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n+1} \right)
+    S_{n+1} &= S_{n} + \frac{\delta t}{2} \left[ F(S_{n}, t_{n}) + F(S_{n+1}, 
+    t_{n+1}) \right] \\
+            &= S_{n} + \frac{\delta t}{2} \left( \begin{bmatrix} 0 & 1 \\ 
+    -1 & 0 \end{bmatrix} S_{n} + \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix}
+    S_{n+1} \right)
     \end{aligned}
     \end{equation*}
      
     \begin{equation*}
     \begin{aligned}
-    \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} S_{n+1} - \frac{\delta t}{2} \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n+1} &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} S_{n} + \frac{\delta t}{2} \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n} \\
-    \left( \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} - \begin{bmatrix} 0 & \frac{\delta t}{2} \\ -\frac{\delta t}{2} & 0 \end{bmatrix} \right) S_{n+1} &= \left( \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} + \begin{bmatrix} 0 & \frac{\delta t}{2} \\ -\frac{\delta t}{2} & 0 \end{bmatrix} \right) S_{n}
+    \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} S_{n+1} - \frac{\delta t}{2} 
+    \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} S_{n+1} &= \begin{bmatrix} 
+    1 & 0 \\ 0 & 1 \end{bmatrix} S_{n} + \frac{\delta t}{2} \begin{bmatrix} 
+    0 & 1 \\ -1 & 0 \end{bmatrix} S_{n} \\
+    \left( \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} - \begin{bmatrix} 0 & 
+    \frac{\delta t}{2} \\ -\frac{\delta t}{2} & 0 \end{bmatrix} \right) S_{n+1}
+    &= \left( \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} + \begin{bmatrix} 
+    0 & \frac{\delta t}{2} \\ -\frac{\delta t}{2} & 0 \end{bmatrix} \right) 
+    S_{n}
     \end{aligned}
     \end{equation*}
 
     \begin{equation*}
-    \begin{bmatrix} 1 & -\frac{\delta t}{2} \\ \frac{\delta t}{2} & 1 \end{bmatrix} S_{n+1} = \begin{bmatrix} 1 & \frac{\delta t}{2} \\ -\frac{\delta t}{2} & 1 \end{bmatrix} S_{n}
+    \begin{bmatrix} 1 & -\frac{\delta t}{2} \\ \frac{\delta t}{2} & 1 
+    \end{bmatrix} S_{n+1} = \begin{bmatrix} 1 & \frac{\delta t}{2} \\ 
+    -\frac{\delta t}{2} & 1 \end{bmatrix} S_{n}
     \end{equation*}
 
     \begin{equation*}
-    S_{n+1} = \begin{bmatrix} 1 & -\frac{\delta t}{2} \\ \frac{\delta t}{2} & 0 \end{bmatrix}^{-1} \begin{bmatrix} 1 & \frac{\delta t}{2} \\ -\frac{\delta t}{2} & 1 \end{bmatrix} S_{n}
+    S_{n+1} = \begin{bmatrix} 1 & -\frac{\delta t}{2} \\ \frac{\delta t}{2} 
+    & 0 \end{bmatrix}^{-1} \begin{bmatrix} 1 & \frac{\delta t}{2} \\ 
+    -\frac{\delta t}{2} & 1 \end{bmatrix} S_{n}
     \end{equation*}
     
     \end{itemize}
        
-    These equations allow us to solve the initial value problem since at each state, $S_{n}$, we can compute the next state at $S_{n+1}$. 
-    In general, this is possible to do when an ODE is linear.
+    These equations allow us to solve the initial value problem since at 
+    each state, $S_{n}$, we can compute the next state at $S_{n+1}$. In 
+    general, this is possible to do when an ODE is linear.
 
 \end{enumerate}
 \end{document}
