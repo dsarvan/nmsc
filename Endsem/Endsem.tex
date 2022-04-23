@@ -526,7 +526,7 @@
     \begin{figure}[ht!]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/program6.pgf}}
-    \caption{Plot of the decay of the absolute error}
+    %\caption{Plot of decay of the absolute error of $\displaystyle \int_{-1}^{1} e^{-x^2} dx$ with $N \in \{2, 5, 10, 20, 50, 100\}$}
     \end{figure}
 
     \lstinputlisting[numbers=none]{Scripts/errorterm6.txt}
@@ -592,9 +592,12 @@
     \begin{figure}[ht!]
     \centering
     \resizebox{0.95\linewidth}{!}{\input{Scripts/program7.pgf}}
+    %\caption{Plot of decay of the absolute error of $\displaystyle \int_{0}^{1} \frac{e^{-x}}{\sqrt{x}} dx$ with $N \in \{5, 10, 20, 50, 100, 200, 500, 1000\}$}
     \end{figure} 
 
     \lstinputlisting[numbers=none]{Scripts/errorterm7.txt}
+
+    \vspace{0.5cm}
 
     We can see that the rectangular rule with change of variables $x = t^{2}$ does better than the rectangular rule without change of variables.
     The rectangular rule with change of variables $x = t^{2}$ generate an integration method with error $\mathcal{O}(h^{2})$.
@@ -880,7 +883,7 @@
 
     \begin{equation*}
     \begin{aligned}
-    \theta^{\prime} &= \frac{d \theta}{dt} = \omega \\
+    \theta^{\prime} &= \frac{d \theta}{dt} = \omega \\ \\
     \theta^{\prime\prime} &= \frac{d \omega}{dt} = - \theta
     \end{aligned}
     \end{equation*}
