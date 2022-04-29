@@ -5,18 +5,20 @@
 
 """ Script to calculate nodes and weights of Gauss-Legendre quadrature """
 
+using SciPy
 using FastGaussQuadrature, LinearAlgebra
 
 # exact value of the integral
-f = x -> sin(x**2)
+f = x -> sin(x^2)
+exact = SciPy.integrate.quad(f, -1, 1)[1]
 
 # nodes and weights calculations
 x, w = gausslegendre(10)
 
 # integration
-integral = w * sin(x**2)
+integral = (w' * f.(x)) 
 
 # error calculation
 error = abs(integral - exact)
 
-println(exact, integral, error)
+println(exact, ' ', integral, ' ', error)
