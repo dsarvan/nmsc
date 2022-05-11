@@ -32,7 +32,6 @@ exact = exp(-0.5*t)     # exact solution
 fig, ax = plt.subplots()
 ax.plot(t, y1, "r.", label=raw"euler explicit")
 ax.plot(t, y2, "b.", label=raw"euler implicit")
-ax.plot(t, y3, "g.", label=raw"trapezoidal rule")
 ax.plot(t, exact, "k-", label=raw"exact solution")
 ax.set(xlabel=raw"t", ylabel=raw"y(t)")
 ax.set_title(raw"Euler explicit \& implicit scheme")
