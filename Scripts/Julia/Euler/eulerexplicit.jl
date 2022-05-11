@@ -3,7 +3,7 @@
 # Name: D.Saravanan
 # Date: 02/12/2021
 
-""" Script to implement the Euler explicit & implicit scheme for y' = -0.5*y with y(0) = 1 """
+""" Script to implement the Euler explicit scheme for y' = -10y with y(0) = 1 """
 
 import PyPlot
 const plt = PyPlot
@@ -14,18 +14,18 @@ plt.rc("figure", titlesize=10)
 plt.rc("text", usetex="True")
 using LaTeXStrings
 
-t_ = 25                 # time period
-dt = 0.5                # time step
+t_ = 10                 # time period
+dt = 0.02               # time step
 N = int(t_/dt)          # number of steps
 t = zeros(N)            # time vector
-y = zeros(N)           # solution vector of euler explicit
+y = zeros(N)            # solution vector of euler explicit
 
 for k in 1:N
     t[k+1] = t[k] + dt
-    y[k+1] = y[k]*(1 - 0.5*dt)
+    y[k+1] = y[k] + dt * (-10*y[k])
 end
 
-exact = exp(-0.5*t)     # exact solution
+exact = exp(-10*t)      # exact solution
 
 fig, ax = plt.subplots()
 ax.plot(t, y, "r.", label=raw"euler explicit")
