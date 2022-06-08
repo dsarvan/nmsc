@@ -8,6 +8,25 @@
 using SciPy
 using FastGaussQuadrature, LinearAlgebra
 
+    
+println("degree: ")
+n = readline()
+n = parse(Int64, n) 
+
+println("lower limit: ")
+a = readline()
+a = parse(Int64, a)
+
+println("upper limit: ")
+b = readline()
+b = parse(Int64, b)
+
+x = zeros(n+1)
+w = zeros(n+1)
+
+xn, wn = 
+
+
 for k in 1:n
     x[k] = 0.5*(b - a) * cos(((2*k-1)/(2*n))*pi) + 0.5*(b + a)
     w[k] = pi/(n)
