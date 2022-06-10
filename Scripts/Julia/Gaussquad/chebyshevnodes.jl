@@ -7,7 +7,6 @@
 
 using SciPy
 using FastGaussQuadrature, LinearAlgebra
-
     
 println("degree: ")
 n = readline()
@@ -24,8 +23,9 @@ b = parse(Int64, b)
 x = zeros(n+1)
 w = zeros(n+1)
 
-xn, wn = 
-
+xn, wn = gausschebyshev(n)
+println("nodes computed: ", xn)
+println("weights: ", wn) 
 
 for k in 1:n
     x[k] = 0.5*(b - a) * cos(((2*k-1)/(2*n))*pi) + 0.5*(b + a)
