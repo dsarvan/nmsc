@@ -5,5 +5,20 @@
 
 """ Script to solve the differential equation """
 
+using DifferrentialEquations
+
+function f(y, t)
+    return -0.5*y
+end
+
 # initial condition
 y0 = 1
+
+# time points
+t = linspace(0, 25)
+
+# solve ODE
+y = ODEProblem(f, y0, t)
+
+# exact solution
+exact = exp(-0.5*t)
