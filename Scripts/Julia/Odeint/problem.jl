@@ -5,11 +5,9 @@
 
 """ Script to solve the differential equation """
 
-using DifferrentialEquations
+using DifferentialEquations
 
-function f(y, t)
-    return -0.5*y
-end
+f(y, p, t) = -0.5y
 
 # initial condition
 y0 = 1
@@ -19,6 +17,3 @@ t = (0, 25)
 
 # solve ODE
 y = ODEProblem(f, y0, t)
-
-# exact solution
-exact = exp(-0.5*t)
