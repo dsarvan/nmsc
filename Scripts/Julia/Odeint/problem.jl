@@ -15,7 +15,7 @@ end
 y0 = 1
 
 # time points
-t = linspace(0, 25)
+t = (0, 25)
 
 # solve ODE
 y = ODEProblem(f, y0, t)
