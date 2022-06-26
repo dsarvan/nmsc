@@ -6,6 +6,7 @@
 """ Script to solve the differential equation """
 
 using DifferentialEquations
+using Plots
 
 f(y, p, t) = -0.5y
 
@@ -17,3 +18,10 @@ t = (0, 25)
 
 # solve ODE
 y = ODEProblem(f, y0, t)
+
+plot(solve(y), linewidth=2,
+     title="Solution to the linear ODE",
+     xaxis="Time (t)", yaxis="y(t)",
+     label="dy/dt = - 0.5 * y")
+
+savefig("problem.png")
