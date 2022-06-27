@@ -24,4 +24,7 @@ plot(solve(y), linewidth=2,
      xaxis="Time (t)", yaxis="y(t)",
      label="dy/dt = - 0.5 * y")
 
+plot!(solve(y).t, t -> exp(-0.5*t), 
+      ls=:dash, label="Exact solution")
+
 savefig("problem.png")
