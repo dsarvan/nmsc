@@ -16,20 +16,20 @@ using LaTeXStrings
 
 t_ = 25                 # time period
 dt = 0.5                # time step
-N = int(t_/dt)          # number of steps
+N = Int64(t_/dt)          # number of steps
 t = zeros(N)            # time vector
 y1 = zeros(N)           # solution vector of euler explicit
 y2 = zeros(N)           # solution vector of euler implicit
-y4 = zeros(N)           # solution vector of trapezoidal rule
+y3 = zeros(N)           # solution vector of trapezoidal rule
 
-for k in 1:N
+for k in 1:N-1
     t[k+1] = t[k] + dt
     y1[k+1] = y1[k]*(1 - 0.5*dt)
     y2[k+1] = y2[k]/(1 + 0.5*dt)
     y3[k+1] = y3[k]*(1 - 0.5*dt/2)/(1 + 0.5*dt/2)
 end
 
-exact = exp(-0.5*t)     # exact solution
+exact = exp.(-0.5*t)     # exact solution
 
 fig, ax = plt.subplots()
 ax.plot(t, y1, "r.", label=raw"euler explicit")
