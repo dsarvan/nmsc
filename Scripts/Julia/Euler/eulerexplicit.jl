@@ -1,4 +1,4 @@
-!#/usr/bin/env julia
+#!/usr/bin/env julia
 # File: eulerexplicit.jl
 # Name: D.Saravanan
 # Date: 02/12/2021
@@ -16,16 +16,18 @@ using LaTeXStrings
 
 t_ = 10                 # time period
 dt = 0.02               # time step
-N = int(t_/dt)          # number of steps
+N = Int64(t_/dt)        # number of steps
 t = zeros(N)            # time vector
 y = zeros(N)            # solution vector of euler explicit
+t[1] = 0
+y[1] = 1
 
-for k in 1:N
+for k in 1:N-1
     t[k+1] = t[k] + dt
     y[k+1] = y[k] + dt * (-10*y[k])
 end
 
-exact = exp(-10*t)      # exact solution
+exact = exp.(-10*t)      # exact solution
 
 fig, ax = plt.subplots()
 ax.plot(t, y, "r.", label=raw"euler explicit")
@@ -33,4 +35,4 @@ ax.plot(t, exact, "k-", label=raw"exact solution")
 ax.set(xlabel=raw"t", ylabel=raw"y(t)")
 ax.set_title(raw"Euler explicit scheme")
 ax.grid(true); ax.legend()
-plt.savefig("eulerexplicit.pdf")
+plt.savefig("eulerexplicit.png")
