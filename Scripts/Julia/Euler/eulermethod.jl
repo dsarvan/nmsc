@@ -1,4 +1,4 @@
-!#/usr/bin/env julia
+#!/usr/bin/env julia
 # File: eulermethod.jl
 # Name: D.Saravanan
 # Date: 02/12/2021
@@ -16,10 +16,10 @@ using LaTeXStrings
 
 t_ = 25                 # time period
 dt = 0.5                # time step
-N = int(t_/dt)          # number of steps
-t = zeros(N)            # time vector
-y1 = zeros(N)           # solution vector of euler explicit
-y2 = zeros(N)           # solution vector of euler implicit
+N = Int64(t_/dt)        # number of steps
+t = zeros(N+1)          # time vector
+y1 = ones(N+1)          # solution vector of euler explicit
+y2 = ones(N+1)          # solution vector of euler implicit
 
 for k in 1:N
     t[k+1] = t[k] + dt
@@ -27,7 +27,7 @@ for k in 1:N
     y2[k+1] = y2[k]/(1 + 0.5*dt)
 end
 
-exact = exp(-0.5*t)     # exact solution
+exact = exp.(-0.5*t)     # exact solution
 
 fig, ax = plt.subplots()
 ax.plot(t, y1, "r.", label=raw"euler explicit")
@@ -36,4 +36,4 @@ ax.plot(t, exact, "k-", label=raw"exact solution")
 ax.set(xlabel=raw"t", ylabel=raw"y(t)")
 ax.set_title(raw"Euler explicit \& implicit scheme")
 ax.grid(true); ax.legend()
-plt.savefig("eulermethod.pdf")
+plt.savefig("eulermethod.png")
