@@ -5,12 +5,10 @@
 
 """ Script to implement the Euler explicit & implicit scheme for y' = -0.5*y with y(0) = 1 """
 
-import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('classic')
-
-matplotlib.rcParams.update(
+plt.rcParams.update(
     {
         "font.family": "serif",
         "font.size": 8,
@@ -19,8 +17,7 @@ matplotlib.rcParams.update(
         "figure.titlesize": 10,
     }
 )
-matplotlib.rcParams["text.usetex"] = True
-matplotlib.use("Agg")
+plt.rcParams["text.usetex"] = True
 
 t_ = 25                     # time period
 dt = 0.5                    # time step
