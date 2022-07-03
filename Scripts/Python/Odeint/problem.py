@@ -9,7 +9,6 @@ import numpy as np
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 plt.style.use('classic')
-
 plt.rcParams.update(
     {
         "font.family": "serif",
@@ -19,7 +18,6 @@ plt.rcParams.update(
         "figure.titlesize": 12,
     }
 )
-
 plt.rcParams["text.usetex"] = True
 
 # function that returns dy/dt
