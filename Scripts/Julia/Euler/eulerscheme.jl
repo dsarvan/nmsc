@@ -17,17 +17,19 @@ using LaTeXStrings
 t_ = 25                 # time period
 dt = 0.5                # time step
 N = Int64(t_/dt)          # number of steps
-t = zeros(N)            # time vector
-y1 = zeros(N)           # solution vector of euler explicit
-y2 = zeros(N)           # solution vector of euler implicit
-y3 = zeros(N)           # solution vector of trapezoidal rule
+t = zeros(N+1)            # time vector
+y1 = ones(N+1)           # solution vector of euler explicit
+y2 = ones(N+1)           # solution vector of euler implicit
+y3 = ones(N+1)           # solution vector of trapezoidal rule
 
-for k in 1:N-1
+for k in 1:N
     t[k+1] = t[k] + dt
     y1[k+1] = y1[k]*(1 - 0.5*dt)
     y2[k+1] = y2[k]/(1 + 0.5*dt)
     y3[k+1] = y3[k]*(1 - 0.5*dt/2)/(1 + 0.5*dt/2)
 end
+
+print(y1)
 
 exact = exp.(-0.5*t)     # exact solution
 
@@ -39,4 +41,4 @@ ax.plot(t, exact, "k-", label=raw"exact solution")
 ax.set(xlabel=raw"t", ylabel=raw"y(t)")
 ax.set_title(raw"Euler explicit, implicit \& Trapezoidal scheme")
 ax.grid(true); ax.legend()
-plt.savefig("eulerscheme.pdf")
+plt.savefig("eulerscheme.png")
