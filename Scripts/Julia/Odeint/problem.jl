@@ -42,7 +42,7 @@ exact = exp.(-0.5*(0:0.5:25))
 #savefig("problem.png")
 
 fig, ax = plt.subplots()
-ax.plot(solve(y), "r--", label=raw"dy/dt = -0.5*y")
+ax.plot(solve(y), "r--", label=L"$\displaystyle \frac{dy}{dt} = - 0.5 * y$")
 ax.plot(0:0.5:25, exact, "k.", label=raw"exact solution")
 ax.set(xlabel=raw"t", ylabel=raw"y(t)")
 ax.set_title(raw"Solution to the linear ODE")
