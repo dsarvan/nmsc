@@ -30,5 +30,6 @@ println("weights: ", wn)
 for k in 1:n
     x[k] = 0.5*(b - a) * cos(((2*k-1)/(2*n))*pi) + 0.5*(b + a)
     w[k] = pi/(n)
-    println(k, x[k])
-    println(k, w[k])
+    println("x[k] =  ", x[k])
+    println("w[k] =  ", w[k])
+end
