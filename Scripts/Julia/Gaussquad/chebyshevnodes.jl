@@ -24,12 +24,12 @@ x = zeros(n+1)
 w = zeros(n+1)
 
 xn, wn = gausschebyshev(n)
-println("nodes computed: ", xn)
-println("weights: ", wn) 
+println("nodes computed: $xn\n")
+println("weights: $wn\n") 
 
 for k in 1:n
     x[k] = 0.5*(b - a) * cos(((2*k-1)/(2*n))*pi) + 0.5*(b + a)
     w[k] = pi/(n)
-    println("x[k] =  ", x[k])
-    println("w[k] =  ", w[k])
+    println("x[$k] =  ", x[k])
+    println("w[$k] =  ", w[k])
 end
