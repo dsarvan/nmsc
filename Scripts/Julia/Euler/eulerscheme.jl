@@ -29,8 +29,6 @@ for k in 1:N
     y3[k+1] = y3[k]*(1 - 0.5*dt/2)/(1 + 0.5*dt/2)
 end
 
-print(y1)
-
 exact = exp.(-0.5*t)     # exact solution
 
 fig, ax = plt.subplots()
@@ -38,6 +36,9 @@ ax.plot(t, y1, "r.", label=raw"euler explicit")
 ax.plot(t, y2, "b.", label=raw"euler implicit")
 ax.plot(t, y3, "g.", label=raw"trapezoidal rule")
 ax.plot(t, exact, "k-", label=raw"exact solution")
+ax.set(xlim=(0, 25), xticks=0:5:25)
+ax.set(ylim=(0, 1), yticks=0:0.2:1)
+ax.tick_params(direction="in")
 ax.set(xlabel=raw"t", ylabel=raw"y(t)")
 ax.set_title(raw"Euler explicit, implicit \& Trapezoidal scheme")
 ax.grid(true); ax.legend()
