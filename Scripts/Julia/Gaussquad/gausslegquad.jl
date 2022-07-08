@@ -7,7 +7,6 @@
 
 using SciPy
 using FastGaussQuadrature, LinearAlgebra
-
 import PyPlot
 const plt = PyPlot
 plt.rc("pgf", texsystem="pdflatex")
@@ -15,17 +14,19 @@ plt.rc("font", family="serif", weight="normal", size=8)
 plt.rc("axes", labelsize=10, titlesize=10)
 plt.rc("figure", titlesize=10)
 plt.rc("text", usetex="True")
-using LaTeXStrings
 
 # exact value of the integral
 f = x -> exp(-x^2)
 exact = SciPy.integrate.quad(f, -1, 1)[1]
 
-n = []
+N = [2, 5, 10, 20, 50, 100]
 
-for k in [2, 5, 10, 20, 50, 100]
+n = zeros(length(N))
+error = zeros(length(N))
 
-    n.append(k)
+for (i, k) in enumerate(N)
+
+    n[i] = k
     
     # nodes and weights calculations
     x, w = gausslegendre(k)
@@ -34,7 +35,7 @@ for k in [2, 5, 10, 20, 50, 100]
     integral = (w' * f.(x))
 
     # error calculation
-    error = abs(integral - exact)
+    error[i] = abs(integral - exact)
 
 end
 
