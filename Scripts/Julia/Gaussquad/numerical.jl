@@ -18,7 +18,7 @@ plt.rc("text", usetex="True")
 using LaTeXStrings
 
 # exact value of the integral
-f(x) = cos(20*pi*x) * exp(-x^2)
+f = x -> cos(20*pi*x) * exp(-x^2)
 exact = SciPy.integrate.quad(f, -1, 1)[1]
 
 x = range(-1, 1, 1000)
@@ -30,7 +30,7 @@ Ngrids = length(N)
 
 gleg = zeros(Ngrids)
 
-for k, N in enumerate(N)
+for (k, N) in enumerate(N)
     
     # nodes and weights calculation of gauss-legendre
     xnode, wnode = gausslegendre(N)
@@ -40,18 +40,18 @@ for k, N in enumerate(N)
 end
 
 # error calculations
-gleg_err = abs.(gleg - exact)
+gleg_err = abs.(gleg .- exact)
 
 fig, ax = plt.subplots(1, 2, figsize=(10,4))
-ax[0].plot(x, f(x))
-ax[0].set(xlim=(-1, 1), xticks=-1:0.5:1.5)
-ax[0].set(ylim=(-1, 1), yticks=-1:0.2:1.2)
-ax[0].set(xlabel=raw"x", ylabel=raw"f(x)")
-ax[0].tick_params(direction="in")
-ax[1].semilogy(n, gleg_err)
-ax[1].set(xlim=(0, 80), xticks=0:10:90)
-ax[1].set(ylim=(10^-17, 10))
-ax[1].set(xlabel=raw"number of points", ylabel=raw"quadrature error")
+ax[1].plot(x, f.(x))
+ax[1].set(xlim=(-1, 1), xticks=-1.0:0.5:1.5)
+ax[1].set(ylim=(-1, 1), yticks=-1.0:0.2:1.0)
+ax[1].set(xlabel=raw"x", ylabel=raw"f(x)")
 ax[1].tick_params(direction="in")
+ax[2].semilogy(n, gleg_err)
+ax[2].set(xlim=(0, 80), xticks=0:10:90)
+ax[2].set(ylim=(10^-17, 10))
+ax[2].set(xlabel=raw"number of points", ylabel=raw"quadrature error")
+ax[2].tick_params(direction="in")
 fig.tight_layout()
 plt.savefig("numerical.png")
