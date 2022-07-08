@@ -8,17 +8,14 @@
 using SciPy
 using FastGaussQuadrature, LinearAlgebra
     
-println("degree: ")
-n = readline()
-n = parse(Int64, n) 
+print("degree: ")
+n = parse(Int64, readline()) 
 
-println("lower limit: ")
-a = readline()
-a = parse(Int64, a)
+print("lower limit: ")
+a = parse(Int64, readline())
 
-println("upper limit: ")
-b = readline()
-b = parse(Int64, b)
+print("upper limit: ")
+b = parse(Int64, readline())
 
 x = zeros(n+1)
 w = zeros(n+1)
