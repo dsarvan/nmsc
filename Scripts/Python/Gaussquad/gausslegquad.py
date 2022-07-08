@@ -8,6 +8,17 @@
 import numpy as np
 from scipy.integrate import quad
 import matplotlib.pyplot as plt
+plt.style.use('classic')
+plt.rcParams.update(
+    {
+        "font.family": "serif",
+        "font.size": 10,
+        "axes.labelsize": 12,
+        "axes.titlesize": 12,
+        "figure.titlesize": 12,
+    }
+)
+plt.rcParams["text.usetex"] = True
 
 # exact value of the integral
 f = lambda x: np.exp(-x**2)
