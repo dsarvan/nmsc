@@ -10,7 +10,7 @@ from scipy.integrate import quad
 
 # exact value of the integral
 f = lambda x: x**4 * np.exp(-x**2)
-exact = quad(f, -inf, inf)[0]
+exact = quad(f, -np.inf, np.inf)[0]
 
 # nodes and weights calculations
 x, w = np.polynomial.hermite.hermgauss(10)
