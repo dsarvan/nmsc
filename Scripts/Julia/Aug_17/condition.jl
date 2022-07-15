@@ -7,11 +7,19 @@
 
 using LinearAlgebra
 
-N = 5
+N = 20
 
 eye(n) = 1.0*Matrix(I,n,n)
-#A = eye(N) - 10 * diagm(ones(N-1)) + 9 * diagm(ones(N-2))
-#A = eye(N) - 10 * diagm(ones(N), 1)
-A = diagm(ones(N-1))
+A = eye(N) - 10 * diagm(-1 => fill(1, N-1)) + 9 * diagm(-2 => fill(1, N-2))
+A[2,1] = 0
 
-println(A)
+cond_A = cond(A)
+
+println("Condition number of matrix A: $cond_A")
+
+B = eye(N) - 1 * diagm(-1 => fill(1, N-1)) - 1 * diagm(-2 => fill(1, N-2))
+B[2,1] = 0
+
+cond_B = cond(B)
+
+println("Condition number of matrix B: $cond_B")
