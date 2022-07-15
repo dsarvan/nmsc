@@ -7,7 +7,11 @@
 
 using LinearAlgebra
 
-N = 20
+N = 5
 
 eye(n) = 1.0*Matrix(I,n,n)
-A = eye(N) - 10 * diagm(ones(N)) + 9 * diagm(ones(N))
+#A = eye(N) - 10 * diagm(ones(N-1)) + 9 * diagm(ones(N-2))
+#A = eye(N) - 10 * diagm(ones(N), 1)
+A = diagm(ones(N-1))
+
+println(A)
