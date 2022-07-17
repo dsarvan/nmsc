@@ -14,22 +14,24 @@ plt.rc("figure", titlesize=10)
 plt.rc("text", usetex="True")
 using LaTeXStrings
 
+function Chebyshev(x, n)
+    n == 0 && return 1
+    n == 1 && return x
+    2x*Chebyshev(x, n-1) - Chebyshev(x, n-2)
+end
+
 fig, ax = plt.subplots()
 
-for n in 1:5
-
-    # generate the Chebyshev basis for the polynomial of degree 'n'
-    #Tn = 
+for n in 0:4
 
     # interval [-1, 1]
-    x = range(-1, 1, 1000)
-    #y = Tn(x)
-    println(x)
+    x = LinRange(-1, 1, 1000)
+    y = map(x -> Chebyshev(x, n), x)
 
-    ax.plot(x, y, label=raw"$T_{}(x)$".format(n))
+    ax.plot(x, y, label=raw"$T_{n}(x)$")
 end
 
 ax.set(xlabel=raw"$x$", ylabel=raw"$T_{n}(x)$")
 ax.set_title(raw"Chebyshev polynomials")
-ax.grid(); ax.legend()
+ax.grid(true); ax.legend()
 plt.savefig("chebyshev.png")
