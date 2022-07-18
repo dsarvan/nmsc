@@ -15,6 +15,9 @@ plt.rc("text", usetex="True")
 using LaTeXStrings
 
 function Hermite(x, n)
+    # recurrence relation of Hermite polynomials
+    # H_0 = 1, H_1 = 2x
+    # H_(n+1) = 2 x H_(n) - 2 n H_(n-1)
     n == 0 && return 1
     n == 1 && return 2*x
     2x*Hermite(x, n-1) - 2(n-1)*Hermite(x, n-2)    
