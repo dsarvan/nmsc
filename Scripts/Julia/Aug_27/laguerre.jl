@@ -15,6 +15,9 @@ plt.rc("text", usetex="True")
 using LaTeXStrings
 
 function Laguerre(x, n)
+    # recurrence relation of Laguerre polynomials
+    # L_0 = 1, L_1 = 1-x
+    # (n+1) L_(n+1) = (2n + 1 - x) L_(n) - n L_(n-1)
     n == 0 && return 1
     n == 1 && return 1-x
     ((2(n-1) + 1 - x)*Laguerre(x, n-1) - (n-1)*Laguerre(x, n-2))/n
