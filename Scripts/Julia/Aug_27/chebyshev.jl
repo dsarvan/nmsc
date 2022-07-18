@@ -28,7 +28,7 @@ for n in 0:4
     x = LinRange(-1, 1, 1000)
     y = map(x -> Chebyshev(x, n), x)
 
-    ax.plot(x, y, label=raw"$T_{n}(x)$")
+    ax.plot(x, y, label=L"T_{n}(x)")
 end
 
 ax.set(xlabel=raw"$x$", ylabel=raw"$T_{n}(x)$")
