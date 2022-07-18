@@ -15,6 +15,9 @@ plt.rc("text", usetex="True")
 using LaTeXStrings
 
 function Chebyshev(x, n)
+    # recurrence relation of Chebyshev polynomials of first kind
+    # T_0 = 1, T_1 = x
+    # T_(n+1) = 2 x T_(n) - T_(n-1)
     n == 0 && return 1
     n == 1 && return x
     2x*Chebyshev(x, n-1) - Chebyshev(x, n-2)
