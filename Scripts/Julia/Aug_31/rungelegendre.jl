@@ -6,8 +6,9 @@
 """ Script to construct the polynomial interpolation
 for Runge Function using Legendre nodes """
 
-using Polynomials
 using FastGaussQuadrature
+using LaTeXStrings
+
 import PyPlot
 const plt = PyPlot
 plt.rc("pgf", texsystem="pdflatex")
@@ -15,7 +16,6 @@ plt.rc("font", family="serif", weight="normal", size=8)
 plt.rc("axes", labelsize=10, titlesize=10)
 plt.rc("figure", titlesize=10)
 plt.rc("text", usetex="True")
-using LaTeXStrings
 
 function interpolate(fnodes, xnodes, x)
 
@@ -48,10 +48,7 @@ end
 
 N = 21
 
-Pn = [(gausslegendre(N)[1])]
-Pn = reverse(Pn)
-
-xnodes = roots(Polynomial(Pn))
+xnodes, weights = gausslegendre(N)
 fnodes = 1 ./(1 .+ 25 .* xnodes.^2)
 
 # true function calculated with equi-spaced nodes
@@ -60,10 +57,10 @@ f = 1 ./(1 .+ 25 .* x.^2)
 
 fintp = interpolate(fnodes, xnodes, x)
 
-error = maximum(abs(f .- fintp) ./abs.(f))
+error = maximum(abs.(f .- fintp) ./abs.(f))
 println(error)
 
-fig, ax = plt.subplot()
+fig, ax = plt.subplots()
 ax.plot(x, f, c="olive", ls="dotted", label=L"$\displaystyle\frac{1}{1+25 x^{2}}$")
 ax.plot(x, fintp, c="teal", label=L"$Interpolation$")
 ax.plot(xnodes, fnodes, "m.", label=L"$N = 21$")
