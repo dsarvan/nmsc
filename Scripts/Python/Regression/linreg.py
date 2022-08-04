@@ -14,18 +14,14 @@ plt.rcParams['text.usetex'] = True
 
 def slope(x, y, n):
     """ estimating the slope """
-    sum1 = 0; sum2 = 0
-    for i in range(n):
-        sum1 = sum1 + (x[i] - np.mean(x)) * (y[i] - np.mean(y))
-        sum2 = sum2 + (x[i] - np.mean(x))**2
-    return sum1/sum2
+    return sum((x - np.mean(x)) * (y - np.mean(y)))/sum((x - np.mean(x))**2)
 
 def intercept(x, y, m):
     """ estimating the intercept """
     return np.mean(y) - m * np.mean(x)
 
-height = [151, 174, 138, 186, 128, 136, 179, 163, 152, 131]
-weight = [63, 81, 56, 91, 47, 57, 76, 72, 62, 48]
+height = np.array([151, 174, 138, 186, 128, 136, 179, 163, 152, 131])
+weight = np.array([63, 81, 56, 91, 47, 57, 76, 72, 62, 48])
 
 n = len(height)
 m = slope(height, weight, n)
@@ -38,10 +34,7 @@ print(sum(residuals))
 
 def rmse(p, y, n):
     """ error estimation (Root Mean Squared Error) """
-    sum = 0
-    for i in range(n):
-        sum += (p[i] - y[i])**2
-    return np.sqrt(sum/n)
+    return np.sqrt(sum((p - y)**2)/n)
 
 err = rmse(predicted_y, weight, n)
 print(err)
